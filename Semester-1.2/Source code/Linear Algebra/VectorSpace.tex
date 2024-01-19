@@ -1,0 +1,520 @@
+\documentclass[12pt]{article}
+\input{/Users/shahriararfin/Workspace/LaTex Projects/#Library/Preamble.tex}
+
+% New commands
+\newcommand{\ro}[2][]{
+\tab \xrightarrow[\scalebox{1}{$#1$}]{\scalebox{1}{$#2$}} \tab
+}
+\renewcommand{\vec}[1]{\overrightarrow{#1}}
+
+\renewenvironment{pmatrix}
+{\left(\begin{array}{ccc}}
+{\end{array}\right)}
+
+\NewDocumentEnvironment{fmatrix}{m}
+{\left(\begin{array}{#1}}
+{\end{array}\right)}
+
+\NewDocumentEnvironment{pomatrix}{mm}
+{\left(\begin{array}{ccc}}
+{\end{array}\right)_{#1 \times #2}}
+
+\NewDocumentEnvironment{figmatrix}{moO{0.3}}
+{  
+   \begin{subfigure}{#3\textwidth} \centering $$
+      \begin{fmatrix}{#1}
+}
+{
+      \end{fmatrix} $$ \IfValueT{#2}{#2}
+   \end{subfigure}
+}
+\NewDocumentEnvironment{csplit}{o}
+{  
+   \IfValueT{#1}{\begin{center}}
+      \begin{tabular}{l|l}
+}
+{
+      \end{tabular}
+   \IfValueT{#1}{\end{center}}
+}
+\newcommand{\sxrightarrow}[2][]{%
+  \mathrel{\text{$\xrightarrow[#1]{#2}$}}%
+}
+
+   
+
+
+\begin{document}
+
+\Lecture{Linear combination}
+
+% \begin{csplit}[c]
+%    $\vec{u} \ =\ a_1\hat{\ i}+b_1\hat{\ j}+c_1\hat{\ k} \ =\ (a_1,b_1,c_1)$ \\
+%    $\vec{v} \ =\ a_2\hat{\ i}+b_2\hat{\ j}+c_2\hat{\ k} \ =\ (a_2,b_2,c_2)$
+%    \tabs & \tabs
+%    $\vec{u} \ =\ a_1a_2 \ +\ b_1b_2 \ +\ c_1c_2$\\
+%    $A= \left| \ \ \begin{matrix}
+%       \hat{i} & \hat{j}  & \hat{k} \\
+%       a_1 & b_1 & c_1 \\
+%       a_2 & b_2 & c_2 
+%    \end{matrix} \ \ \right|$
+% \end{csplit}
+
+
+
+\Heading{Linear combination: \cyan{vector}}
+
+\textbf{Linear Combination of vectors:} Let \ $V$ \ be a vector space over the field \ $F$ \ and let \ $\mathrm{v}_1, \mathrm{v}_2, \ldots \ldots \ldots, \mathrm{v}_{\mathrm{n}} \in \mathrm{V}$. Then any vector \ $\mathrm{v} \in \mathrm{V}$ \ is called a linear combination of \ $\mathrm{v}_1, \mathrm{v}_2, \ldots \ldots \ldots, \mathrm{v}_{\mathrm{n}}$ \ if and only if there exists scalar \ $\alpha_1, \alpha_2, \ldots \ldots \ldots, \alpha_n$ \ in \ $F$ \ such that, \ $\mathrm{v}=\alpha_1 \mathrm{v}_1+\alpha_2 \mathrm{v}_2+\cdots \ldots \ldots+\alpha_n \mathrm{v}_{\mathrm{n}}$
+
+\vspace{5ex}
+\cyanbox{Example 1:} Consider the vectors $\mathbf{u}=(1,2,-1)$ and $\mathbf{v}=(6,4,2)$ in $\mathbb{R}^3$. Show that $\mathbf{w}=(9,2,7)$ is a linear combination of $\mathbf{u}$ and $\mathbf{v}$.
+
+
+\vspace{3ex}
+\cyanbox{Solution:}
+\vspace{-3\baselineskip}
+
+\begin{align*}
+   \text{Let, \ \ } w \ &=\ \alpha_1 u \ +\ \alpha_2 v \tabs \alpha_i \ \in \mathbb{R}\\
+   \Rightarrow \tab (9,2,7) \ &=\ \alpha_1 (1,2,-1) \ +\ \alpha_2 (6,4,2) \\
+   \Rightarrow \tab (9,2,7) \ &=\ (\alpha_1,2\alpha_1,-\alpha_1) \ +\ (6\alpha_2,4\alpha_2,2\alpha_2) \\
+   \ &=\ (\alpha_1+6\alpha_2, \tab 2\alpha_1+4\alpha_2, \tab -\alpha_1+2\alpha_2) 
+\end{align*}
+
+Equating corresponding components:
+\vspace{-0.75\baselineskip}
+\begin{equation*}
+   \left.
+   \begin{array}{r}
+   \alpha_1 \ + \ 6 \alpha_2\ = \ 9 \\
+   2 \alpha_1 \ + \ 4 \alpha_2\ = \ 2 \\
+   -\alpha_1 \ + \ 2 \alpha_2\ = \ 7
+   \end{array}
+   \tab \right\} \tab \seteqno{1}
+\end{equation*}
+
+
+Writing $(1)$ in matrix form $A \mathbf{x}=\mathbf{b}$,
+\begin{equation*}
+   A=\begin{fmatrix}{cc}
+      1 & 6 \\ 2 & 4 \\ -1 & 2
+   \end{fmatrix}, \quad
+   \mathbf{x} \ = \ \begin{fmatrix}{l}
+      \alpha_1 \\ \alpha_2
+   \end{fmatrix}, \quad
+   \mathbf{b} \ = \ \begin{fmatrix}{r}
+      9 \\ 2 \\ 7
+   \end{fmatrix}
+\end{equation*}
+
+
+Reduce augmented matrix \ $(A \mid \mathbf{b})$ \ to echelon form by e.r.o
+\begin{align*}
+   \left(A \mid \mathbf{b}\right) = \ 
+   \begin{fmatrix}{cc|c}
+      1 & 6 & 9 \\ 2 & 4 & 2 \\ -1 & 2 & 7
+   \end{fmatrix}
+      \ro{\tabs}
+   \begin{fmatrix}{cc|c}
+      1 & 6 & 9 \\ 0 & -8 & -16 \\ 0 & 8 & 16
+   \end{fmatrix}
+      \ro{\tabs}
+   \begin{fmatrix}{cc|c}
+      1 & 6 & 9 \\ 0 & -8 & -16 \\ 0 & 0 & 0
+   \end{fmatrix}
+      \ro{\tabs}
+   \begin{fmatrix}{cc|c}
+      1 & 6 & 9 \\ 0 & 1 & 2 \\ 0 & 0 & 0
+   \end{fmatrix}
+\end{align*}
+
+Corresponding system,
+\vspace{-\baselineskip}
+\begin{alignat*}{4}
+   \alpha_1 &\ +\ & 6 \alpha_2 &\ =\ & 9 \\
+   && \alpha_2 &\ =\ & 2 \\
+\end{alignat*}
+
+\vspace{-\baselineskip}
+By backward substitution,
+$$\alpha_1 = -3 \tabs \text{and} \tabs \mathbf{x} \ = \ \begin{fmatrix}{c}
+   -3\\2
+\end{fmatrix}$$
+\vspace{-\baselineskip}
+\begin{center}
+$\therefore w \ = -3u \ + \ 2v$
+
+Therefore, \ $w$ \ is a linear combination of \ $u$ \ and \ $v$
+\end{center}
+
+
+\vspace{5ex}
+\cyanbox{Example 2:} Is the vector $v=(2,-5,3)$ in $\mathbb{R}^3$ is a linear combination of the vectors $v_1=(1,-3,2), \\ v_2=(2,-4,-1)$ and $v_3=(1,-5,7)$
+
+\vspace{3ex}
+\cyanbox{Solution:}
+\vspace{-\baselineskip}
+\begin{align*}
+   \text{Let, \ \ } v \ &=\ \alpha_1 v_1 \ +\ \alpha_2 v_2 \ +\ \alpha_2 v_3 \tabs \alpha_i \ \in \mathbb{R}\\
+   \Rightarrow \tab (2,-5,3) \ &=\ \alpha_1 (1,-3,2) \ +\ \alpha_2 (2,-4,-1) \ +\ \alpha_2 (1,-5,7)\\
+   \Rightarrow \tab (2,-5,3) \ &=\ (\alpha_1,-3 \alpha_1, 2 \alpha_1) \ +\ (2 \alpha_2,-4 \alpha_2,-\alpha_2) \ +\ (\alpha_3,-5 \alpha_3, 7 \alpha_3) \\
+   \ &=\ (\alpha_1+2 \alpha_2+\alpha_3, \tab -3 \alpha_1-4 \alpha_2-5 \alpha_3, \tab 2 \alpha_1-\alpha_2+7 \alpha_3) 
+\end{align*}
+
+Equating corresponding components:
+\vspace{-0.75\baselineskip}
+\begin{equation*}
+   \left.
+   \begin{array}{r}
+      \alpha_1 \ + \ 2 \alpha_2 \ + \ \alpha_3 \ = \ 2 \\
+      -3 \alpha_1 \ - \ 4 \alpha_2 \ - \ 5 \alpha_3 \ = \ -5 \\
+      2 \alpha_1 \ - \ \alpha_2 \ + \ 7 \alpha_3 \ = \ 3
+   \end{array}
+   \tab \right\} \tab \seteqno{1}
+\end{equation*}
+
+
+Writing $(1)$ in matrix form $A \mathbf{x}=\mathbf{b}$,
+\begin{equation*}
+   A=\begin{fmatrix}{rrr}
+      1 & 2 & 1 \\ -3 & -4 & -5 \\ 2 & -1 & 7
+   \end{fmatrix}, \quad
+   \mathbf{x} \ = \ \begin{fmatrix}{l}
+      \alpha_1 \\ \alpha_2 \\ \alpha_3
+   \end{fmatrix}, \quad
+   \mathbf{b} \ = \ \begin{fmatrix}{r}
+      2 \\ -5 \\ 3
+   \end{fmatrix}
+\end{equation*}
+
+
+Reduce augmented matrix \ $(A \mid \mathbf{b})$ \ to echelon form by e.r.o
+\begin{align*}
+   \left(A \mid \mathbf{b}\right) = \ 
+   \begin{fmatrix}{rrr|r}
+      1 & 2 & 1 & 2 \\ -3 & -4 & -5 & -5 \\ 2 & -1 & 7 & 3
+   \end{fmatrix}
+      \ro{\tabs}
+   \begin{fmatrix}{rrr|r}
+      1 & 2 & 1 & 2 \\ 0 & 2 & -2 & 1 \\ 0 & -5 & 5 & -1
+   \end{fmatrix}
+      \ro{\tabs}
+   \begin{fmatrix}{rrr|r}
+      1 & 2 & 1 & 2 \\ 0 & 2 & -2 & 1 \\ 0 & 0 & 0 & 3
+   \end{fmatrix}
+\end{align*}
+
+Corresponding system,
+\vspace{-\baselineskip}
+\begin{alignat*}{4}
+   \alpha_1 &\ +\ & 2 \alpha_2 &\ +\ & \alpha_3 &\ =\ & 2 \\
+   && 2 \alpha_2 &\ -\ & 2\alpha_3 &\ =\ & 1 \\
+   &&&& 0 &\ =\ & 3 \\
+\end{alignat*}
+
+\vspace{-\baselineskip}
+There is an equation in the form \ $0=b$ \ and \ $b\neq 0$
+
+Hence the above system is inconsistent and it has no solution.
+
+Therefore, the vector \ $v$ \ is not a linear combination of \ $v_1$, \ $v_2$ \ and \ $v_3$ \ .
+
+\vspace{5ex}
+\Heading{Linear combination: \cyan{Matrix}}
+\vspace{1ex}
+\cyanbox{Example:} Write the matrix $A=\begin{pmatrix} 3 & 1 \\[-1ex] 1 & -1 \end{pmatrix}$ as a linear combination of the matrices $A_1=\begin{pmatrix} 1 & 1 \\[-1ex] 1 & 0 \end{pmatrix}$, \ $A_2=\begin{pmatrix} 0 & 0 \\[-1ex] 1 & 1 \end{pmatrix}$, \ and $A_2=\begin{pmatrix} 0 & 2 \\[-1ex] 0 & -1 \end{pmatrix}$
+
+
+\vspace{3ex}
+\cyanbox{Solution:}
+\vspace{-2\baselineskip}
+\begin{align*}
+   \text{Let, \ } S \ &=\ \{A_1, \ A_2, \ A_3\} \tabs \text{and} \tabs M=\begin{pmatrix} 3 & 1 \\[-1ex] 1 & -1 \end{pmatrix}\\
+   \text{Set, \ \ } M \ &=\ \alpha_1 A_1 \ +\ \alpha_2 A_2 \ +\ \alpha_3 A_3\\[1ex]
+   \Rightarrow \tab
+   \begin{pmatrix} 3 & 1 \\[-1ex] 1 & -1 \end{pmatrix}
+      \ &=\ \alpha_1
+   \begin{pmatrix} 1 & 1 \\[-1ex] 1 & 0 \end{pmatrix}
+      \ +\ \alpha_2 
+   \begin{pmatrix} 0 & 0 \\[-1ex] 1 & 1 \end{pmatrix}
+      \ +\ \alpha_3 
+   \begin{pmatrix} 0 & 2 \\[-1ex] 0 & -1 \end{pmatrix}\\[1ex]
+      \Rightarrow \tab
+   \begin{pmatrix} 3 & 1 \\[-1ex] 1 & -1 \end{pmatrix} \ &=\ \begin{pmatrix}
+      \alpha_1 & \alpha_1 \\[-1ex] \alpha_1 & 0
+   \end{pmatrix} \ +\ \begin{pmatrix}
+     0 & 0 \\[-1ex] \alpha_2 & \alpha_2
+   \end{pmatrix} \ +\ \begin{pmatrix}
+      0 & 2\alpha_3 \\[-1ex] 0 & -\alpha_3
+   \end{pmatrix} \\
+   \ &=\
+   \begin{pmatrix}
+      \alpha_1 & \alpha_1+2 \alpha_3 \\
+      \alpha_1+\alpha_2 & \alpha_2-\alpha_3
+   \end{pmatrix} 
+\end{align*}
+
+Equating corresponding components:
+\vspace{-0.75\baselineskip}
+\begin{equation*}
+   \left.
+   \begin{array}{rl}
+      \alpha_1 &=\ 3 \\
+      \alpha_1+2 \alpha_3 &=\ 1 \\
+      \alpha_1+\alpha_2 &=\ 1 \\
+      \alpha_2-\alpha_3 &=\ -1
+   \end{array}
+   \tab \right\} \tab \seteqno{1}
+\end{equation*}
+
+
+Writing $(1)$ in matrix form $A \mathbf{x}=\mathbf{b}$,
+\begin{equation*}
+   A=\begin{fmatrix}{rrr}
+      1 & 0 & 0  \\ 1 & 0 & 2 \\ 1 & 1 & 0 \\ 0 & 1 & -1
+   \end{fmatrix}, \quad
+   \mathbf{x} \ = \ \begin{fmatrix}{l}
+      \alpha_1 \\ \alpha_2 \\ \alpha_3
+   \end{fmatrix}, \quad
+   \mathbf{b} \ = \ \begin{fmatrix}{r}
+      3 \\ 1 \\ 1 \\ -1
+   \end{fmatrix}
+\end{equation*}
+
+
+Reduce augmented matrix \ $(A \mid \mathbf{b})$ \ to echelon form by e.r.o
+\begin{align*}
+   \left(A \mid \mathbf{b}\right) = \ 
+   &\begin{fmatrix}{rrr|r}
+      1 & 0 & 0 & 3 \\
+      1 & 0 & 2 & 1 \\
+      1 & 1 & 0 & 1 \\
+      0 & 1 & -1 & -1\\
+   \end{fmatrix}
+      \ro[R_4 \leftrightarrow R_2]{R_3 \leftrightarrow R_1}
+   \begin{fmatrix}{rrr|r}
+      1 & 1 & 0 & 1 \\
+      0 & 1 & -1 & -1\\
+      1 & 0 & 0 & 3 \\
+      1 & 0 & 2 & 1 \\
+   \end{fmatrix}
+      \ro[{R_4'= R_4-R_1}]{R_3'= R_3-R_1}
+   \begin{fmatrix}{rrr|r}
+      1 & 1 & 0 & 1 \\
+      0 & 1 & -1 & -1\\
+      0 & -1 & 0 & 2 \\
+      0 & -1 & 2 & 0 \\
+   \end{fmatrix}\\[1ex]
+   \ro[{R_4'= R_4+R_2}]{R_3'= R_3+R_2}
+   &\begin{fmatrix}{rrr|r}
+      1 & 1 & 0 & 1 \\
+      0 & 1 & -1 & -1\\
+      0 & 0 & -1 & 1 \\
+      0 & 0 & 1 & -1 \\
+   \end{fmatrix}
+      \ro{R_4'= R_4+R_3}
+   \begin{fmatrix}{rrr|r}
+      1 & 1 & 0 & 1 \\
+      0 & 1 & -1 & -1\\
+      0 & 0 & -1 & 1 \\
+      0 & 0 & 0 & 0 \\
+   \end{fmatrix}
+\end{align*}
+
+Corresponding system,
+\vspace{-\baselineskip}
+\begin{alignat*}{4}
+   \alpha_1 &\ +\ & \alpha_2 &&&\ =\ & 1 \\
+   && \alpha_2 &\ -\ & \alpha_3 &\ =\ & -1 \\
+   &&&\ -\ & \alpha_3 &\ =\ & 1
+\end{alignat*}
+
+\vspace{-\baselineskip}
+By backward substitution,
+$$\begin{aligned}\alpha_3 &= -1\\\alpha_2 &= -2\\\alpha_1 &= 3\end{aligned} \tabs \text{and} \tabs \mathbf{x} \ = \ \begin{fmatrix}{c}
+   3\\-2\\-1
+\end{fmatrix}$$
+\vspace{-\baselineskip}
+\begin{center}
+$\therefore A \ = 3A_1-2A_2-A_3$
+
+Therefore, the matrix \ $A$ \ is a linear combination of \ $A1$, \ $A_2$ \ and \ $A_3$
+\end{center}
+
+\vspace{5ex}
+\Heading{Spanning: \cyan{Polynomial}}
+\vspace{1ex}
+\cyanbox{Example:} Determine whether the polynomials:
+
+\begin{equation*}
+   \left.
+   \begin{aligned}
+   & P_1=1-x+2x^2 \\
+   & P_2=3+x \\
+   & P_3=5-x+4x^2 \\
+   & P_4=-2-2 x+2x^2 
+   \end{aligned} \tab \right\} \ \text{spans} \ \ \mathbb{P}_2
+\end{equation*}
+
+\vspace{3ex}
+\cyanbox{Solution:} Let $P \in \mathbb{P}_2$ be anbitary, then:
+\vspace{-0.75\baselineskip}
+\begin{align*}
+P \ &= \ a+bx+cx^2 . \\
+\text {Set, \ } P \ &= \ \alpha_1 P_1+\alpha_2 P_2+\alpha_3 P_3+\alpha_4 P_4 \\
+a+bx+cx^2 \ &= \ \alpha_1(1-x+2x^2) \ + \ \alpha_2(3+x)
+\ + \ \alpha_3(5-x+4x^2) \ + \ \alpha_4(-2-2 x+2x^2)\\
+\ &= \ (\alpha_1+3 \alpha_2+5 \alpha_3-2 \alpha_4)+(-\alpha_1+\alpha_2-\alpha_3-2 \alpha_4) x+(2 \alpha_1+0+4 \alpha_3+2\alpha_4) x^2
+\end{align*}
+
+Equating corresponding components:
+\vspace{-0.75\baselineskip}
+\begin{align*}
+   \alpha_1+3 \alpha_2+5 \alpha_3-2 \alpha_4 \ &= \ a\\
+   -\alpha_1+\alpha_2-\alpha_3-2 \alpha_4 \ &= \ b\\
+   2\alpha_1+0+4 \alpha_3+2\alpha_4 \ &= \ c
+\end{align*}
+
+
+Writing $(1)$ in matrix form $A \mathbf{x}=\mathbf{b}$,
+\begin{equation*}
+   A=\begin{fmatrix}{rrrr}
+      1 & 3 & 5 & -2  \\ -1 & 1 & -1 & -2 \\ 2 & 0 & 4 & 2
+   \end{fmatrix}, \quad
+   \mathbf{x} \ = \ \begin{fmatrix}{l}
+      \alpha_1 \\ \alpha_2 \\ \alpha_3 \\ \alpha_4
+   \end{fmatrix}, \quad
+   \mathbf{b} \ = \ \begin{fmatrix}{r}
+      a \\ b \\ c
+   \end{fmatrix}
+\end{equation*}
+
+
+Reduce augmented matrix \ $(A \mid \mathbf{b})$ \ to echelon form by e.r.o
+\begin{align*}
+   \left(A \mid \mathbf{b}\right) = \ 
+   &\begin{fmatrix}{rrrr|r}
+      1 & 3 & 5 & -2 & a \\
+      -1 & 1 & -1 & -2 & b \\
+      2 & 0 & 4 & 2 & c
+   \end{fmatrix}
+      \ro{R_2'=R_1+R_2}
+   \begin{fmatrix}{rrrr|l}
+      1 & 3 & 5 & -2 & a \\
+      0 & 4 & 4 & -4 & a+b \\
+      0 & -6 & -6 & 6 & c-2a
+   \end{fmatrix}\\[1ex]
+      \ro{R_3'=4R_3+6R_2}
+   &\begin{fmatrix}{rrrr|l}
+      1 & 3 & 5 & -2 & a \\
+      0 & 4 & 4 & -4 & a+b \\
+      0 & 0 & 0 & 0 & 6c-8a+4
+   \end{fmatrix}
+\end{align*}
+
+Corresponding system,
+\vspace{-\baselineskip}
+\begin{alignat*}{12}
+   \alpha_1 &\ +\ & 3\alpha_2 &\ +\ & 5\alpha_3 &\ -\ & 2\alpha_4 &\ =\ & a \\
+   && 4\alpha_2 &\ +\ & 4\alpha_3 &\ -\ & 4\alpha_4 &\ =\ & a+b \\
+   &&&&&& 0 &\ =\ & 6c-8a+4b \\
+\end{alignat*}
+
+
+\vspace{-\baselineskip}
+There is an equation in the form \ $0=b$ \ and \ $b\neq 0$
+
+Hence the above system is inconsistent and it has no solution.
+
+Therefore, the polynomials doesn't not spans \ $\mathbb{P}_2$
+
+
+
+
+
+
+\vspace{5ex}
+\Lecture{Linear Independence: \cyan{vector}}
+\cyanbox{Example:} Determine wheather the vactors \ \ $v_1=(1,-2,3), \ \ v_2=(5,6,-1), \ \ v_{3}=(3,2,1)$ \ \ are Linearly Dependent or Independent in \ $\mathbb{R}^3$
+
+\vspace{3ex}
+\cyanbox{Solution:}
+\vspace{-3\baselineskip}
+
+\begin{align*}
+   \text{Let, \ \ } \alpha_1 v_1 \ +\ \alpha_2 v_2 \ +\ \alpha_3 v_3 \ & \ = \ 0 \tabs \alpha_i \ \in \mathbb{R}\\
+   \alpha_1 (1,-2,3) \ +\ \alpha_2 (5,6,-1) \ +\ \alpha_3 (3,2,1) \ & \ = \ (0,0,0)  \\
+   (\alpha_1,-2\alpha_1,3\alpha_1) \ +\ (5\alpha_2,6\alpha_2,-\alpha_2) \ +\ (3\alpha_3,2\alpha_3,\alpha_3) \ & \ = \ (0,0,0)  \\
+   (\alpha_1+5\alpha_2+3\alpha_3, \tab
+-2\alpha_1+6\alpha_2+2\alpha_3, \tab
+3\alpha_1-\alpha_2+\alpha_3) \ & \ = \ (0,0,0)
+\end{align*}
+
+Equating corresponding components:
+\vspace{-0.75\baselineskip}
+\begin{equation*}
+   \left.
+   \begin{aligned}
+      \alpha_1+5\alpha_2+3\alpha_3 &= 0 \\
+      -2\alpha_1+6\alpha_2+2\alpha_3\ &= \ 0 \\
+      3\alpha_1-\alpha_2+\alpha_3\ &= \ 0
+   \end{aligned}
+   \tab \right\} \tab \seteqno{1}
+\end{equation*}
+
+
+Writing $(1)$ in matrix form $A \mathbf{x}=\mathbf{b}$,
+\begin{equation*}
+   A=\begin{fmatrix}{rrr}
+      1 & 5 & 3 \\ -2 & 6 & 2 \\ 3 & -1 & 1
+   \end{fmatrix}, \quad
+   \mathbf{x} \ = \ \begin{fmatrix}{l}
+      \alpha_1 \\ \alpha_2 \\ \alpha_3
+   \end{fmatrix}, \quad
+   \mathbf{b} \ = \ \begin{fmatrix}{r}
+      0 \\ 0 \\ 0
+   \end{fmatrix}
+\end{equation*}
+
+
+Reduce augmented matrix \ $(A \mid \mathbf{b})$ \ to echelon form by e.r.o
+\begin{align*}
+   \left(A \mid \mathbf{b}\right) = \ 
+   \begin{fmatrix}{rrr|l}
+      1 & 5 & 3 & 0 \\ -2 & 6 & 2 & 0 \\ 3 & -1 & 1 & 0
+   \end{fmatrix}
+      \ro[R_3'=R_3-3R_1]{R_2'=R_2+2R_1}
+   \begin{fmatrix}{rrr|l}
+      1 & 5 & 3 & 0 \\ 0 & 16 & 8 & 0 \\ 0 & -16 & -8 & 0
+   \end{fmatrix}
+   \ro[R_3'=R_3+R_2]{R_2'=\frac{R_2}{8}}
+   \begin{fmatrix}{rrr|l}
+      1 & 5 & 3 & 0 \\ 0 & 2 & 1 & 0 \\ 0 & 0 & 0 & 0
+   \end{fmatrix}
+\end{align*}
+
+Corresponding system,
+\vspace{-\baselineskip}
+\begin{alignat*}{6}
+   \alpha_1 &\ +\ & 5 \alpha_2 &\ +\ & 3 \alpha_3 &\ =\ & 0 \\
+   && 2\alpha_2 &\ +\ & \alpha_3 &\ =\ & 0 \\
+\end{alignat*}
+
+\vspace{-1.5\baselineskip}
+The system has a non-trivial solution. Therefore the vectors \ $v_1, \ v_2, \ v_3$ \ are Linearly Dependent.
+
+And, at least one of them is a linear combination of the others.
+
+\begin{center}
+   Let, \ $\alpha_3 = -2$ \tabs Now, \ $\alpha_2 = 1, \tab \alpha_1 = 1$
+
+   Therefore, $v_1 \ + \ v_2 \ - \ 2v_3 \ = \ 0$
+
+   $v_1 \ = \ 2v_3 \ - \ v_2$
+\end{center}
+
+
+\begin{center}
+Therefore, \ $v_1$ \ is a linear combination of \ $v_2$ \ and \ $v_3$
+\end{center}
+\end{document}
