@@ -1,0 +1,235 @@
+\usepackage[margin=1.27cm]{geometry}
+\usepackage{setspace}
+\usepackage{fontspec}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+\usepackage{amsmath,txfonts,amssymb,nicefrac,mathtools,pifont} %for math
+\usepackage{array,tabularx,multirow,fmtcount} %for tables
+\usepackage{tikz, pgfplots} %for diagram
+\usepackage{multicol} %for multiple column
+\usepackage{enumerate,enumitem,adjustbox} %for ordered list
+\usepackage{graphicx,subcaption,wrapfig,tcolorbox} %for figure
+\usepackage{xparse} %for commands & environments
+\usepackage{lipsum} %miscellaneous
+\usepackage{colortbl,xcolor,soul} %for default table & border
+
+% #ANCHOR Font settings
+\setmainfont{Oxygen}
+\newfontfamily\banglafont[Script=Bengali]{Baloo Da 2}
+\newfontfamily{\lstsansserif}{IBM Plex Mono}
+\renewcommand{\normalsize}{\fontsize{11.5pt}{13pt}\selectfont}
+
+
+\setlength{\arrayrulewidth}{0.35 pt}
+\definecolor{border}{HTML}{A1A1AA}
+\arrayrulecolor{border}
+
+
+% #ANCHOR Document settings
+\linespread{1.45}
+\setlength\parindent{0pt}
+\setlength\parskip{16pt}
+\setlist[enumerate]{noitemsep}
+\usetikzlibrary{shapes.geometric,decorations.pathreplacing,trees,arrows,positioning,shapes,fit,calc,decorations.markings, decorations.text}
+\tikzset{every node/.append style={font=\footnotesize}}
+\usepgfplotslibrary{fillbetween}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+\pgfplotsset{compat=1.18}
+\columnseprule=1pt
+\everymath{\displaystyle}
+% #ANCHOR Hypernation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\newlength{\colWidth}
+
+
+
+% #ANCHOR Colors
+\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}
+\definecolor{carminepink}{rgb}{0.92, 0.3, 0.26}
+\definecolor{orange}{rgb}{0.9, 0.55, 0.22}
+\definecolor{violet}{rgb}{0.60, 0.45, 1}
+% Syantax Highlighting Colors
+\definecolor{keyword}{HTML}{D73A4A}
+\definecolor{number}{HTML}{015CC5}
+\definecolor{comment}{HTML}{6A737D}
+\definecolor{string}{HTML}{1D825E}
+\definecolor{function}{HTML}{743FD1}
+\definecolor{orange}{HTML}{CF7842}
+\definecolor{codeblack}{HTML}{24292F}
+\definecolor{divider}{HTML}{A1A1AA}
+\definecolor{border}{HTML}{D1D1D1}
+
+
+% #ANCHOR Ordered & Unordered List
+\setlist[itemize,1]{left=0cm, label={\textbullet}}
+\setlist[itemize,2,3,4,5,6,7,8,9,10]{left=0.6cm, label={\textbullet}}
+\setlist[enumerate,1]{left=0cm}
+\setlist[enumerate,2,3,4,5,6,7,8,9,10]{left=0.6cm}
+\setul{0.5ex}{0.125ex}
+
+
+
+% #ANCHOR Colored Box
+\let\oldul\ul
+\renewcommand{\ul}[2][keyword]{\text{\setulcolor{#1}\oldul{#2}}}
+\newcommand{\redbox}[1]{%
+{\color{red}\fbox{\color{black}#1}}
+}
+\newcommand{\red}[1]{%
+\textcolor{red}{#1}
+}
+\newcommand{\redeq}[1]{%
+\text{\color{red}$#1$}
+}
+\newcommand{\mred}[1]{%
+\textcolor{keyword}{#1}
+}
+\newcommand{\mredeq}[1]{%
+\textcolor{keyword}{$#1$}
+}
+\newcommand{\blue}[1]{%
+% {\color{number}#1\hspace{-0.4ex}}
+\textcolor{number}{#1}
+}
+\newcommand{\blueeq}[1]{%
+\text{\color{number}$#1$}
+}
+\newcommand{\cyanbox}[1]{%
+{\color{teal}\fbox{\textcolor{black}{#1}}}
+}
+\newcommand{\cyan}[1]{%
+\textcolor{teal}{#1}
+}
+\newcommand{\pink}[1]{%
+\textcolor{magenta}{#1}
+}
+\newcommand{\orange}[1]{%
+\textcolor{orange}{#1}
+}
+\newcommand{\violet}[1]{%
+{\color{violet}#1}
+}
+\newcommand{\cyaneq}[1]{%
+\text{\color{teal}$#1$}
+}
+\newcommand{\gray}[1]{%
+\textcolor{comment}{#1}
+}
+\newcommand{\pinkeq}[1]{%
+\text{\color{magenta}$#1$}
+}
+\renewcommand{\columnseprulecolor}{\color{divider}}
+
+
+
+
+% #ANCHOR Tabular commands
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcommand{\rspan}[2]{\multirow{#1}{*}{#2}}
+\newcommand{\thc}[1]{%
+\multicolumn{1}{|c|}{\textbf{#1}}
+}
+\newcommand{\thcx}[1]{%
+\multicolumn{1}{|C|}{\textbf{#1}}
+}
+\newcommand{\thl}[1]{%
+\multicolumn{1}{|l|}{\textbf{#1}}
+}
+\newcommand{\thr}[1]{%
+\multicolumn{1}{|r|}{\textbf{#1}}
+}
+% Adjusting arraystretch to modify vertical padding
+\renewcommand{\arraystretch}{1.25}
+% Adjusting tabcolsep to modify horizontal padding
+\setlength{\tabcolsep}{10pt}
+
+
+
+% #ANCHOR Math commands
+\newcommand{\set}[1]{\{$#1$\}}
+\newcommand{\tabs}{\ \ \ \ \ \ }
+\newcommand{\tab}{\ \ \ }
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\boldi}[1]{\boldsymbol{#1}}%
+\newcommand{\wspace}{\ \ = \ \ }
+
+
+
+% #ANCHOR New commands
+\newcommand{\Title}[1]{%
+   \begin{center}
+      \textbf{\Large{#1}}
+   \end{center}
+}
+\newcommand{\Heading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{#1}}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\BuleHeading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{\textcolor{number}{#1}}}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\CHeading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   \hspace{\fill}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{#1}}
+   \hspace{\fill}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\Section}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   \hspace{\fill}
+   {\fontsize{13pt}{13pt}\selectfont\textbf{#1}}
+   \hspace{\fill}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\seteqno}[1]{%
+   \ \cdots \ \cdots \ \cdots \ (#1)
+}
+\newcommand{\eqor}{%
+   \Rightarrow \ \ 
+}
+\newcommand{\tsub}[1]{%
+\textsubscript{#1}\hspace{-0.45ex}
+}
+\newcommand{\tsup}[1]{%
+\textsuperscript{#1}\hspace{-0.45ex}
+}
+\newcommand{\cbox}[2][cyan]{
+\tikz\node[draw=#1,circle,inner sep=2pt,baseline=(a.base)](a){#2};
+}
+\newcommand{\hrline}{%
+\vspace{1ex} {\color{gray}\hrule} \vspace{4ex}
+}
+\newcommand{\divideX}[1][divider]{{\hspace{1ex}\color{#1}{\vrule}\hspace{1ex}}}
+\newcommand{\Reference}[2][Reference]{
+
+\vspace{-0.5\baselineskip}
+\begin{center}
+   {\fontspec{Merriweather}\textbf{#1:} \textit{#2}} 
+\end{center}
+}
+\newcommand{\bn}[1]{%
+   {\banglafont #1}
+}
+
+\NewDocumentCommand{\Column}{O{0.49} O{1.5em} m m}{
+   \setlength{\colWidth}{\linewidth-#1\linewidth-#2}
+   \begin{minipage}[t]{#1\linewidth}
+      \noindent
+         #3
+      \end{minipage}\hspace{\fill}{\color{divider}\vrule width 0.35pt}\hspace{\fill}
+      \begin{minipage}[t]{\colWidth}
+      \noindent
+         #4
+   \end{minipage}
+}

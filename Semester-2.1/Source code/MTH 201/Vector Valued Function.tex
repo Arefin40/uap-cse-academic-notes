@@ -1,0 +1,305 @@
+\documentclass[12pt]{article}
+\input{/Users/shahriararfin/Workspace/LaTex Projects/#Library/Preamble.tex}
+
+% Vector commands
+\renewcommand{\vec}[1]{\underline{\mathrm{#1}}}
+\renewcommand{\r}{\mathrm{\textbf{r}}}
+\renewcommand{\v}{\mathrm{v}}
+\renewcommand{\a}{\mathrm{a}}
+\let\oldkappa\kappa
+\renewcommand{\kappa}{\scalebox{1.25}{$\oldkappa$}}
+\newcommand{\vf}[2][t]{\vec{#2}(#1)}
+\newcommand{\norm}[1]{\left\lVert\ #1\ \right\rVert}
+
+
+\NewDocumentCommand{\dt}{O{t} m}{\vec{#2}^\prime(#1)}
+\NewDocumentCommand{\vdt}{m}{\vec{#1}^\prime}
+\NewDocumentCommand{\dtt}{O{t} m}{\vec{#2}^{\prime\prime}(#1)}
+\NewDocumentCommand{\vdtt}{m}{\vec{#1}^{\prime\prime}}
+\NewDocumentCommand{\vecf}{O{x} O{y} O{z}}{#1 \ \vec{i} + #2 \ \vec{j} + #3 \ \vec{k}}
+\NewDocumentCommand{\vecxy}{O{x} O{y}}{#1 \ \vec{i} + #2 \ \vec{j}}
+\NewDocumentCommand{\vecbf}{O{x} O{y} O{z}}{\left(#1,\ #2,\ #3\right)}
+\begin{document}
+\Title{Vector Functions and Space Curves}
+\textbf{\mred{Exr-1}:} Find the parametric equation of a tangent line of the circular helix at $t=\frac{\pi}{4}$.
+\vspace{-\baselineskip}
+$$x=\cos{t}, \tabs y=\sin{t}, \tabs z=t$$
+
+\vspace{-\baselineskip}
+\Heading{Solution:}
+
+\vspace{1ex}
+$\begin{aligned}
+   \text{Let,\ } \vf{\r} \ & = \ \vecf \ = \ \vecf[\cos{t}][\sin{t}][t]\\
+   \therefore \dt{\r} \ & = \ \vecf[-\sin][\cos][1]\\[1ex]
+\end{aligned}$
+
+\vspace{1ex}
+Now we have,\\[1ex]
+$\begin{aligned}
+   \therefore \vf[t_o]{\r} \ = \ \vec{\r}\left(\frac{\pi}{4}\right) & \ = \ \vecf[\frac{1}{\sqrt{2}}][\frac{1}{\sqrt{2}}][\frac{\pi}{4}]\\[1ex]
+   \therefore \dt[t_o]{\r} \ = \ \vec{\r}^\prime\left(\frac{\pi}{4}\right) & \ = \ -\vecf[\frac{1}{\sqrt{2}}][\frac{1}{\sqrt{2}}][1]\\
+\end{aligned}$
+
+\vspace{3ex}
+Equation of tangent line is,\\
+$\begin{aligned}
+   \vf{\r} & \ = \ \vec{\r}(t_o) + t\ \dt[t_o]{\r}\\
+   & \ = \ \left(\vecf[\frac{1}{\sqrt{2}}][\frac{1}{\sqrt{2}}][\frac{\pi}{4}]\right) + t\ \left(-\vecf[\frac{1}{\sqrt{2}}][\frac{1}{\sqrt{2}}][1]\right)\\[1ex]
+   & \ = \ \vecf[\left(\frac{1}{\sqrt{2}}-\frac{t}{\sqrt{2}}\right)][\left(\frac{1}{\sqrt{2}}+\frac{t}{\sqrt{2}}\right)][\left(\frac{\pi}{4}+t\right)]
+\end{aligned}$
+
+\vspace{3ex}
+The parametric equations are,\\[1ex]
+$\begin{aligned}
+   \vf{x} \ &= \ \frac{1}{\sqrt{2}}-\frac{t}{\sqrt{2}}\\[1ex]
+   \vf{y} \ &= \ \frac{1}{\sqrt{2}}+\frac{t}{\sqrt{2}}\\[1ex]
+   \vf{z} \ &= \ \frac{\pi}{4}+t
+\end{aligned}$
+
+\pagebreak
+\textbf{\mred{Exr-2}:} Find the curvature for the circular helix \vspace{-\baselineskip}
+$$x=a\cos{t}, \tabs y=a\sin{t}, \tabs z=ct$$
+
+\vspace{-\baselineskip}
+\Heading{Solution:}
+\vspace{1ex}
+$\begin{aligned}
+   \text{Let,\ } \vec{\r} \ & = \ \vecbf \ = \ \vecbf[a\cos{t}][a\sin{t}][ct]\\
+   \therefore \vdt{\r} \ & = \ \vecbf[-a\sin{t}][a\cos{t}][c]\\
+   \therefore \vdtt{\r} \ & = \ \vecbf[-a\cos{t}][-a\sin{t}][0]\\
+   \therefore \norm{\vdt{\r}} \ & = \ \sqrt{a^2 \sin ^2 t+a^2 \cos ^2 t+c^2} \ = \ \sqrt{a^2+c^2} \\[1ex]
+   \therefore \vdt{\r} \times \vdtt{\r} \ & = \
+   \left|\begin{array}{ccc}
+      \vec{i} & \vec{j} & \vec{k} \\
+      -a\sin{t} & a\cos{t} & c \\
+      -a\cos{t} & -a\sin{t} & 0
+      \end{array}\right|\\
+   \ & = \ \vecf[(ac\sin{t})][(ac\cos{t})][(a^2 \sin^2{t} + a^2 \cos^2{t})]\\
+   \ & = \ \vecf[(ac\sin{t})][(ac\cos{t})][a^2]\\[1ex]
+   \therefore \norm{\vdt{\r} \times \vdtt{\r}} \ & = \sqrt{a^2 c^2 \sin ^2 t+a^2 c^2 \cos ^2 t+a^4} \ = \ a\sqrt{a^2+c^2}\\[1ex]
+   \vf{\kappa} \ &= \ \frac{\norm{\vdt{\r} \times \vdtt{\r}}}{\norm{\vdt{\r}}^3} \ =\frac{a \sqrt{a^2+c^2}}{\left(\sqrt{a^2+c^2}\right)^3} = \frac{a}{a^2+c^2}\\
+\end{aligned}$
+
+
+\pagebreak
+\textbf{\mred{Exr-3}:} The graph of the ellipse is given by
+\vspace{-\baselineskip}
+$$\vec{\r} = \vecxy[2\cos{t}][3\sin{t}] \tabs 0 \leq t \leq 2\pi$$
+
+\vspace{-\baselineskip}
+Find the curvature of the ellipse at the end point of the major and minor axes.
+
+\vspace{2ex}
+\Heading{Solution:}
+\vspace{1ex}
+% $\vec{\r}=2 \cos t \underline{i}+3 \sin t \underline{j}$
+$\begin{aligned}
+\text{Given,}\ \vec{\r} & \ = \ \vecxy[(2\cos{t})][(3\sin{t})]\\
+\vdt{\r} & \ = \ \vecxy[(-2\sin{t})][(3\cos{t})] \\
+\vdtt{\r} & \ = \ \vecxy[(-2\cos{t})][(-3\sin{t})] \\
+\norm{\vdt{\r}} & \ = \ \sqrt{4\sin^2{t}+9\cos^2{t}}\\[1ex]
+\therefore \vdt{\r} \times \vdtt{\r} \ & = \
+\left|\begin{array}{ccc}
+   \vec{i} & \vec{j} & \vec{k} \\
+   -2\sin{t} & 3\cos{t} & 0 \\
+   -2\cos{t} & -3\sin{t} & 0
+   \end{array}\right|\\
+   & \ = \ i(0) - j(0) + \vec{k}\left(6\sin^2{t} + 6\cos^2{t}\right) \ = \ 6\vec{k}\\
+   \therefore \norm{\vdt{\r} \times \vdtt{\r}} \ & = \sqrt{6^2} \ = \ 6\\[2ex]
+   \vf{\kappa} \ &= \ \frac{\norm{\vdt{\r} \times \vdtt{\r}}}{\norm{\vdt{\r}}^3} \ =\frac{6}{\left(\sqrt{4\sin^2{t}+9\cos^2{t}}\right)^3} \quad \seteqno{1}\\
+\end{aligned}$
+
+\vspace{4ex}
+The end point of the minor axis are $(2,0)$ and $(-2,0)$ corresponds to, $t=0$ and $t=\pi$\\
+Now put $t=0$ and $t=\pi$ in $(1)$\\[1ex]
+$\Rightarrow \ \kappa(0)=\frac{6}{(\sqrt{0+9})^3}=\frac{6}{27}=\frac{2}{9}$ \tabs and \tabs $\kappa(\pi)=\frac{2}{9}$
+
+\vspace{4ex}
+Similarly the end point of the major anis are $(0,3)$ and $(0,-3)$ corresponds to $t=\frac{\pi}{2}$ and $t=\frac{3\pi}{2}$\\
+Now put $t=\frac{\pi}{2}$ and $t = \frac{3\pi}{2}$ in $(1)$,\\[1ex]
+$\Rightarrow \ \kappa\left(\frac{\pi}{2}\right)=\frac{6}{(\sqrt{4+0})^3}=\frac{6}{8}=\frac{3}{4}$  \tabs and \tabs $\kappa\left(\frac{3 \pi}{2}\right)=\frac{3}{4}$
+
+
+\pagebreak
+\textbf{\mred{Exr-4}:} Find the arc length of the circular helix
+\vspace{-\baselineskip}
+$$x=a\cos{t}, \tabs y=a\sin{t}, \tabs z=ct \tabs \quad \text{where} \tab 0 \leq t \leq \pi$$
+
+\vspace{-\baselineskip}
+\Heading{Solution:}
+\vspace{1ex}
+$\begin{aligned}
+   \text{Let,\ } \vec{\r} \ & = \ \vecbf \ = \ \vecbf[a\cos{t}][a\sin{t}][ct]\\[1ex]
+   \therefore \frac{d\r}{dt} \ & = \ \vecbf[-a\sin{t}][a\cos{t}][c]\\[1ex]
+   \therefore \norm{\frac{d\r}{dt}} \ & = \ \sqrt{a^2 \sin ^2 t+a^2 \cos ^2 t+c^2} \ = \ \sqrt{a^2+c^2}
+\end{aligned}$
+
+\vspace{3ex}
+$\begin{aligned}
+   \therefore L & = \int_{a}^{b} \norm{\frac{d\r}{dt}} \,dt
+   \wspace \int_{0}^{\pi} \sqrt{a^2+c^2}\ dt
+   \wspace \sqrt{a^2+c^2}\int_{0}^{\pi} 1\ dt
+   \wspace \sqrt{a^2+c^2} \left[\ t\ \right]_{0}^{\pi}
+   \wspace \pi\sqrt{a^2+c^2}
+\end{aligned}$
+
+\vspace{20ex}
+\textbf{\mred{Exr-5}:} Find the arc length of the curve
+
+\vspace{-\baselineskip}
+$$\vf{\r} \ = \ \vecf[e^t\cos{t}][e^t\sin{t}][e^t] \tabs \quad \text{where} \tab 0 \leq t \leq \frac{\pi}{2}$$
+
+\vspace{-\baselineskip}
+\Heading{Solution:}
+\vspace{1ex}
+$\begin{aligned}
+   \text{Let,\ } \vec{\r} \ & = \ \vecbf \ = \ \vecbf[e^t\cos{t}][e^t\sin{t}][e^t]\\[1ex]
+   \therefore \frac{d\r}{dt} \ & = \ \vecf[(e^t\cos{t}-e^t\sin{t})][(e^t\sin{t}+e^t\cos{t})][(e^t)]\\[1ex]
+   \therefore \norm{\frac{d\r}{dt}} \ & = \ \sqrt{e^{2t}\left(\cos^2{t}+\sin^2{t}-2\sin{t}\cos{t}\right) + e^{2t}\left(\sin^2{t}+\cos^2{t}+2\sin{t}\cos{t}\right) + e^{2t}}\\[1ex]
+   & = \ \sqrt{e^{2t}\left(\cos^2{t}+\sin^2{t}-2\sin{t}\cos{t} + \sin^2{t}+\cos^2{t}+2\sin{t}\cos{t} + 1\right)}\\[1ex]
+   & = \ \sqrt{e^{2t}\left(1 + 1 + 1\right)} \ = \ \sqrt{3}e^t\\[1ex]
+\end{aligned}$
+
+\vspace{3ex}
+$\begin{aligned}
+   \therefore L & = \int_{a}^{b} \norm{\frac{d\r}{dt}} \,dt
+   \wspace \int_{0}^{\frac{\pi}{2}} \sqrt{3}e^t\ dt
+   \wspace \sqrt{3}\int_{0}^{\frac{\pi}{2}} e^t\ dt
+   \wspace \sqrt{3} \left[\ e^t\ \right]_{0}^{\frac{\pi}{2}}
+   \wspace \sqrt{3} \left(e^{\frac{\pi}{2}}-1\right)
+\end{aligned}$
+
+
+% \pagebreak
+% For a particle moving along a curve din 2-space or 3-space, The velocity and acceleration vector
+% can be written as
+% $$
+% \begin{aligned}
+% & \vec{v} \ = \ \frac{d s}{d t} \ \vec{T} \tab \seteqno{1} \\
+% & \vec{a} \ = \ \frac{d^2s}{d t^2} \ \vec{T} + \kappa\left(\frac{d s}{d t}\right)^2 \vec{N} \tab \seteqno{2}
+% \end{aligned}
+% $$
+
+% \begin{tabular}{rl}
+%    where, & $s$ \ is the  arc length parameter,\\[-0.5ex]
+%    & $\vec{T}$ \ is a unit tangent vector \\[-0.5ex]
+%    & $\vec{N}$ \ is a unit normal vector \\[-0.5ex]
+%    & $\kappa$ \ is curvature \\
+% \end{tabular}
+
+% \vspace{3ex}
+% The coefficient of $\vec{T}$ and $\vec{N}$ in $(2)$,
+
+% \vspace{1ex}
+% $\begin{aligned}
+% & a_T \ = \ \frac{d^2s}{d t^2} \quad \text{is called the scalar tangential component of acceleration.} \\
+% & a_N \ = \ \kappa\left(\frac{d s}{d t}\right)^2 \text{is called the scaler normal component of acceleration.}\\
+% \end{aligned}$
+
+
+% \vspace{3ex}
+% This provides useful insight into the physical properties of the tangential and normal components acceleration. They are not always the best formulas use for computation.
+% We shall now derive some more useful formulas that express the scalar normal and tangential components of acceleration directly, in terms of velocity and acceleration of the particle.
+
+
+% $$\begin{aligned}
+%    a_T \ = \ \frac{\vec{v} \cdot\vec{a}}{\|\vec{v}\|}, \quad a_N \ = \ \frac{\|\vec{v} \times \vec{a}\|}{\|\vec{v}\|}\\
+%    \text{curvature } \kappa \ = \ \frac{\|\vec{v} \times \vec{a}\|}{\|\vec{v}\|^3}
+% \end{aligned}$$
+
+\pagebreak
+\textbf{\mred{Exr-1}:} Suppose a particle moves through 3-space and its position vector at time $t$ is
+
+\vspace{-\baselineskip}
+$$\vec{r}(t)=t\ \vec{i} + t^2 \ \vec{j} + t^3 \ \vec{k}$$
+
+\vspace{-\baselineskip}
+\begin{enumerate}[label=(\alph*)]
+   \item find the scalar tangential and normal components of acceleration at time \ $t$
+   \item find the scalar tangential and normal components of acceleration at time \ $t=1$
+   \item find the vector tangential and normal components of acceleration at time \ $t=1$.
+   \item find the curvature of the path at the point where the particle is located at time \ $t=1$
+\end{enumerate}
+
+\Heading{Solution:}
+\begin{enumerate}[label=\textbf{\mred{(\alph*)}}]
+\item 
+\vspace{1ex}
+$\begin{aligned}[t]
+\text{ Given } \quad \vec{r}(t) \ &= \ t\ \vec{i} + t^2 \ \vec{j} + t^3 \ \vec{k}\\
+\therefore \vec{v} \ &= \ \frac{d r}{d t} \ = \ \vec{r}^{\prime} \ = \ 1 \ \vec{i}+2 t \ \vec{j}+3 t^2\ \vec{k} \\
+\therefore\vec{a} \ &= \ \vec{v}^{\prime}(t) \ = \ 0\ \vec{i}+2 \vec{j} + 6t \ \vec{k} \\
+\end{aligned}$
+
+\vspace{3ex}
+Now,\\
+$\begin{aligned}
+  \norm{v} \ = \ & \sqrt{1+4 t^2+9 t^4} \\
+   \therefore \ \vec{v} \cdot \vec{a} \ = \ & 0+4 t+18 t^3 \\
+   \therefore \ a_T
+   \ = \ & \frac{\vec{v} \cdot\vec{a}}{\norm{v}}
+   \ = \ -\frac{4 t+18 t^3}{\sqrt{1+4 t^2+9 t^4}}
+\end{aligned}$
+
+\vspace{3ex}
+$\begin{aligned}
+\therefore \ \vec{v} \times a \ &= \ \left|\begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{j} \\
+1 & 2 t & 3 t^2 \\
+0 & 2 & 6 t
+\end{array}\right| \ = \ \vec{i} \left(12 t^2-6 t^2\right) - \vec{j}(6 t-0) + \vec{k}(2-0) \ = \ 6 t^2 \ \vec{i}-6 t \ \vec{j} + 2 \ \vec{k}\\[1ex]
+\therefore \ a_N \ &= \ \frac{\|v \times\vec{a}\|}{\|\vec{v}\|}
+\ = \ \frac{\sqrt{36 t^4+36 t^2+4}}{\sqrt{1++4 t^2+9 t^4}}
+\end{aligned}$
+
+
+\vspace{4ex}
+\item
+$\begin{aligned}[t]
+\text{At $t=1$, \ }& a_T \ = \ \frac{4+18}{\sqrt{14}} = \frac{22}{\sqrt{14}} \\[0.5ex]
+& a_N \ = \ \frac{\sqrt{36+36+4}}{\sqrt{14}}= \frac{\sqrt{76}}{\sqrt{14}}
+\end{aligned}$
+
+\pagebreak
+\item
+Since \ $a_T \vec{T}$ \ is the vector tangential component of accelaration where \ $\vec{T}= \frac{\vec{v}}{\norm{\vec{v}}}$
+
+$\begin{aligned}
+\text{At } \ t=1, \quad  \vec{T}(1)
+\ &= \ \frac{v(1)}{\norm{v(1)}}
+\ = \ \frac{1 \ \vec{i}+2 t  \ \vec{j}+3 t^2 \ \vec{k}}{\sqrt{1+4+9}}
+\ = \ \frac{1}{\sqrt{14}}(\vec{i}+2 \dot{J}+3\vec{k})\\[1ex]
+\therefore A_T \vec{T}(1)
+\ &= \ \frac{22}{\sqrt{14}} \vec{T}(1) \ = \ \frac{22}{\sqrt{14}} \cdot \frac{1}{\sqrt{14}}(1\vec{i}+2 \dot{J}+3\vec{k}) \\[1ex]
+& =\frac{11}{7}(i+2\vec{i}+3\vec{k})
+\ = \ \frac{11}{7} \vec{i}+\frac{22}{7} \vec{j}+\frac{33}{7} \vec{k}
+\end{aligned}$
+
+
+\vspace{3ex}
+Now,\\
+$\begin{aligned}
+   \vec{a} \ &= \ a_T \Vec{T} + a_N \vec{N} \\
+   a_N \vec{N} \ &= \ \vec{a} - a_T \Vec{T} \\
+\end{aligned}$
+
+\vspace{1ex}
+$\begin{aligned}
+\text { At } t=1, \quad a_N N(1) \ &= \ \vec{a}(1)-a_T T(1) \\
+&=(2 \vec{j} + 6 \vec{k}) -\left(\frac{11}{7} \vec{i}+\frac{22}{7} \vec{j}+\frac{33}{7}\vec{k}\right) \\
+ &=-\frac{11}{7} \vec{i} - \frac{8}{7} \vec{j} + \frac{9}{7}\vec{k} \\
+\end{aligned}$
+
+\vspace{3ex}
+\item
+At \ $t=1$, \quad $\norm{\vec{v} \times\vec{a}} \ = \ \sqrt{36+36+4}=\sqrt{33} \sqrt{76}=2 \sqrt{19}$
+
+\vspace{1ex}
+$\norm{v} \ = \ \sqrt{1+4+9} \ = \ \sqrt{14}$
+
+\vspace{1ex}
+$\therefore$ curvature $\kappa \ = \ \frac{\norm{\vec{v} \times \vec{a}}}{\norm{\vec{v}}^3} \ = \ \frac{2 \sqrt{19}}{(\sqrt{14})^3}$
+
+\end{enumerate}
+\end{document}

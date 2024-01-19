@@ -1,0 +1,167 @@
+
+
+
+
+
+
+% #ANCHOR Document settings
+\setlist[enumerate]{noitemsep}
+\usetikzlibrary{shapes.geometric,decorations.pathreplacing,trees,arrows,positioning,shapes,fit,calc,decorations.markings, decorations.text}
+\tikzset{every node/.append style={font=\footnotesize}}
+\usepgfplotslibrary{fillbetween}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+\pgfplotsset{compat=1.18}
+\columnseprule=1pt
+% #ANCHOR Hypernation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\newlength{\colWidth}
+
+
+
+
+
+
+% #ANCHOR Ordered & Unordered List
+\setlist[itemize,1]{left=0cm, label={\textbullet}}
+\setlist[itemize,2,3,4,5,6,7,8,9,10]{left=0.6cm, label={\textbullet}}
+\setlist[enumerate,1]{left=0cm}
+\setlist[enumerate,2,3,4,5,6,7,8,9,10]{left=0.6cm}
+\setul{0.5ex}{0.125ex}
+
+
+
+% #ANCHOR Colored Box
+\let\oldul\ul
+\renewcommand{\ul}[2][keyword]{\text{\setulcolor{#1}\oldul{#2}}}
+\newcommand{\redbox}[1]{%
+{\color{red}\fbox{\color{black}#1}}
+}
+\newcommand{\red}[1]{%
+\textcolor{red}{#1}
+}
+\newcommand{\redeq}[1]{%
+\text{\color{red}$#1$}
+}
+\newcommand{\mred}[1]{%
+\textcolor{keyword}{#1}
+}
+\newcommand{\mredeq}[1]{%
+\textcolor{keyword}{$#1$}
+}
+\newcommand{\blue}[1]{%
+% {\color{number}#1\hspace{-0.4ex}}
+\textcolor{number}{#1}
+}
+\newcommand{\blueeq}[1]{%
+\text{\color{number}$#1$}
+}
+\newcommand{\cyanbox}[1]{%
+{\color{teal}\fbox{\textcolor{black}{#1}}}
+}
+\newcommand{\cyan}[1]{%
+\textcolor{teal}{#1}
+}
+\newcommand{\pink}[1]{%
+\textcolor{magenta}{#1}
+}
+\newcommand{\orange}[1]{%
+\textcolor{orange}{#1}
+}
+\newcommand{\violet}[1]{%
+{\color{violet}#1}
+}
+\newcommand{\cyaneq}[1]{%
+\text{\color{teal}$#1$}
+}
+\newcommand{\gray}[1]{%
+\textcolor{comment}{#1}
+}
+\newcommand{\pinkeq}[1]{%
+\text{\color{magenta}$#1$}
+}
+\renewcommand{\columnseprulecolor}{\color{divider}}
+
+
+
+% #ANCHOR Math commands
+\newcommand{\set}[1]{\{$#1$\}}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\boldi}[1]{\boldsymbol{#1}}%
+\newcommand{\wspace}{\ \ = \ \ }
+
+
+
+% #ANCHOR New commands
+\newcommand{\Title}[1]{%
+   \begin{center}
+      \textbf{\Large{#1}}
+   \end{center}
+}
+\newcommand{\Heading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{#1}}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\BuleHeading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{\textcolor{number}{#1}}}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\CHeading}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   \hspace{\fill}
+   {\fontsize{12pt}{13pt}\selectfont\textbf{#1}}
+   \hspace{\fill}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\Section}[1]{%
+   \par\vspace{\dimexpr -\baselineskip + 16pt}
+   \hspace{\fill}
+   {\fontsize{13pt}{13pt}\selectfont\textbf{#1}}
+   \hspace{\fill}
+   \par\vspace{\dimexpr -\baselineskip + 6pt}
+}
+\newcommand{\seteqno}[1]{%
+   \ \cdots \ \cdots \ \cdots \ (#1)
+}
+\newcommand{\eqor}{%
+   \Rightarrow \ \ 
+}
+\newcommand{\tsub}[1]{%
+\textsubscript{#1}\hspace{-0.45ex}
+}
+\newcommand{\tsup}[1]{%
+\textsuperscript{#1}\hspace{-0.45ex}
+}
+\newcommand{\cbox}[2][cyan]{
+\tikz\node[draw=#1,circle,inner sep=2pt,baseline=(a.base)](a){#2};
+}
+\newcommand{\hrline}{%
+\vspace{1ex} {\color{gray}\hrule} \vspace{4ex}
+}
+\newcommand{\divideX}[1][divider]{{\hspace{1ex}\color{#1}{\vrule}\hspace{1ex}}}
+\newcommand{\Reference}[2][Reference]{
+
+\vspace{-0.5\baselineskip}
+\begin{center}
+   {\fontspec{Merriweather}\textbf{#1:} \textit{#2}} 
+\end{center}
+}
+
+
+\NewDocumentCommand{\Column}{O{0.49} O{1.5em} m m}{
+   \setlength{\colWidth}{\linewidth-#1\linewidth-#2}
+   \begin{minipage}[t]{#1\linewidth}
+      \noindent
+         #3
+      \end{minipage}\hspace{\fill}{\color{divider}\vrule width 0.35pt}\hspace{\fill}
+      \begin{minipage}[t]{\colWidth}
+      \noindent
+         #4
+   \end{minipage}
+}

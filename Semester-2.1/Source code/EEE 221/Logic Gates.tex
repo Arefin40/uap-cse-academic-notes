@@ -1,0 +1,307 @@
+\documentclass[12pt]{article}
+\input{/Users/shahriararfin/Workspace/LaTex Projects/#Library/Preamble.tex}
+
+\usepackage{circuitikz}
+\usepackage{tikz}
+\newcommand{\ac}[1]{#1 to[sV, fill=white] #1}
+\ctikzset{resistors/scale=0.65}
+\ctikzset{diodes/scale=0.75}
+
+\begin{document}
+% #ANCHOR RTL
+\Title{Resistor-Transistor-Logic (RTL) Gates}
+\begin{figure}[ht!]
+\centering
+   \begin{subfigure}[t]{0.3\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[npn] (npn) {};
+         \draw (npn.base) to[R, anchor=east] ++(-1.5,0) node[left] {$A$};
+         \draw (npn.emitter) -- ++(0,-0.5) node[ground] {};
+         \draw (npn.collector) to[short,-o] ++(1,0)
+         node[above left]{$\bar{A}$};
+         \draw (npn.collector) -- ++(0,0.5) to[R] ++(0,1) node[vcc] {$V_{cc}$};
+   \end{circuitikz}
+   \caption{RTL NOT Gate}
+   \end{center}
+   \end{subfigure}
+
+   \vspace{10ex}
+   \begin{subfigure}[t]{0.3\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[npn] (npn1) {};
+         \draw (0,-1.5) node[npn] (npn2) {};
+         \draw (npn1.base) to[R, anchor=east] ++(-1.5,0) node[left] {$A$};
+         \draw (npn1.collector) to[short,-o] ++(1.5,0)
+         node[above left]{$\overline{A \cdot B}$};
+         \draw (npn1.collector) -- ++(0,0.5) to[R] ++(0,1) node[vcc] {$V_{cc}$};
+         \draw (npn2.base) to[R, anchor=east] ++(-1.5,0) node[left] {$B$};
+         \draw (npn2.emitter) -- ++(0,-0.5) node[ground] {};
+   \end{circuitikz}
+   \caption{RTL NAND Gate}
+   \end{center}
+   \end{subfigure}
+   \hspace{0.04\textwidth}
+   \begin{subfigure}[t]{0.4\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[npn] (npn1) {};
+         \draw (2,0) node[npn] (npn2) {};
+         \draw (npn1.base) to[R, anchor=east] ++(-1.5,0) node[left] {$A$};
+         \draw (npn2.base) -- ++(-0.5,0) -- ++(0,-1) -- ++(-1.5,0) to[R, anchor=east] ++(-1.5,0) node[left] {$B$};
+         \draw (npn1.emitter) -- ++(0,-1) -- ++(1,0) node[ground]{} -- ++(1,0) -- (npn2.emitter) {};
+         \draw (npn1.collector) -- ++(0,1) -- ++(1,0) coordinate (vcc) {} -- ++(1,0) -- (npn2.collector) {};
+         \draw (vcc) to[R] ++(0,2) node[vcc](vcc) {$V_{cc}$};
+         \draw (npn2.collector) to[short,-o] ++(1.5,0)
+         node[above left] {$\overline{A + B}$};
+   \end{circuitikz}
+   \caption{RTL NOR Gate}
+   \end{center}
+   \end{subfigure}
+\end{figure}
+
+\pagebreak
+% #ANCHOR DTL
+\Title{Diode-Transistor-Logic (DTL) Gates}
+\begin{figure}[ht!]
+\centering
+\begin{subfigure}[t]{\textwidth}
+\begin{center}
+\begin{circuitikz}
+   \coordinate (Origin) at (0,-0.5);
+   \draw (0,0) node[above](vcc){$V_{cc}$}
+   to[short, o-] (Origin)
+   (Origin) -| (-1, -1)
+   (-1, -1) to[R] (-1,-2.75)
+   
+   (Origin) -| (1, -1)
+   (1, -1) to[R] (1,-2.75)
+
+   (1,-2.75) -- (1, -3)
+   node[npn, anchor=collector] (npn){}
+
+   (npn.base) -| node(mid){} (-1,-2.75)
+   (npn.base) -- ++ (-1.5,0)
+   to[diode, anchor=east] ++(-2,0)
+   node[label=left:$A$]{}
+
+   (npn.collector) to[short, -o] ++(1.5,0)
+   node[above left]{$\overline{A}$}
+
+   (npn.emitter) node[ground]{}
+   (npn.base) ++(-0.5,0) to[diode,fill=white] ++(0.5,0)
+   ;
+\end{circuitikz}
+\caption{DTL NOT Gate}
+\end{center}
+\end{subfigure}
+
+\vspace{10ex}
+\begin{subfigure}[t]{0.4\textwidth}
+\begin{center}
+\begin{circuitikz}
+   \coordinate (Origin) at (0,-0.5);
+   \draw (0,0) node[above](vcc){$V_{cc}$}
+   to[short, o-] (Origin)
+   (Origin) -| (-1, -1)
+   (-1, -1) to[R] (-1,-2.75)
+   
+   (Origin) -| (1, -1)
+   (1, -1) to[R] (1,-2.75)
+
+   (1,-2.75) -- (1, -4)
+   node[npn, anchor=collector] (npn){}
+   
+   (-1,-3.5) -- ++(-0.35,0)
+   to[diode, anchor=east] ++(-2,0)
+   node[label=left:$A$]{}
+
+   (npn.base) -| node(mid){} (-1,-2.75)
+   (npn.base) -- ++ (-1.5,0)
+   to[diode, anchor=east] ++(-2,0)
+   node[label=left:$B$]{}
+
+   (npn.collector) ++(0,0.75) to[short, -o] ++(2,0)
+   node[above left]{$\overline{A \cdot B}$}
+
+   (npn.emitter) node[ground]{}
+   (npn.base) ++(-0.5,0) to[diode,fill=white] ++(0.5,0)
+   ;
+\end{circuitikz}
+\caption{DTL NAND Gate}
+\end{center}
+\end{subfigure}
+\hspace{5ex}
+\begin{subfigure}[t]{0.4\textwidth}
+   \begin{center}
+   \begin{circuitikz}
+      \coordinate (Origin) at (2,0);
+      \draw
+      (0,0.75) node[label=left:$A$]{}
+      to[diode] (2,0.75) -- (Origin)
+      
+      (0,-0.75) node[label=left:$B$]{}
+       to[diode] (2,-0.75) -- (Origin)
+   
+       (Origin) to[R,anchor=west] (4,0)
+       node[npn, anchor=base] (npn){}
+   
+       (npn.collector) to[R] ++(0,2) to[short, -o] ++(0,0)
+       node[above](vcc){$V_{cc}$}
+   
+       (npn.collector) to[short, -o] ++(2,0)
+      node[above left]{$\overline{A + B}$}
+   
+       (npn.emitter) node[ground]{}
+      ;
+   \end{circuitikz}
+   \caption{DTL NOR Gate}
+   \end{center}
+   \end{subfigure}
+\end{figure}
+
+\pagebreak
+% #ANCHOR TTL
+\Title{Transistor-Transistor-Logic (TTL) Gates}
+
+\begin{figure}[ht!]
+\centering
+\begin{subfigure}[t]{\textwidth}
+ \begin{center}
+   \begin{circuitikz}
+      \coordinate (Origin) at (0,-1.5);
+      \draw (0,0) node[above](vcc){$V_{cc}$}
+      to[R,o-] (Origin)
+      (Origin) -| (0.75,-3)
+      node[npn, anchor=collector] (npn2){}
+      (npn2.base) node[npn, anchor=collector, rotate=-90] (npn1){}
+      (npn1.base) |- (Origin)
+      (npn1.emitter) to[short] ++(-0.25,0)  node[label=left:$A$]{}
+      (npn2.emitter) node[ground]{}
+      (npn2.collector) to[short,-o] ++(1,0)
+      node[above left]{$\bar{A}$}
+      ;
+\end{circuitikz}
+\end{center}
+\caption{TTL NOT Gate}
+\end{subfigure}
+
+\vspace{10ex}
+\begin{subfigure}[t]{0.4\textwidth}
+ \begin{center}
+   \begin{circuitikz}
+      \coordinate (Origin) at (0,-1.5);
+      \draw (0,0) node[above](vcc){$V_{cc}$}
+      to[R,o-] (Origin)
+      (Origin) -| (0.75,-2.5)
+      node[npn, anchor=collector] (npnA2){}
+
+      (npnA2.base) node[npn, anchor=collector, rotate=-90] (npnA1){}
+      (npnA1.base) |- (Origin)
+      (npnA1.emitter) to[short] ++(-0.25,0)  node[label=left:$A$]{}
+
+      (npnA2.emitter) node[npn, anchor=collector] (npnB2){}
+      (npnA2.collector) -- ++(1,0)
+      (npnB2.base) node[npn, anchor=collector, rotate=-90] (npnB1){}
+      (npnB1.emitter) to[short] ++(-0.25,0)  node[label=left:$B$]{}
+
+      (npnA1.base) -- (npnB1.base)
+      (npnB2.emitter) node[ground]{}
+      (npnA2.collector) to[short, -o] ++(1.5,0)
+      node[above left]{$\overline{A \cdot B}$}
+      ;
+\end{circuitikz}
+\end{center}
+\caption{TTL NAND Gate}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+ \begin{center}
+   \begin{circuitikz}
+      \coordinate (Origin) at (0,-1.5);
+      \coordinate (Center) at (0,-3);
+      \draw (0,0) node[above](vcc){$V_{cc}$}
+      to[R,o-] (Origin) -- (Center)
+
+      (Center) -| (-0.5,-3.5)
+      node[npn, anchor=collector] (npnC1){}
+      (Center) -| (0.5,-3.5)
+      node[npn, anchor=collector, xscale=-1] (npnC2){}
+
+      (npnC1.base) node[npn, anchor=collector, rotate=-90] (npnA){}
+      (npnA.base) |- (Origin)
+      (npnA.emitter) to[short] ++(-0.25,0)  node[label=left:$A$]{}
+
+      (npnC2.base) node[npn, anchor=collector, rotate=-90, yscale=-1] (npnB){}
+      (npnB.base) |- (Origin)
+      (npnB.emitter) to[short] ++(0.25,0)  node[label=right:$B$]{}
+
+      (npnC1.emitter) -- (npnC2.emitter)
+      (0,-5.05) node[ground]{}
+      (0,-2.5) to[short, -o] ++(4,0)
+      node[above left]{$\overline{A + B}$}
+      ;
+\end{circuitikz}
+\end{center}
+\caption{TTL NOR Gate}
+\end{subfigure}
+\end{figure}
+
+\pagebreak
+% #ANCHOR NMOS
+\Title{NMOS Gates}
+\begin{figure}[ht!]
+\centering
+   \begin{subfigure}[t]{0.3\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[nmos] (nmos) {};
+         \draw (nmos.base) -- ++(-0.5,0) node[left] {$A$};
+         \draw (nmos.emitter) -- ++(0,-0.5) node[ground] {};
+         \draw (nmos.collector) to[short,-o] ++(1,0)
+         node[above left]{$\bar{A}$};
+         \draw (nmos.collector) -- ++(0,0.5) to[R] ++(0,1) node[vcc] {$V_{cc}$};
+   \end{circuitikz}
+   \caption{NMOS NOT Gate}
+   \end{center}
+   \end{subfigure}
+
+   \vspace{10ex}
+   \begin{subfigure}[t]{0.3\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[nmos] (nmos1) {};
+         \draw (0,-1.5) node[nmos] (nmos2) {};
+         \draw (nmos1.base) -- ++(-0.5,0) node[left] {$A$};
+         \draw (nmos1.collector) to[short,-o] ++(1.5,0)
+         node[above left]{$\overline{A \cdot B}$};
+         \draw (nmos1.collector) -- ++(0,0.5) to[R] ++(0,1) node[vcc] {$V_{cc}$};
+         \draw (nmos2.base) -- ++(-0.5,0) node[left] {$B$};
+         \draw (nmos2.emitter) -- ++(0,-0.5) node[ground] {};
+   \end{circuitikz}
+   \caption{NMOS NAND Gate}
+   \end{center}
+   \end{subfigure}
+   \hspace{0.04\textwidth}
+   \begin{subfigure}[t]{0.4\textwidth}
+   \begin{center}
+      \begin{circuitikz}
+         \draw (0,0) node[nmos] (nmos1) {};
+         \draw (2,0) node[nmos] (nmos2) {};
+         \draw (nmos1.base) -- ++(-0.5,0) node[left] {$A$};
+         \draw (nmos2.base) -- ++(-0.5,0) -- ++(0,-1) -- ++(-1.5,0) -- ++(-0.5,0) node[left] {$B$};
+         \draw (nmos1.emitter) -- ++(0,-1) -- ++(1,0) node[ground]{} -- ++(1,0) -- (nmos2.emitter) {};
+         \draw (nmos1.collector) -- ++(0,1) -- ++(1,0) coordinate (vcc) {} -- ++(1,0) -- (nmos2.collector) {};
+         \draw (vcc) to[R] ++(0,2) node[vcc](vcc) {$V_{cc}$};
+         \draw (nmos2.collector) to[short,-o] ++(1.5,0)
+         node[above left] {$\overline{A + B}$};
+   \end{circuitikz}
+   \caption{NMOS NOR Gate}
+   \end{center}
+   \end{subfigure}
+\end{figure}
+
+\vspace{3ex}
+\Heading{Why NMOS technology is prefered over the PMOS?}
+The electrons, the majority charge carriers in the NMOS, have a much higher mobility than those of the holes, which form the majority charge carriers in PMOS technology.
+\end{document}

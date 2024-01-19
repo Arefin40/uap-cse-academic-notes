@@ -1,0 +1,584 @@
+\documentclass[12pt]{article}
+\input{/Users/shahriararfin/Workspace/LaTex Projects/#Library/Preamble.tex}
+\input{Statistics.tex}
+
+\begin{document}
+\Title{Solution to Sample Question-1}
+
+\textbf{\mred{Q1.}} The mean and standard deviation of 100 items are found to be 40 and 10 respectively. If at the time of calculations two items are wrongly taken as 30 and 70 instead of 3 and 27, find the correct mean and standard deviation.
+
+\vspace{-0.5\baselineskip}
+\begin{minipage}[t]{0.49\linewidth}
+   \Heading{Incorrect:}
+   $\sum{x} = \product{40}{100}$\\[1ex]
+   $\begin{aligned}
+      &\sdformula\\[1ex]
+      &\Rightarrow \ 10^2 \ = \ \varience[\sum{x^2}][100][4000][100]\\
+      &\Rightarrow \sum{x^2} = (10^2 + 1600) \times 100 = 170000\\
+   \end{aligned}$
+\end{minipage}\vrule\hspace{1ex}
+\begin{minipage}[t]{0.49\linewidth}
+   \Heading{Correct:}
+   $\begin{aligned}
+      &\sum{x} = 4000-30-70+3+27 = 3930\\[1ex]
+      &\bar{x} = \fracv[1]{3930}{100}\\[1ex]
+      &\sum{x^2} = 170000-30^2-70^2+3^2+27^2 = 164938\\[1ex]
+      &\SD[164938][100][3930][100] = \sqrt{104.89} = 10.24\\
+   \end{aligned}$
+\end{minipage}
+
+\vspace{5ex}
+\textbf{\mred{Q2.}} The mean and standard deviation calculated from 20 observations are 15 and 10 respectively. If an additional observation 36, left out through oversight, be included in the calculations, find the correct mean and standard deviation.
+
+\vspace{1ex}
+\begin{minipage}[t]{0.49\linewidth}
+   \noindent
+   \Heading{Incorrect:}
+   $\begin{aligned}
+      &\sum{x} = \product{15}{20}\\[1ex]
+      &\sdformula\\[1ex]
+      &\Rightarrow \ 10^2 \ = \ \varience[\sum{x^2}][20][300][20]\\
+      &\Rightarrow \sum{x^2} = (10^2 + 225) \times 20 = 6500\\
+   \end{aligned}$
+
+\end{minipage}\vrule\hspace{1ex}
+\begin{minipage}[t]{0.49\linewidth}
+   \noindent
+   \Heading{Correct:}
+   $\begin{aligned}
+      &\sum{x} = 300+36 = 336\\[1ex]
+      &\bar{x} = \fracv[1]{336}{21}\\[1ex]
+      &\sum{x^2} = 6500+36^2 = 7796\\[1ex]
+      &\SD[7796][21][336][21] = \sqrt{115.23} = 10.73\\
+   \end{aligned}$
+\end{minipage}
+
+
+\pagebreak
+\begin{enumerate}[label=(\alph*)]
+   \item[\mred{Q3.} (a)] For a group of 200 candidates, the mean and standard deviation of scores were found to be 40 and 15 respectively. Later on it was discovered that the scores 43 and 35 were misread as 34 and 53 respectively. Find the corrected mean and standard deviation corresponding to the corrected figures.\\[-3ex]
+   \item Calculate coefficient of variation for a series for which the following results are known :\\
+   $N=50$, \ \ \footnotesize{$\sum$} \normalsize{$d=-10$}, \ \ \footnotesize{$\sum$} \normalsize{$d^2=404$ \ \ where $d =$ deviation of items from assumed mean 75.}
+\end{enumerate}
+
+\vspace{1ex}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+   \item \begin{minipage}[t]{0.46\linewidth}
+   \noindent
+   \Heading{Incorrect:}
+   $\begin{aligned}
+      &\sum{x} = \product{40}{200}\\[1ex]
+      &\sdformula\\[1ex]
+      &\Rightarrow \ 15^2 \ = \ \varience[\sum{x^2}][200][8000][200]\\
+      &\Rightarrow \sum{x^2} = (15^2 + 40^2) \times 200 = 365000\\
+   \end{aligned}$
+\end{minipage}\vrule\hspace{1ex}
+\begin{minipage}[t]{0.52\linewidth}
+   \noindent
+   \Heading{Correct:}
+   $\begin{aligned}
+      &\sum{x} = 8000-34-53+43+35 = 7991\\[1ex]
+      &\bar{x} = \fracv[2]{7991}{200}\\[1ex]
+      &\sum{x^2} = 365000-34^2-53^2+43^2+35^2 = 364109\\[1ex]
+      &\SD[364109][200][7991][200] = \sqrt{224.14} = 14.97\\
+   \end{aligned}$
+\end{minipage}
+
+\vspace{5ex}
+\item $\sigma = \sqrt{\bar{d^2} - \bar{d}^2} = \sqrt{\frac{404}{50} - \left(\frac{-10}{50}\right)^2} = \sqrt{8.04} = 2.84$
+
+\vspace{2ex}
+$\bar{x} = A+\bar{d} = 75 + \frac{-10}{50} = 74.8$
+
+\vspace{2ex}
+$CV = \frac{\sigma}{\bar{x}} \times 100 = \frac{2.84}{74.8} \times 100 = 3.79\%$
+\end{enumerate}
+
+
+% \vspace{5ex}
+\pagebreak
+\textbf{\mred{Q4.}} Calculate the first four moments about the mean from the following data:
+
+\vspace{-0.25\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|}
+      Class mark $(x)$: & 61 & 64 & 67 & 70 & 73\\
+      Frequency $(f)$: & 5 & 18 & 42 & 27 & 8\\
+   \end{tabularx}
+\end{center}
+
+\Heading{Solution}
+\begin{center}
+\begin{tabularx}{\linewidth}{|C|C|C|C|C|C|C|}\hline
+   ${X}$ & ${u}$ & ${f}$ & ${fu}$ & ${fu^2}$ & ${fu^3}$ & ${fu^4}$\\\hline
+   61 & -2 & 5 & -10 & 20 & -40 & 80 \\\hline
+   64 & -1 & 18 & -18 & 18 & -18 & 18 \\\hline
+   67 & 0 & 42 & 0 & 0 & 0 & 0 \\\hline
+   70 & 1 & 27 & 27 & 27 & 27 & 27 \\\hline
+   73 & 2 & 8 & 16 & 32 & 64 & 128 \\\hline
+   \multicolumn{2}{r|}{$\sum=$}& 100 & 15 & 97 & 33 & 253\\[0.5ex]\cline{3-7}
+\end{tabularx}
+\end{center}
+
+\vspace{2ex}
+Raw moments are,
+\vspace{1ex}
+\begin{center}
+   \begin{tabularx}{0.85\linewidth}{XX}
+      $\mu^\prime_1 \ = \  \frac{c \times \sum{fu}}{N} \ = \ \frac{3 \times 15}{100} \ = \ 0.45$ &
+      $\mu^\prime_3 \ = \  \frac{c^3 \times \sum{fu^3}}{N} \ = \ \frac{3^3 \times 33}{100} \ = \ 8.91$ \\[4ex]
+      $\mu^\prime_2 \ = \ \frac{c^2 \times \sum{fu^2}}{N} \ = \ \frac{3^2 \times 97}{100} \ = \ 8.73$ &
+      $\mu^\prime_4 \ = \ \frac{c^4 \times \sum{fu^4}}{N} \ = \ \frac{3^4 \times 253}{100} \ = \ 204.93$
+   \end{tabularx}
+\end{center}
+
+\vspace{2ex}
+Moments about the mean,\\
+\vspace{-\baselineskip}
+\begin{center}
+$\begin{aligned}
+   \mu_1 & \wspace 0\\
+   \mu_2 & \wspace \mu_2^\prime - \mu_1^{\prime 2} \wspace 8.73 - (0.45)^2 \wspace 8.5275\\
+   \mu_3  & \wspace \mu_3^\prime - 3\mu_1^\prime \mu_2^\prime +  \mu_1^{\prime 3} \wspace 8.91 - 3(0.45)(8.73) + 2(0.45)^3 = 2.6932\\
+   \mu_4 & \wspace \mu_4^\prime - 4\mu_1^\prime \mu_3^\prime + 6\mu_1^{\prime 2}\mu_2^\prime - 3\mu_1^{\prime 4} \wspace 204.93 - 4(0.45)(8.91) + 6(0.45)^2(8.73) - 3(0.45)^4 = 199.3759
+\end{aligned}$
+\end{center}
+
+\pagebreak
+\textbf{\mred{Q4.}} Calculate the first four moments about the mean from the following data:
+
+\vspace{-0.25\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|}
+      Class mark $(X)$: & 61 & 64 & 67 & 70 & 73\\
+      Frequency $(f)$: & 5 & 18 & 42 & 27 & 8\\
+   \end{tabularx}
+\end{center}
+
+\Heading{Alternative Solution}
+\begin{center}
+   \begin{tabularx}{\linewidth}{|c|c|c|C|C|C|C|C|C|}\hline
+      ${X}$ & ${f}$ & ${fX}$ & ${X-\bar{X}}$ & ${f(X-\bar{X})}$ & ${f(X-\bar{X})^2}$ & ${f(X-\bar{X})^3}$ & ${f(X-\bar{X})^4}$\\\hline
+      61 & 5 & 305 & -6.45 & -32.25 & 208.01 & -1341.68 & 8653.84 \\\hline
+      64 & 18 & 1152 & -3.45 & -62.1 & 214.24 & -739.14 & 2550.05 \\\hline
+      67 & 42 & 2814 & -0.45 & -18.9 & 8.505 & -3.82 & 1.72 \\\hline
+      70 & 27 & 1890 & 2.55 & 68.85 & 175.56 & 447.69 & 1141.62 \\\hline
+      73 & 8 & 584 & 5.55 & 44.4 & 246.42 & 1367.63 & 7590.35 \\\hline
+      \multicolumn{1}{r|}{$\sum=$}  & ${100}$ & ${6745}$ & ${-2.25}$ & ${0}$ & ${852.75}$ & ${-269.325}$ & ${19937.5931}$ \\\cline{2-8}
+   \end{tabularx}
+   \end{center}
+
+   \vspace{2ex}
+   Mean, $\bar{X} = \frac{\sum{fX}}{N} = \frac{6745}{100} = 67.45$
+   
+   \vspace{3ex}
+   Moments about the mean,\\[2ex]
+   \begin{tabularx}{\linewidth}{XX}
+      $\mu_1 = \frac{\sum{f(X-\bar{X})}}{N} = \frac{0}{100} = 0$ &
+      $\mu_3 = \frac{\sum{f(X-\bar{X})^3}}{N} = \frac{-269.325}{100} = -2.6932$ \\[4ex]
+      $\mu_2 = \frac{\sum{f(X-\bar{X})^2}}{N} = \frac{852.75}{100} = 8.5275$ &
+      $\mu_4 = \frac{\sum{f(X-\bar{X})^4}}{N} = \frac{19937.5931}{100} = 199.3759$\\
+   \end{tabularx}
+
+\pagebreak
+\begin{tabularx}{\textwidth}{lX}
+   \textbf{\mred{Q5.}} & 
+   Establish the relation between the first four moments about the mean $\mu_r$ and the moments about an arbitrary origin $\mu^\prime_r$ (raw moments). Prove that\\
+   & (a) \ $\mu_2 \ = \ \mu_2^\prime - (\mu_1^\prime)^2$ \\
+   & (b) \ $\mu_3 \ = \ \mu_3^\prime - 3\mu_1^\prime\mu_2^\prime + 2(\mu_1^\prime)^3$ \\
+   & (c) \ $\mu_4 \ = \ \mu_4^\prime - 4\mu_1^\prime\mu_3^\prime + 6(\mu_1^\prime)^2 \mu_2^\prime - 3(\mu_1^\prime)^4$ \\
+\end{tabularx}
+
+\vspace{3ex}
+\Heading{Solution}
+\begin{enumerate}[label=(\alph*)]
+   \item\adjustbox{valign=t}
+   {$\begin{aligned}
+      \mu_2 \ = \ \bar{(X-\bar{X})^2}\ = \ \bar{(d-\bar{d})^2} \ &= \ \bar{d^2 + 2d\bar{d} + \bar{d}^2}\\
+      & = \ \bar{d^2} - 2\bar{d}^2 + \bar{d}^2 \\
+      &  = \ \bar{d^2} - \bar{d}^2 \\
+      &  = \  \mu_2^\prime - (\mu_1^\prime)^2
+   \end{aligned}$}
+   \vspace{3ex}
+   \item\adjustbox{valign=t}
+   {$\begin{aligned}
+      \mu_3 \ = \ \bar{(X-\bar{X})^3}\ = \ \bar{(d-\bar{d})^3} \ &= \ \bar{d^3 + 3d^2\bar{d} + 3d\bar{d}^2 + \bar{d}^3}\\
+      & = \ \bar{d^3} - 3\bar{d}\bar{d^2} + 3\bar{d}^3 - \bar{d}^3 \\
+      &  = \ \bar{d^3} - 3\bar{d}\bar{d^2} + 2\bar{d}^3 \\
+      &  = \ \mu_3^\prime - 3\mu_1^\prime\mu_2^\prime + 2\mu_1^{\prime 3}
+   \end{aligned}$}
+   \vspace{3ex}
+   \item\adjustbox{valign=t}
+   {$\begin{aligned}
+      \mu_4 \ = \ \bar{(X-\bar{X})^4}\ = \ \bar{(d-\bar{d})^4} \ &= \ \bar{d^4 - 4d^3\bar{d} + 6d^2\bar{d}^2 - 4d\bar{d}^3 + \bar{d}^4}\\
+      & = \ \bar{d^4} - 4\bar{d}\bar{d^3} + 6\bar{d}^2\bar{d^2} - 4\bar{d}^4 + \bar{d}^4 \\
+      & = \ \bar{d^4} - 4\bar{d}\bar{d^3} + 6\bar{d}^2\bar{d^2} - 3\bar{d}^4 \\
+      & = \ \mu_4^\prime - 4\mu_1^\prime\mu_3^\prime + 6\mu_1^{\prime 2}\mu_2^\prime - 3\mu_1^{\prime 4}
+   \end{aligned}$}
+\end{enumerate}
+
+\pagebreak
+\begin{tabularx}{\textwidth}{P{0.7cm}P{0.5cm}X}
+   \textbf{\mred{Q6.}} & (a) & Prove that the standard deviation\\
+   && $\mathrm{(i)} \ \ \sdformulaX = \sqrt{\ \bar{X^2}-\bar{X}^2} \tabs \text{and} \tabs \mathrm{(ii)} \ \ \sigma \ = \sqrt{\ \bar{d^2}-\bar{d}^2} \quad \text{where\ } \ d=X-A$
+   \\[1ex]
+   &(b) & Use any one of the above formulas to find the standard deviation of the set of numbers
+   12, 6, 7, 3, 15, 10, 18, 5.
+\end{tabularx}
+
+\vspace{3ex}
+\Heading{Solution}
+\begin{enumerate}[label=(\alph*)]
+   \item
+   \begin{enumerate}[label=$\mathrm{(\roman*)}$]
+      \item \adjustbox{valign=t}
+      {$\begin{aligned}
+         \sigma \ &= \ \sqrt{\frac{\sum(X-\bar{X})^2}{N}} \\
+         \sigma^2 \ &= \ \frac{\sum(X-\bar{X})^2}{N}
+          \tab = \tab \frac{\sum\left(X^2-2 \bar{X} X+\bar{X}^2\right)}{N}
+          \tab = \tab \frac{\sum X^2}{N} - \frac{2\bar{X}\sum{X}}{N} + \frac{\sum \bar{X}^2}{N}\\[2ex]
+          &= \ \frac{\sum X^2}{N} - \frac{2\bar{X}\sum{X}}{N} + \frac{N\bar{X}^2}{N}
+          \tab = \tab \bar{X^2} - 2\bar{X}^2 + \bar{X}^2
+          \tab = \tab \bar{X^2} - \bar{X}^2 \\[2ex]
+          \therefore \sigma \ &= \ \sqrt{\bar{X^2} - \bar{X}^2} \tabs \text{(Proved)}
+      \end{aligned}$}
+      \vspace{5ex}
+      \item \adjustbox{valign=t}
+      {$\begin{aligned}
+         \sigma \ &= \ \sqrt{\frac{\sum(X-\bar{X})^2}{N}} \\[1ex]
+         \sigma^2 \ &= \ \bar{(X-\bar{X})^2}
+         \tab = \tab \bar{(d - \bar{d}^2)}
+         \tab = \tab \bar{(d^2 -2d\bar{d} + \bar{d}^2)}
+         \tab = \tab \bar{d^2} -2\bar{d}\bar{d} + \bar{d}^2
+         \tab = \tab \bar{d^2} - \bar{d}^2\\[1ex]
+         \therefore \sigma \ &= \ \sqrt{\bar{d^2} - \bar{d}^2} 
+      \end{aligned}$}
+   \end{enumerate}
+   \vspace{8ex}
+   \item \adjustbox{valign=t}
+   {$\begin{aligned}
+      \bar{X} \ &= \ \frac{\sum{X}}{N} \ = \ \frac{12+6+7+3+15+10+18+5}{8} \ = \ \fracv[1]{76}{8}\\[2ex]
+      \bar{X^2} \ &= \ \frac{\sum{X^2}}{N} \ = \ \frac{12^2+6^2+7^2+3^2+15^2+10^2+18^2+5^2}{8} \ = \ \fracv[0]{912}{8}\\[2ex]
+      \therefore \sigma \ &= \ \sqrt{\ \bar{X^2} - \bar{X}^2}
+      \ = \ \sqrt{114 - (9.5)^2} \ = \ \sqrt{23.75} \ = \ 4.87
+   \end{aligned}$}
+\end{enumerate}
+
+\pagebreak
+\textbf{\mred{Q7.}} From the data given bellow calculate Karl Pearson's coefficient of skewness and comment on the result:
+\vspace{-\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|}
+      Profits (Tk. lakhs): & 10-20 & 20-30 & 30-40 & 40-50 & 50-60\\
+      No. of companies: & 18 & 20 & 30 & 22 & 10\\
+   \end{tabularx}
+\end{center}
+
+\Heading{Solution}
+\begin{center}
+   \begin{tabularx}{\linewidth}{|C|C|C|C|C|C|}\hline
+      class & $x$ & $f$ & $d$ & $fd$ & $fd^2$\\\hline
+      10-20 & 15 & 18 & -20 & -360 & 7200 \\\hline
+      20-30 & 25 & 20 & -10 & -200 & 2000 \\\hline
+      30-40 & 35 & 30 & 0 & 0 & 0 \\\hline
+      40-50 & 45 & 22 & 10 & 220 & 2200 \\\hline
+      50-60 & 55 & 10 & 20 & 200 & 4000 \\\hline
+		\multicolumn{2}{r|}{$\sum=$} & 100 & 0 & -140 & 15400\\\cline{3-6}
+   \end{tabularx}
+\end{center}
+
+\vspace{3ex}
+\begin{minipage}{0.42\textwidth}
+   Mean,  \ $\bar{x} =A+\frac{\sum fd}{N}  = 35+\frac{-140}{100} = 33.6$
+
+   \vspace{3ex}
+   $\begin{aligned}
+      \text{Mode} \ & = L + \left(\frac{\Delta_1}{\Delta_1 + \Delta_2}\right) c\\[1ex]
+      & = 30 + \frac{10}{10+8} \times 10 = 35.56
+   \end{aligned}$
+\end{minipage}
+\begin{minipage}{0.54\textwidth}
+   \vspace{-\baselineskip}
+   S.D, \ $= \sqrt{\frac{\sum fd^2}{N}-\left(\frac{\sum fd}{N}\right)^2} = \sqrt{\frac{15400}{100} - \left(\frac{-140}{100}\right)^2} = 12.33$
+
+   \vspace{3ex}
+   $\begin{aligned}
+      \text{Skewness} \ & = \frac{\text{mean} - \text{mode}}{\text{S.D}}\\[1ex]
+      & = \frac{33.6 - 35.56}{12.33} = -0.159
+   \end{aligned}$
+\end{minipage}
+
+
+\vspace{5ex}
+\textbf{\mred{Q8.}} Calculate coefficient of variation (CV) and Karl Pearson's coefficient of skewness from following
+data:
+\vspace{-\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|}
+      Marks less than: & 20 & 40 & 60 & 80 & 100\\
+      No. of Students: & 18 & 40 & 70 & 90 & 100\\
+   \end{tabularx}
+\end{center}
+
+\Heading{Solution}
+\begin{center}
+   \begin{tabularx}{\linewidth}{|C|C|C|C|C|C|C|}\hline
+      class & $x$ & $cf$ & $f$ & $u$ & $fu$ & $fu^2$\\\hline
+      00-20 & 10 & 18 & 18 & -2 & -36 & 72 \\\hline
+      20-40 & 30 & 40 & 22 & -1 & -22 & 22 \\\hline
+      40-60 & 50 & 70 & 30 & 0 & 0 & 0 \\\hline
+      60-80 & 70 & 90 & 20 & 1 & 20 & 20 \\\hline
+      80-100 & 90 & 100 & 10 & 2 & 20 & 40 \\\hline
+		\multicolumn{3}{r|}{$\sum=$} & 100 & 0 & -18 & 154\\\cline{4-7}
+   \end{tabularx}
+\end{center}
+
+\vspace{7ex}
+\begin{minipage}[t]{0.45\textwidth}
+   \vspace{-\baselineskip}
+   Mean,  \ $\bar{x} = 50+\frac{-18}{100} \times 20 = 46.4$
+
+   \vspace{3ex}
+   $\begin{aligned}
+     \text{S.D,}\  \sigma &= \sqrt{\frac{\sum fu^2}{N} - \left(\frac{\sum fu}{N}\right)^2} \times c\\
+      &= \sqrt{\frac{154}{100} - \left(\frac{-18}{100}\right)^2} \times 20 = 24.56
+   \end{aligned}$
+\end{minipage}
+\begin{minipage}[t]{0.54\textwidth}
+   \vspace{-\baselineskip}
+   Mode \ $= L + \left(\frac{\Delta_1}{\Delta_1 + \Delta_2}\right) c \ = 40 + \frac{8}{8+10} \times 20 = 48.89$
+
+   \vspace{3ex}
+   Skewness \ $= \frac{\text{mean} - \text{mode}}{\text{S.D}} \ = \frac{46.4 - 48.89}{24.56} = -0.101$
+
+   \vspace{3ex}
+   CV \ $= \frac{\sigma}{\bar{x}} = \frac{24.56 \times 100}{46.4} = 52.92\%$
+\end{minipage}
+
+
+
+\vspace{5ex}
+\textbf{\mred{Q9.}} From the prices of X and Y given below, state which share is more stable in value:
+\vspace{-0.25\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|C|}
+      X: & 53 & 54 & 58 & 50 & 61 & 60\\
+      Y: & 105 & 108 & 104 & 106 & 100 & 102
+   \end{tabularx}
+\end{center}
+
+\vspace{1ex}
+\begin{minipage}[t]{0.463\linewidth}
+   \noindent
+   \Heading{For X:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{53+54+58+50+61+60}{6} = 56.0\\[1ex]
+      &\bar{x^2} = \frac{53^2+54^2+58^2+50^2+61^2+60^2}{6} = 3151.67\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{3151.67 - (56)^2} = 3.96\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{3.96 \times 100}{56} = 7.07\%
+   \end{aligned}$
+
+\end{minipage}\vrule\hspace{0.8ex}
+\begin{minipage}[t]{0.52\linewidth}
+   \noindent
+   \Heading{For Y:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{105+108+104+106+100+102}{6} = 104.17\\[1ex]
+      &\bar{x^2} = \frac{105^2+108^2+104^2+106^2+100^2+102^2}{6} = 10857.5\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{10857.50 - (104.17)^2} = 2.61\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{2.61 \times 100}{104.17} = 2.50\%
+   \end{aligned}$
+\end{minipage}
+
+
+\vspace{2ex}
+Since $CV(Y) < CV(X)$ hence, share Y is more stable.
+
+\vspace{5ex}
+\textbf{\mred{Q10.}} From the prices of X and Y given below, state which share is more stable in value:
+\vspace{-0.25\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|C|C|C|C|C|}
+      X: & 35 & 54 & 52 & 53 & 56 & 58 & 52 & 50 & 51 & 49\\
+      Y: & 108 & 107 & 105 & 106 & 100 & 107 & 104 & 103 & 104 & 101
+   \end{tabularx}
+\end{center}
+
+\vspace{1ex}
+\begin{minipage}[t]{0.463\linewidth}
+   \noindent
+   \Heading{For X:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{\sum{x}}{n} = \frac{510}{10} = 51.0\\[1ex]
+      &\bar{x^2} = \frac{\sum{x^2}}{n} = \frac{26360}{10} = 2636\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{2636 - (51)^2} = 5.92\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{5.92 \times 100}{51} = 11.6\%
+   \end{aligned}$
+
+\end{minipage}\vrule\hspace{0.8ex}
+\begin{minipage}[t]{0.52\linewidth}
+   \noindent
+   \Heading{For Y:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{\sum{x}}{n} = \frac{1045}{10} = 104.5\\[1ex]
+      &\bar{x^2} = \frac{\sum{x^2}}{n} = \frac{109265}{10} = 10926.5\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{10926.5 - (104.5)^2} = 2.5\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{2.5 \times 100}{104.5} = 2.39\%
+   \end{aligned}$
+\end{minipage}
+
+\vspace{2ex}
+Since $CV(Y) < CV(X)$ hence, shares Y are more stable.
+
+\pagebreak
+\textbf{\mred{Q11.}} Two cricketers scored the following runs in the several innings. Find who is better run-getter and
+who is more consistent player:
+\vspace{-0.25\baselineskip}
+\begin{center}
+   \begin{tabularx}{0.8\linewidth}{lC|C|C|C|C|C|C|C|C|C|}
+      A: & 42 & 17 & 83 & 59 & 72 & 76 & 64 & 45 & 40 & 32\\
+      B: & 28 & 70 & 31 & 0 & 59 & 108 & 82 & 14 & 3 & 95
+   \end{tabularx}
+\end{center}
+
+\Heading{Solution}
+\vspace{1ex}
+\begin{minipage}[t]{0.463\linewidth}
+   \noindent
+   \Heading{For A:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{\sum{x}}{n} = \frac{530}{10} = 53\\[1ex]
+      &\bar{x^2} = \frac{\sum{x^2}}{n} = \frac{32128}{10} = 3212.8\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{3212.8 - (53)^2} = 20.09\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{20.09 \times 100}{53} = 37.91\%
+   \end{aligned}$
+
+\end{minipage}\vrule\hspace{0.8ex}
+\begin{minipage}[t]{0.52\linewidth}
+   \noindent
+   \Heading{For B:}
+   \vspace{1ex}
+   $\begin{aligned}
+      &\bar{x} = \frac{\sum{x}}{n} = \frac{490}{10} = 49\\[1ex]
+      &\bar{x^2} = \frac{\sum{x^2}}{n} = \frac{37744}{10} = 3774.4\\[1ex]
+      &\sigma = \sqrt{\bar{x^2} - (\bar{x})^2} = \sqrt{3774.4 - (49)^2} = 37.06\\[1ex]
+      &CV = \frac{\sigma}{\bar{x}}\times 100 = \frac{37.06 \times 100}{49} = 75.63\%
+   \end{aligned}$
+\end{minipage}
+
+\vspace{2ex}
+Since $CV(A) < CV(B)$ hence, cricketer A is more consistent player.
+
+\vspace{5ex}
+\textbf{\mred{Exr16.}} Compute the arithmetic mean, geometric mean, and harmonic mean of the following set of data.
+\vspace{-1.5\baselineskip}
+\begin{center}
+   \begin{tabular}{cccccc}
+      3, & 5, & 7, & 11, & 14, & 57\\
+   \end{tabular}
+\end{center}
+
+\vspace{-0.5\baselineskip}
+If these data were observations on the time needed to cure a disease, which mean would you think to be most appropriate?
+
+\vspace{1ex}
+\Heading{Solution}
+$\therefore$ Arithmetic Mean, \ $\bar{X} \ = \ \frac{3+5+7+11+14+57}{6} \ = \ 9.7$
+
+\vspace{1ex}
+$\therefore$ Geometric Mean, \ $G \ = \ \sqrt[6]{3 \times 5 \times 7 \times 11 \times 14 \times 57} \ = \ 9.87$
+
+\vspace{1ex}
+$\therefore$ Harmonic Mean, \ $H \ = \ \frac{n}{\scalebox{1}{$\sum{\frac{1}{X}}$}} \ = \ \frac{6}{\scalebox{1}{$\left(\frac{1}{3} + \frac{1}{5} + \frac{1}{7} + \frac{1}{11} + \frac{1}{14} + \frac{1}{57}\right)$}} \ = \ \frac{6}{0.856} \ = \ 7.009$
+
+\pagebreak
+\textbf{\mred{Exr17.}} If the weights are 2, 1, 1, 3, 1, and 2 for the numbers 3, 5, 7, 11, 14, and 57
+(exercise 16), compute the weighted average and variance.
+
+\vspace{1ex}
+\Heading{Solution}
+\begin{center}
+   \begin{tabularx}{\linewidth}{|C|C|C|C|}\hline
+      $x$ & $w$ & $wx$ & $wx^2$\\\hline
+      3 & 2 & 6 & 18\\\hline
+      5 & 1 & 5 & 25\\\hline
+      7 & 1 & 7 & 49\\\hline
+      11 & 3 & 33 & 363\\\hline
+      14 & 1 & 14 & 196\\\hline
+      57 & 2 & 114 & 6498\\\hline
+      \multicolumn{1}{r|}{$\sum=$} & 10 & 179 & 7149\\\cline{2-4}
+   \end{tabularx}
+\end{center}
+
+\vspace{3ex}
+$\therefore$ Weighted Average, \ $\bar{x} \ = \ \frac{\sum{wx}}{\sum{w}} \ = \ \frac{179}{10} \ = \ 17.9$
+
+\vspace{3ex}
+$\therefore$ Variance, \ $\sigma^2 \ = \ \frac{\sum{wx^2}}{N}-\left(\frac{\sum{wx}}{N}\right)^2 \ = \ \frac{7149}{10} - \left(\frac{179}{10}\right)^2 \ = \ 394.49$
+
+\pagebreak
+\Title{Regression}
+
+\begin{tabular}{ll}
+   \textbf{\mred{Q15.}} Calculate & $(i)$ the regression equation of x on y and y on x from the following data and\\
+   & $(ii)$ estimate x when y = 20, \tabs $(iii)$ estimate y when x = 30.
+\end{tabular}
+
+\vspace{1ex}
+\Heading{Solution}
+\begin{center}
+   \begin{tabularx}{\linewidth}{|C|C|C|C|C|C|C|}\hline
+      $x$ & $x^{\prime}$ & $x^{\prime 2}$ & $y$ & $y^{\prime}$ & $y^{\prime 2}$ & $x^{\prime}y^{\prime}$ \\\hline
+      10 & -4 & 16 & 5 & -3 & 9 & 12 \\\hline
+      12 & -2 & 4 & 6 & -2 & 4 & 4 \\\hline
+      13 & -1 & 1 & 7 & -1 & 1 & 1 \\\hline
+      17 & 3 & 9 & 9 & 1 & 1 & 3 \\\hline
+      18 & 4 & 16 & 13 & 5 & 25 & 20 \\\hline
+      \mred{70} && \mred{46} && \mred{40} & \mred{40} & \mred{40}\\\hline
+   \end{tabularx}
+\end{center}
+
+\vspace{3ex}
+Now,
+
+\vspace{1ex}
+$\bar{x} = \frac{\sum{x}}{N} = \fracv[0]{70}{5}$
+\tabs and \tabs $\bar{y} = \frac{\sum{y}}{N} = \fracv[0]{40}{5}$
+
+\vspace{3ex}
+$m = \frac{\sum{x^{\prime}y^{\prime}}}{\sum{x^{\prime 2}}} = \fracv[2]{40}{46}$
+\tabs and \tabs $m^{\prime} = \frac{\sum{x^{\prime}y^{\prime}}}{\sum{y^{\prime 2}}} = \fracv[0]{40}{40}$
+\vspace{2ex}
+
+\vspace{3ex}
+Regression equation,\\
+\begin{tabular}{ll|l}
+   $\begin{aligned}
+      & (y-\bar{y}) = m(x-\bar{x})\\
+      & y-8 = 0.87(x-14)\\
+      & y = 0.87x -14 \times 0.87+8\\
+      \therefore \ & y = 0.87x-4.18
+   \end{aligned}$
+   & \tabs &
+   $\begin{aligned}
+      & (x-\bar{x}) = m^{\prime}(y-\bar{y})\\
+      & x-14 = 1(y-8)\\
+      & x = y-8+14\\
+      \therefore \ & x = y+6
+   \end{aligned}$
+\end{tabular}
+
+\vspace{2ex}
+$\begin{aligned}
+   \text{when y = 20,} \tabs x \ &= (20) + 6 \ = 26\\
+   \text{when x = 30,} \tabs y \ &= 0.87(30)-4.18 \ = 21.92
+\end{aligned}$
+
+\vspace{5ex}
+Coefficient of linear correlation, $r \ = \ \frac{\sum{x^{\prime}y^{\prime}}}{\sqrt{\sum{x^{\prime 2}}\sum{y^{\prime 2}}}} \ = \ \frac{40}{\sqrt{(46)(40)}} \ = \ 0.933$
+\end{document}
