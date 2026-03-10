@@ -1,0 +1,616 @@
+\documentclass[14pt]{extreport}
+\input{Preamble}
+
+
+\begin{document}
+\include{reports/Titlepage}
+
+\pagebreak
+
+\subsection*{Problem Statement}
+
+The problem is to implement the classic game of Tic Tac Toe as an adversarial search problem. The goal is to design an AI player capable of making optimal moves by applying the Minimax algorithm with Alpha-Beta pruning. The AI should evaluate possible game states to choose the best action and ensure optimal play against either a human or another AI. Additionally, the efficiency of the algorithm and the effect of scoring on AI behavior need to be analyzed.
+
+
+\subsection*{Approach and Implementation}
+\begin{enumerate}[itemsep=1em]
+    \item \textbf{Game Implementation}
+    \begin{itemize}[itemsep=0.5em, topsep=1em]
+        \item A 3x3 Tic Tac Toe board was implemented using a Python list to represent the state of the grid.
+        \item Console output was used to print the board after each move.
+    \end{itemize}
+    \item \textbf{Adversarial Search (Minimax)}
+    \begin{itemize}[itemsep=0.5em, topsep=1em]
+        \item The Minimax algorithm was implemented to recursively evaluate all possible game states.
+        \item The maximizing player (X) aims to maximize the score, while the minimizing player (O) tries to minimize it.
+        \item Terminal states were assigned scores: +1 (X wins), -1 (O wins), 0 (draw).
+    \end{itemize}
+    \item \textbf{Alpha-Beta Pruning}
+    \begin{itemize}[itemsep=0.5em, topsep=1em]
+        \item $\alpha$ (best guaranteed score for maximizer) and $\beta$ (best guaranteed score for minimizer) were applied to prune branches where $\beta \leq \alpha$.
+        \item This reduced the number of explored nodes, which makes the algorithm more efficient.
+    \end{itemize}
+
+    \item \textbf{Experiment Setup}
+    \begin{itemize}[itemsep=0.5em, topsep=1em]
+        \item Multiple test board states were used to compare outcomes.
+        \item Node exploration counts were tracked to measure efficiency.
+    \end{itemize}
+\end{enumerate}
+
+
+\vspace{1em}
+
+\textbf{Source code:} \ 
+The complete source code for this project is available on \href{https://github.com/Arefin40/AI-Lab}{\rgbB{GitHub}}.
+
+
+\pagebreak
+\begin{center}
+\subsection*{Win Combinations}
+\vspace{2em}
+
+\subsubsection*{Rows}
+
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell[filled]{0}{0}{0}
+      \cell[filled]{1}{0}{1}
+      \cell[filled]{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell{2}{0}{2}
+      
+      \cell[filled]{0}{1}{3}
+      \cell[filled]{1}{1}{4}
+      \cell[filled]{2}{1}{5}
+      
+      \cell{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell[filled]{0}{2}{6}
+      \cell[filled]{1}{2}{7}
+      \cell[filled]{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+
+\vspace{4em}
+\subsubsection*{Columns}
+
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell[filled]{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell{2}{0}{2}
+      
+      \cell[filled]{0}{1}{3}
+      \cell{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell[filled]{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell{0}{0}{0}
+      \cell[filled]{1}{0}{1}
+      \cell{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell[filled]{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell{0}{2}{6}
+      \cell[filled]{1}{2}{7}
+      \cell{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell[filled]{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell{1}{1}{4}
+      \cell[filled]{2}{1}{5}
+      
+      \cell{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell[filled]{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+
+
+\vspace{4em}
+\subsubsection*{Diagonals}
+
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell[filled]{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell[filled]{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell[filled]{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+   \centering
+   \begin{tictactoeboard}[1.25]
+      \cell{0}{0}{0}
+      \cell{1}{0}{1}
+      \cell[filled]{2}{0}{2}
+      
+      \cell{0}{1}{3}
+      \cell[filled]{1}{1}{4}
+      \cell{2}{1}{5}
+      
+      \cell[filled]{0}{2}{6}
+      \cell{1}{2}{7}
+      \cell{2}{2}{8}
+   \end{tictactoeboard}
+\end{minipage}
+\end{center}
+
+
+\pagebreak
+
+\begin{center}   
+\subsection*{Simulation of the MinMax Algorithm}
+
+\vspace{2em}
+\begin{tikzpicture}[arrow/.style={->, >={Stealth[scale=1.5]}}]
+\draw[lightgray!50,rounded corners=6pt] (-8.5,1.5) rectangle ++(17,-3);
+\draw[lightgray!50,rounded corners=6pt] (-8.5,-3) rectangle ++(17,-3);
+\draw[lightgray!50,rounded corners=6pt] (-8.5,-8.5) rectangle ++(17,-3);
+\draw[lightgray!50,rounded corners=6pt] (-8.5,-13.85) rectangle ++(17,-3);
+
+   \node[below right] at (-8.5,1.5) {Max};
+   \node[below right] at (-8.5,-3) {Min};
+   \node[below right] at (-8.5,-7.95) {Max};
+   \node[below right] at (-8.5,-13.3) {Min};
+
+  \node (Origin) at (0,0) {
+     \begin{tictactoeboard}[0.75]
+        \drawX{0}{0};
+        \drawX{2}{0};
+        \drawX{2}{1};
+        \drawO{1}{0};
+        \drawO{1}{1};
+        \drawO{0}{1};
+     \end{tictactoeboard}
+  };
+
+  \node[below left=of Origin, xshift=-2cm, yshift=-1cm] (A) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{0}{2};
+      \end{tictactoeboard}\\
+      -1 \rgbR{\ding{51}}
+   \end{tabular}
+  };
+
+  \node[below=of Origin, yshift=-1cm] (B) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX[filled]{2}{0};
+         \drawX[filled]{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX[filled]{2}{2};
+      \end{tictactoeboard}\\
+      +1
+   \end{tabular}
+  };
+
+  \node[below right=of Origin, xshift=2cm, yshift=-1cm] (C) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{1}{2};
+      \end{tictactoeboard}\\
+      0
+   \end{tabular}
+  };
+
+  \node[below left=of A, xshift=2cm, yshift=-1cm] (A1) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO[filled]{1}{0};
+         \drawO[filled]{1}{1};
+         \drawO{0}{1};
+         \drawX{0}{2};
+         \drawO[filled]{1}{2};
+      \end{tictactoeboard}\\
+      -1
+   \end{tabular}
+  };
+
+  \node[below right=of A, xshift=-2cm, yshift=-1cm] (A2) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{0}{2};
+         \drawO{2}{2};
+      \end{tictactoeboard}\\
+      0
+   \end{tabular}
+  };
+
+  \node[below left=of C, xshift=2cm, yshift=-1cm] (C1) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{1}{2};
+         \drawO{0}{2};
+      \end{tictactoeboard}\\
+      +1 \rgbG{\ding{51}}
+   \end{tabular}
+  };
+
+  \node[below right=of C, xshift=-2cm, yshift=-1cm] (C2) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{1}{2};
+         \drawO{2}{2};
+      \end{tictactoeboard}\\
+      0
+   \end{tabular}
+  };
+
+  \node[below=of A2, yshift=-1cm] (A20) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{0}{2};
+         \drawO{2}{2};
+         \drawX{1}{2};
+      \end{tictactoeboard}\\
+      0
+   \end{tabular}
+  };
+
+  \node[below=of C1, yshift=-1cm] (C10) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX[filled]{2}{0};
+         \drawX[filled]{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{1}{2};
+         \drawO{0}{2};
+         \drawX[filled]{2}{2};
+      \end{tictactoeboard}\\
+      +1
+   \end{tabular}
+  };
+  
+  \node[below=of C2, yshift=-1cm] (C20) {
+   \begin{tabular}{@{}c@{}}
+      \begin{tictactoeboard}[0.75]
+         \drawX{0}{0};
+         \drawX{2}{0};
+         \drawX{2}{1};
+         \drawO{1}{0};
+         \drawO{1}{1};
+         \drawO{0}{1};
+         \drawX{1}{2};
+         \drawO{2}{2};
+         \drawX{0}{2};
+      \end{tictactoeboard}\\
+      0 \rgbR{\ding{51}}
+   \end{tabular}
+  };
+
+  \draw[arrow] (Origin) -- ++($(A)+(1,1.75)$);
+  \draw[arrow] (Origin) -- node[right,midway] {\rgbG{\ding{51}}} (B);
+  \draw[arrow] (Origin) -- ++($(C)+(-1,1.75)$);
+  \draw[arrow] (A) -- (A1);
+  \draw[arrow] (A) -- (A2);
+  \draw[arrow] (C) -- (C1);
+  \draw[arrow] (C) -- (C2);
+  \draw[arrow] (C) -- (C2);
+  \draw[arrow] (A2) -- (A20);
+  \draw[arrow] (C1) -- (C10);
+  \draw[arrow] (C2) -- (C20);
+\end{tikzpicture}
+\end{center}
+
+\pagebreak
+
+\subsection*{Alpha Beta Pruning}
+\begin{minipage}{0.48\textwidth}
+   \begin{figure}[H]
+      \includegraphics[width=\linewidth]{figures/alpha-beta.png}
+   \end{figure}
+\end{minipage}
+\begin{minipage}{0.51\textwidth}
+   \begin{itemize}[itemsep=0.5em]
+      \item Initialize $\alpha = -\infty$ and $\beta = +\infty$
+      best value found so far.
+      \item Traverse the game tree using DFS.
+      \item At each maximizer node:
+         \begin{itemize}[leftmargin=2em]
+            \item Update $\alpha$ if a better max value is found.
+            \item Prune remaining children if $\beta \leq \alpha$.
+         \end{itemize}
+      \item At each minimizer node:
+         \begin{itemize}[leftmargin=2em]
+            \item Update $\beta$ if a better min value is found.
+            \item Prune remaining children if $\beta \leq \alpha$.
+         \end{itemize}
+      \item Return the static evaluation (leaf value).
+   \end{itemize}
+\end{minipage}
+
+
+\vspace{1em}
+\subsection*{Gameplay: Human vs Human}
+
+Below is a sample run of a complete Tic-Tac-Toe game between two human players.
+The board is displayed after each move, using a monospaced font for clarity.
+
+\textbf{Board State (after each move)}
+\begin{center}
+\begin{tabular}{@{} c c c @{}}
+   % Row 1
+   \ttboard{%
+    \phantom{X} | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } &
+   \ttboard{%
+    X | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } &
+   \ttboard{%
+    X | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } \\\\
+   % Row 2
+   \ttboard{%
+    X | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | X   
+   } &
+   \ttboard{%
+    X | \phantom{X} | O \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | X   
+   } &
+   \ttboard{%
+    X | \phantom{X} | O \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    X | \phantom{X} | X   
+   } \\\\
+   % Row 3
+   \ttboard{%
+    X | O | O \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    X | \phantom{X} | X   
+   } &
+   \ttboard{%
+    X | O | O \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    X | X | X   
+   }
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+\begin{center}
+   \textbf{X wins!}
+\end{center}
+
+
+\pagebreak
+
+\subsection*{Gameplay: AI vs AI}
+
+Below is a sample run of a complete Tic-Tac-Toe game between two AI players.
+The board is displayed after each move, using a monospaced font for clarity.
+
+\textbf{Board State (after each move)}
+\begin{center}
+\begin{tabular}{@{} c c c @{}}
+   % Row 1
+   \ttboard{%
+    \phantom{X} | \phantom{X} | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } &
+   \ttboard{%
+    \phantom{X} | \phantom{X} | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } &
+   \ttboard{%
+    X | \phantom{X} | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } \\\\
+   % Row 2
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | \phantom{X} | \phantom{X}   
+   } &
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | X | \phantom{X}   
+   } &
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    O | O | \phantom{X} \\ 
+   --+---+-- \\ 
+    \phantom{X} | X | \phantom{X}   
+   } \\\\
+   % Row 3
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    O | O | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | X | \phantom{X}   
+   } &
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    O | O | X \\ 
+   --+---+-- \\ 
+    \phantom{X} | X | O   
+   } &
+   \ttboard{%
+    X | O | X \\ 
+   --+---+-- \\ 
+    O | O | X \\ 
+   --+---+-- \\ 
+    X | X | O   
+   } \\\\
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+\begin{center}
+   \textbf{It's a draw!}
+\end{center}
+
+\noindent
+\textbf{Note:} This example demonstrates a full game between two AI agents, both playing optimally. The board is shown after each move, and the game ends in a draw, as expected from perfect play on both sides.
+
+
+
+\subsection*{Results and Observations}
+\begin{itemize}
+    \item In all evaluated test cases, the AI consistently identified the optimal move.
+    \item Under conditions of optimal play from both participants, the game invariably concluded in a draw, thereby validating the correctness of the implementation.
+    \item Furthermore, the incorporation of Alpha-Beta pruning led to a substantial reduction in the number of nodes explored relative to the standard Minimax algorithm.
+\end{itemize}
+
+\vspace{1em}
+\subsection*{Challenges}
+\begin{itemize}
+    \item \textbf{Correct pruning logic:} ensuring $\alpha$ and $\beta$ updates were implemented properly.
+    \item \textbf{Move ordering:} efficiency of pruning varied depending on exploration order.
+    \item \textbf{Tie-breaking:} In scenarios where multiple moves were evaluated as equally optimal, the algorithm picked the first move encountered during its search process.
+\end{itemize}
+
+\vspace{1em}
+\subsection*{Conclusion}
+The implementation of \textbf{Minimax with Alpha-Beta pruning} successfully produced an optimal Tic Tac Toe AI. 
+The algorithm ensures optimal play and never loses against any opponent. 
+Alpha-Beta pruning greatly reduces computation without affecting correctness. 
+
+For a simple game like Tic Tac Toe, the approach works perfectly and demonstrates the strength of adversarial search. 
+This experiment confirms that adversarial search is a powerful technique for two-player zero-sum games and forms 
+the foundation for more complex AI systems in games such as Chess or Go.
+
+\end{document}

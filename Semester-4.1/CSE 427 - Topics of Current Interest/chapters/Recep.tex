@@ -1,0 +1,163 @@
+\begin{multicols}{2}
+\topic{Terminology}
+\textbf{Features}\\
+The columns other than the Target column. These columns help the ML model to predict the target for future data points.
+
+\textbf{Target Variable}\\
+The column that we want to predict. It is our resultant column and we want to know for future data.
+
+\textbf{Clustering}\\
+A way of grouping the data points into different clusters, consisting
+of similar data points. Objects with possible similarities remain in a group that has less or no similarities with another group
+
+
+\topic{Naive Bayes}
+Naive Bayes is called \textbf{naive} because it makes a strong, often unrealistic, assumption that all predictor features are independent of each other and contribute equally to the outcome. But in real-world data, features are often correlated, but Naive Bayes ignores these correlations.
+
+\topic{Algorithms}
+\textbf{Finding K (Elbow Method)}
+\begin{itemize}[topsep=-0.5em, parsep=0.5em]
+\item If we choose $k =1$ means the algorithm will be sensitive to outliers.
+\item If we choose $k=$ all (means the total number of data points in the training set), the majority class in the training set will always win.
+\item Always use $k$ as an odd number.
+\item Elbow Method: We can also use an error plot or accuracy plot to find the most favorable $k$ value.
+\end{itemize}
+
+% \columnbreak
+\topic{Performance Metrics}
+\subtopic{Bias}
+Bias is the difference between the average prediction of the model
+and the expected value which it trying to predict.
+
+\begin{itemize}[topsep=-0.5em, parsep=0.5em]
+\item \textbf{High bias:} Underfitting, model cannot capture the data patterns, poor performance on training and test data.
+\item	\textbf{Low bias:} Model fits training data well, Captures Complex Patterns, Risk of overfitting.
+\end{itemize}
+
+\subtopic{Variance}
+Variance is the variability in the model prediction, meaning how much the predictions will change if a different training data set is used.
+\begin{itemize}[topsep=-0.5em, parsep=0.5em]
+   \item \textbf{High variance:} Overfitting, model captures noise, good performance on training but poor on test data i.e it fails to generalize to new,
+   unseen data.
+   \item \textbf{Low variance:} Model is too simple to capture the complexity of data, both training and test error are high.
+\end{itemize}
+
+
+\subtopic{Confusion Matrix}
+\begin{tabular}{ll}
+   Precision &: 
+   $\frac{\text{true positive}}
+   {\text{all predicted positive}}=\frac{TP}{TP+FP}$ \\[1.5em]
+
+   Recall/Sensitivity &: 
+   $\frac{\text{true positive}}
+   {\text{all actual positives}}=\frac{TP}{TP+FN}$ \\[1.5em]
+
+   Specificity &: 
+   $\frac{\text{true negative}}
+   {\text{all actual negatives}}=\frac{TN}{TN+FP}$ \\[1.5em]
+   
+   $F_1$-score &: 
+   $\frac{\text{2} \times \text{precision} \times \text{recall}}
+   {\text{precision} + \text{recall}}$ \\[1.5em]
+\end{tabular}
+
+\subtopic{Errors}
+Mean Absolute Error (MAE) :
+$\frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$ \\[0.5em]
+Mean Squared Error (MSE) :
+$\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$ \\[0.5em]
+Root Mean Squared Error (RMSE) :
+$\sqrt{\text{MSE}}$ \\[0.5em]
+R-squared :
+$1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+{\sum_{i=1}^{n} (y_i - \bar{y})^2}$ \\
+
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0.25em, topsep=-1em]
+   \item MAE, MSE, and RMSE are often referred to as loss functions or error metrics because they quantify the error between predictions and true values.
+   \item $R^2$ is an explanatory measure because it indicates how well the model fits the data.
+\end{itemize}
+
+
+% \subsection*{Linear Regression}
+% \begin{itemize}[topsep=-0.5em, parsep=0.75em, leftmargin=1em]
+%    \item $\hat{y} = WX + b$ \quad  where, ($W$ = weight, $b$ = bias)
+%    \item Linear Regression predicts continuous values by modeling the relationship between a dependent variable and one or more independent variables using a straight line.
+%    \item A model with two or more dependent variables is called \rgbR{multi-variable} linear regression.
+%    \item A model with two or more independent variables is called \rgbR{multiple} linear regression.
+% \end{itemize}
+
+% \vspace{1em}
+% \textbf{Pros}
+% \begin{itemize}[topsep=-0.5em, parsep=0.25em]
+%    \item Simple model
+%    \item Computationally efficient
+%    \item Interpretability of the Output
+% \end{itemize}
+
+% \textbf{Cons}
+% \begin{itemize}[topsep=-0.5em, parsep=0.25em]
+%    \item Overly-Simplistic
+%    \item Linearity Assumption
+%    \item Severely affected by Outliers
+% \end{itemize}
+
+% \subsection*{Logistic Regression}
+% \begin{itemize}[topsep=-0.5em, parsep=0.75em, leftmargin=1em]
+%    \item Sigmoid: $\sigma(z) = \frac{1}{1 + e^{-z}}$ If $\sigma(z) >$ 0.5, classifies 1 else 0.
+%    \item The logistic function (also called the sigmoid function) is used in logistic regression to model the probability of a binary outcome.
+% \end{itemize}
+
+
+% \subsection*{Gradient Descent}
+% The gradient of a scalar function is a vector pointing in the direction of greatest increase. It indicates:
+% \begin{itemize}[topsep=-0.5em, parsep=0.5em]
+%    \item \textbf{Direction of Steepest Ascent}: where the function increases fastest. Negative gradient points to greatest decrease.
+%    \item \textbf{Rate of Increase}: magnitude shows how fast the function increases. Small steps along the negative gradient reduce the function value.
+%    \item \textbf{Goal}: minimize MSE by updating parameters in the direction that reduces error.
+% \end{itemize}
+
+
+
+% \columnbreak
+% \subsection*{K-means}
+% K-means clustering is a method for grouping $n$ observations into $K$
+% clusters.
+
+% \textbf{Challenges}
+% \begin{itemize}[topsep=-0.5em, parsep=0.25em]
+%    \item The algorithm finds spherical shaped clusters only, cannot handle categorical data.
+%    \item Since distance calculation is inaccurate with categorical features.
+%    \item Value of $k$ must be predefined and can be found using elbow method.
+%    \item A wrong value of $k$ might result in inaccurate result.
+%    \item Computational cost is high.
+% \end{itemize}
+
+
+% \begin{itemize}[topsep=-0.5em, parsep=0.5em, leftmargin=1em]
+%    \item Finds the k nearest neighbors and predict the class by the majority vote of the nearest neighbors.
+%    \item Also known as an instance-based model or a lazy learner because it doesn't construct an internal model.
+% \end{itemize}
+
+% \vspace{1em}
+
+
+
+% \vspace{1em}
+% \textbf{Pros}
+% \begin{itemize}[topsep=-0.5em, parsep=0.25em]
+%    \item No training period
+%    \item Easy implementation
+%    \item Adding new data doesn't affect the model
+% \end{itemize}
+
+% \textbf{Cons}
+% \begin{itemize}[topsep=-0.5em, parsep=0.25em]
+%    \item Does not work well for large datasets
+%    \item Slower for high dimensions
+%    \item Sensitive to noise
+%    \item Feature scaling is mandatory
+% \end{itemize}
+\end{multicols}
+
+

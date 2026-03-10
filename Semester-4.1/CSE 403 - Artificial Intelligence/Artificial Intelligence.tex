@@ -1,0 +1,31 @@
+\documentclass[oneside]{book}
+\usepackage[nomarginpar, margin=1.27cm]{geometry}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Preamble.tex}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Syntax.tex}
+\usepackage{pgf-pie}
+
+\setlength{\emergencystretch}{3em}
+
+\begin{document}
+% Create the title page
+\include{chapters/Titlepage}
+
+\frontmatter
+\pagenumbering{Roman}
+% Table of contents
+\tableofcontents
+% Main content
+\mainmatter
+
+% Chapters
+% \include{chapters/Introduction}
+% \include{chapters/Intelligent Agent}
+% \include{chapters/Searching}
+% \include{chapters/Questions}
+\include{chapters/KRR}
+\include{chapters/Predicate Logic}
+% \include{chapters/Fuzzy}
+\include{chapters/Genetic Algorithm}
+\include{chapters/ANN}
+\include{chapters/Uncertainty}
+\end{document}

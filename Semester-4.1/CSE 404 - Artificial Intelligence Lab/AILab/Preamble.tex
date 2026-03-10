@@ -1,0 +1,61 @@
+\usepackage[nomarginpar, margin=1.27cm]{geometry}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Preamble.tex}
+
+\definecolor{start}{HTML}{FFA500}
+\definecolor{goal}{HTML}{04C975}
+
+\renewcommand{\normalsize}{\fontsize{12pt}{18pt}\selectfont}
+\renewcommand{\small}{\fontsize{10pt}{15pt}\selectfont}
+
+\usepackage{caption}
+\captionsetup{font={small}, labelfont={small}}
+\renewcommand{\captionfont}{\fontsize{9pt}{11pt}\selectfont}
+
+
+% ======== Game Board Environment ==========
+\newenvironment{tictactoeboard}[1][1]
+{%
+  \begin{tikzpicture}[scale=#1,
+    every node/.append style={font=\fontsize{14}{21}\selectfont}]%
+    % Grid lines
+    \draw[thick,lightgray] (1,0) -- (1,3);
+    \draw[thick,lightgray] (2,0) -- (2,3);
+    \draw[thick,lightgray] (0,1) -- (3,1);
+    \draw[thick,lightgray] (0,2) -- (3,2);
+    \ignorespaces
+}%
+{%
+  \end{tikzpicture}%
+  \unskip
+}
+
+\newcommand{\drawX}[3][]{%
+   \def\x{0.35}\def\y{0.65}
+   \pgfmathsetmacro{\flipy}{2-#3}
+   \ifthenelse{\equal{#1}{filled}}{%
+      \fill[start!20] (#2+0.5,\flipy+0.5) circle [radius=0.325];
+   }{}%
+   \draw[thick,rgbGF] (#2+\x,\flipy+\x) -- (#2+\y,\flipy+\y);
+   \draw[thick,rgbGF] (#2+\y,\flipy+\x) -- (#2+\x,\flipy+\y);
+}
+\newcommand{\drawO}[3][]{%
+   \def\r{0.2}
+   \pgfmathsetmacro{\flipy}{2-#3}
+   \ifthenelse{\equal{#1}{filled}}{%
+      \fill[start!20] (#2+0.5,\flipy+0.5) circle [radius=0.325];
+   }{}%
+   \draw[thick,rgbRF] (#2+0.5,\flipy+0.5) circle [radius=\r];
+}
+\newcommand{\cell}[4][]{%
+   \pgfmathsetmacro{\flipy}{2-#3}
+   \ifthenelse{\equal{#1}{filled}}{%
+      \fill[start!30] (#2+0.5,\flipy+0.5) circle [radius=0.325];
+   }{}%
+   \node at (#2+0.5,\flipy+0.5) {#4};
+}
+
+
+
+\newcommand{\ttboard}[1]{%
+  \parbox[t]{0.30\linewidth}{\ttfamily\obeyspaces #1}%
+}

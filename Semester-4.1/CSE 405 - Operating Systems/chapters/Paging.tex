@@ -1,0 +1,37 @@
+\begin{multicols}{2}
+   \topic{Paging and Demand Paging}
+   \subtopic{Page Fault}
+
+\begin{itemize}[noitemsep]
+    \item Present bit in page table entry: indicates if a page of a process resides in memory or not
+    \item When translating VA to PA, MMU reads present bit
+    \item If page present in memory, directly accessed
+   \item If page not in memory, MMU raises a trap to the OS - page fault
+\end{itemize}
+
+
+\subtopic{Translation Lookaside Buffer (TLB)}
+\begin{itemize}[noitemsep]
+    \item A cache of recent VA-PA mappings
+    \item To translate VA to PA, MMU first looks up TLB
+    \item If TLB hit, PA can be directly used
+    \item If TLB miss, then MMU performs additional memory accesses to ``walk'' page table
+    \item TLB misses are expensive (multiple memory accesses)
+    \begin{itemize}[noitemsep]
+        \item Locality of reference helps to have high hit rate
+    \end{itemize}
+    \item TLB entries may become invalid on context switch and change of page tables
+\end{itemize}
+
+\subtopic{Demand Paging}
+\begin{itemize}[noitemsep]
+    \item Memory management technique where pages are loaded into physical memory only when needed (on first access).
+    \item Reduces memory usage by avoiding loading unused pages.
+    \item If a required page is not in memory, a page fault occurs $\to$ OS loads the page from disk into a free frame.
+    \item Common in virtual memory systems for efficient resource use.
+\end{itemize}
+
+\columnbreak
+
+Page algos
+\end{multicols}

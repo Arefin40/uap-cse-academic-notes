@@ -1,0 +1,316 @@
+\begin{multicols}{2}
+\textbf{Q4/F-24:}\\[0.5em]
+A small bakery sells croissants at an average rate of 4 customers per hour.
+\vspace{-1em}
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$]
+    \item What is the probability that the bakery gets more than 2 customers in a given hour?
+    \item If no customers arrived in the first 15 minutes, what is the probability that more than 2 customers will arrive in the next 30 minutes?
+\end{enumerate}
+
+\textbf{Solution:}\\[0.5em]
+Given,\\
+Average rate of customers per hour, $\lambda = 4$\\
+Average rate of customers per 30 minutes, $\lambda_{30} = \frac{4}{2} = 2$
+
+$\begin{aligned}
+   (i) P(X > 2)
+   &= 1 - P(X \leq 2) \\
+   &= 1 - [P(X=0) + P(X=1) + P(X=2)] \\
+   &= 1 - \sum_{k=0}^{2} \frac{4^k e^{-4}}{k!}
+   = 0.7619
+\end{aligned}$
+
+
+$\begin{aligned}
+   (ii) P(X > 2)
+   &= 1 - P(X \leq 2) \\
+   &= 1 - [P(X=0) + P(X=1) + P(X=2)] \\
+   &= 1 - \sum_{k=0}^{2} \frac{2^k e^{-2}}{k!}
+   = 0.3233
+\end{aligned}$
+
+
+A laboratory blood test is 80 percent effective in detecting a certain disease when it is, in fact, present. However, the test also yields a "false positive" result for 5 percent of the healthy persons tested. If only 3 percent of the population actually has the disease, then what is the probability that a person actually has the disease given that his test result is positive?
+
+\textbf{Solution:}\\[0.5em]
+Given,\\
+$P(T+\mid D) = 0.8$
+\ \ and \ \ 
+$P(T+\mid D^c) = 0.05$\\
+$P(D) = 0.03$
+\ \ and \ \ 
+$P(D^c) = 0.97$
+
+$\begin{aligned}
+   \therefore P(T+)
+   &= P(T+\mid D) \cdot P(D) + P(T+\mid D^c) \cdot P(D^c) \\
+   &= 0.8 \cdot 0.03 + 0.05 \cdot 0.97  = 0.0725
+\end{aligned}$
+
+by applying Bayes' Theorem,\\[0.5em]
+$\therefore P(D\mid T+)
+= \frac{P(T+\mid D) \cdot P(D)}{P(T+)}
+= \frac{0.8 \cdot 0.03}{0.0725} = 0.331$
+
+\columnbreak
+\textbf{Q5/F-24:}\\[0.5em]
+A basketball player has a 70\% chance of making a free throw. If they attempt 20 free throws.
+\vspace{-1em}
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$]
+\item What is the probability they miss all 20?
+\item What is the probability they make at least 15?
+\item How many free throws do they make on average?
+\end{enumerate}
+
+\textbf{Solution:}\\[0.5em]
+Given,\\
+Probability of making a free throw, $p = 0.7$\\
+Number of free throws, $n = 20$\\
+
+$(i) \ \
+P(X = 0)
+= C(20, 0) \cdot 0.7^0 \cdot (1-0.7)^{20}
+= 3.4868 \times 10^{-11}$
+
+$\begin{aligned}
+(ii) \ \
+P(X \geq 15)
+&= \sum_{k=20}^{15} P(X = k) \\
+&= \sum_{k=20}^{15} \binom{20}{k} \cdot 0.7^k \cdot (1-0.7)^{20-k}\\
+&= 0.4163
+\end{aligned}$
+
+$(iii) \ \
+\mu = n \cdot p = 20 \times 0.7 = 14$.
+
+
+\vspace{2em}
+A pizza shop offers 4 toppings (pepperoni, mushrooms, onions, olives). A customer randomly selects 2 different toppings.
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$]
+\item What is the probability the pizza has pepperoni and mushrooms?
+\item What is the probability the pizza has pepperoni or mushrooms?
+\end{enumerate}
+
+\textbf{Solution:}\\[0.5em]
+Total toppings = 4 (pepperoni, mushrooms, onions, olives)\\
+Toppings to choose = 2 (pepperoni and mushrooms)\\
+Number of ways to choose 2 toppings = $C(4, 2) = 6$.
+
+Possible combinations of 2 toppings are:
+\vspace{-1em}
+\begin{enumerate}
+   \item (Pepperoni, Mushrooms)
+   \item (Pepperoni, Onions)
+   \item (Pepperoni, Olives)
+   \item (Mushrooms, Onions)
+   \item (Mushrooms, Olives)
+   \item (Onions, Olives)
+\end{enumerate}
+
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$, itemsep=1em]
+   \item Favorable outcome for pepperoni and mushrooms = 1\\
+   Probability = $\frac{1}{6}$.
+
+   \item Favorable outcomes for pepperoni or mushrooms = 5\\
+   Probability = $\frac{5}{6}$.
+\end{enumerate}
+\end{multicols}
+
+\pagebreak
+% \begin{figure}[H]
+%    \centering
+%    \begin{forest}
+%       for tree={
+%         grow'=south,
+%         edge={-Latex},
+%         font=\small,
+%         s sep=5mm,
+%         l sep=10mm,
+%         anchor=base west,
+%         draw=none,
+%       }
+%       [Start
+%         [{$T_1$}
+%           [{$T_2$}
+%             [{$T_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%             [{$H_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%           ]
+%           [{$H_2$}
+%             [{$T_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%             [{$H_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%           ]
+%         ]
+%         [{$H_1$}
+%           [{$T_2$}
+%             [{$T_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%             [{$H_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%           ]
+%           [{$H_2$}
+%             [{$T_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%             [{$H_3$}
+%               [{$T_4$}]
+%               [{$H_4$}]
+%             ]
+%           ]
+%         ]
+%       ]
+%     \end{forest}
+% \end{figure}
+
+\begin{multicols}{2}
+\textbf{Q2/S-24}
+Suppose we are tossing 4 fair coins. The random variable $R$ denotes the number of tails appearing.
+\vspace{-1em}
+\begin{center}
+   $P(R=0) + P(R=1) + P(R=2) + P(R=3) + P(R=4) =\ ?$
+\end{center}
+
+\textbf{Solution:}\\[0.5em]
+Number of outcomes $2^4 = 16$\\[0.5em]
+Probability of each outcome$= \frac{1}{16}$\\[0.5em]
+$\begin{aligned}
+P(R=0) &= \binom{4}{0} \times \frac{1}{16} = \frac{1}{16} \\
+P(R=1) &= \binom{4}{1} \times \frac{1}{16} = \frac{4}{16} \\
+P(R=2) &= \binom{4}{2} \times \frac{1}{16} = \frac{6}{16} \\
+P(R=3) &= \binom{4}{3} \times \frac{1}{16} = \frac{4}{16} \\
+P(R=4) &= \binom{4}{4} \times \frac{1}{16} = \frac{1}{16} \\
+\end{aligned}$
+
+by summing up these values we get,\\[0.5em]
+$\sum_{k=o}^{4}P(R=k) = \frac{1}{16} + \frac{4}{16} + \frac{6}{16} + \frac{4}{16} + \frac{1}{16} = \frac{16}{16} = 1$
+
+The probabilities sum to $1$. Therefore the relation is valid.
+
+\vspace{1em}
+\textbf{Q2/F-24} Find the minimum 5 values of $n$ in $(n)$ where the last person standing survives for the Josephus Problem.
+
+\textbf{Solution:}\\[0.5em]
+$\begin{aligned}
+   & J(n) = n \\
+  \Rightarrow \ \ & 2l+1 = 2^m + l \\
+  \Rightarrow \ \ & l = 2^m -1
+\end{aligned}$
+
+\begin{tabular}{|c|c|c|c|}\hline
+   $m$ & $l = 2^m -1$
+   &\makecell{Position \\ ($n = 2l + 1$)}
+   &\makecell{Participants \\ ($n = 2^m + l$)}\\\hline
+   0 & 0 & 1 & 1\\\hline
+   1 & 1 & 3 & 3\\\hline
+   2 & 3 & 7 & 7\\\hline
+   3 & 7 & 15 & 15\\\hline
+   4 & 15 & 31 & 31\\\hline
+\end{tabular}
+
+
+\columnbreak
+In a survey of 198 people, the data presented in Table I were obtained relating gender to color-blindness. A person is randomly selected. What is the probability that the person is:
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$]
+   \item Male
+   \item Male and Color-blind
+   \item Female or Color-blind
+   \item Male given that the person is color-blind
+   \item Color-blind given that the person is Male
+   \item Female given that the person is not Color-blind
+\end{enumerate}
+
+\begin{table}[H]
+   \centering
+   \begin{tabular}{|c|c|c|c|}\hline
+      & Color-Blind (C) & Not Color-Blind (C) & Total \\\hline
+      Male (M)  & 89 & 35 & 124 \\\hline
+      Femal (F) & 56 & 18 & 74 \\\hline
+      Total & 145 & 53 & 198 \\\hline
+   \end{tabular}
+\end{table}
+
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=*, label=$(\roman*)$, itemsep=1em]
+   \item $P(\text{Male}) = \frac{124}{198}$
+   \item $P(\text{Male and Color-blind}) = \frac{89}{198}$
+   \item $P(F \cup C) = P(F) + P(C) - P(F\cap C) = \frac{74}{198}+\frac{145}{198} - \frac{56}{198}$
+   \item $P(M|C) = \frac{M \cap C}{P(C)} = \frac{89}{145}$
+   \item $P(C|M) = \frac{C \cap M}{P(M)} = \frac{89}{124}$
+   \item $P(F|C^c) = \frac{F \cap C^c}{P(C^c)} = \frac{18}{53}$
+\end{enumerate}
+
+
+\topic{Markov Model}
+\begin{center}
+\begin{tikzpicture}[
+   node distance=2cm,
+   state/.style={circle, draw, minimum size=1.75cm, inner sep=0pt, font=\small, align=center},
+   every edge/.style={->, >=Stealth, shorten >=1pt, shorten <=1pt, draw, font=\small}
+]
+   % nodes
+   \node[state] (Bull) {Bull\\market};
+   \node[state] (Bear) [right=of Bull] {Bear\\market};
+   \node[state] (Stagnant) [below=of $(Bull)!0.5!(Bear)$] {Stagnant\\market};
+
+   % edges
+   \draw (Bull) edge [loop left] node [left] {0.9} (Bull);
+   \draw (Bear) edge [loop right] node [right] {0.8} (Bear);
+   \draw (Stagnant) edge [loop below] node [below] {0.5} (Stagnant);
+
+   \draw (Bull) edge [bend left=20] node [above] {0.075} (Bear);
+   \draw (Bear) edge [bend left=20] node [above] {0.15} (Bull);
+   
+   \draw (Bull) edge [bend right=25] node [left] {0.25} (Stagnant);
+   \draw (Stagnant) edge [bend right=25] node [below left] {0.025} (Bull);
+   
+   \draw (Bear) edge [bend left=25] node [right] {0.25} (Stagnant);
+   \draw (Stagnant) edge [bend left=25] node [below right] {0.05} (Bear);   
+\end{tikzpicture}
+\end{center}
+
+Determine the following possibility of occurrence:\\
+Bull $\rightarrow$ Bear $\rightarrow$ Bear $\rightarrow$ Bull\\[0.5em]
+Assume the initial state distribution is: 
+$P(\text{Bull}) = 0.5$, \\$P(\text{Bear}) = 0.3$, $P(\text{Stagnant}) = 0.2$
+
+\textbf{Solution:}\\[0.5em]
+$\begin{aligned}
+&P(\text{Bull} \rightarrow \text{Bear} \rightarrow \text{Bear} \rightarrow \text{Bull})\\
+&= P(\text{Bull}) \times P(\text{Bear}\mid \text{Bull}) \times P(\text{Bear}\mid \text{Bear}) \times P(\text{Bull}\mid \text{Bear}) \\
+&= 0.5 \times 0.075 \times 0.8 \times 0.15 \\
+&= 0.0045
+\end{aligned}$
+
+\columnbreak
+
+A random variable X has a Poisson distribution with parameter 2 such
+that $P (X = 1) = (0.2) P(X = 2)$, calculate 2 and then find $P(X = 0)$.
+
+\textbf{Solution:}\\[0.5em]
+$\begin{aligned}
+   &\frac{\lambda^1 e^{-\lambda}}{1!} = 0.2 \frac{\lambda^2 e^{-\lambda}}{2!} \quad \Rightarrow \quad  \lambda = 0.2 \frac{\lambda^2}{2}
+   &\Rightarrow \quad 2\lambda = 0.2 \lambda^2 \\[0.5em]
+   &\Rightarrow \frac{\lambda^2}{\lambda} =  \frac{2}{0.2}
+   \quad \Rightarrow \lambda = 10\\
+\end{aligned}$
+
+Now,\\
+$P(X=0) = \frac{10^0 e^{-10}}{0!} = 4.53 \times 10^{-5}$
+\end{multicols}

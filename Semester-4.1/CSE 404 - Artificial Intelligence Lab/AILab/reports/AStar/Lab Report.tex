@@ -1,0 +1,323 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[nomarginpar, margin=1.27cm]{geometry}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Preamble.tex}
+
+\definecolor{start}{HTML}{FFA500}
+\definecolor{goal}{HTML}{04C975}
+
+
+\renewcommand{\normalsize}{\fontsize{12pt}{18pt}\selectfont}
+\renewcommand{\small}{\fontsize{10pt}{15pt}\selectfont}
+\newcommand{\putcell}[3]{%
+  \node at (#1+0.5,#2+0.5) {#3};
+}
+
+\usepackage{caption}
+\captionsetup{font={small}, labelfont={small}}
+\renewcommand{\captionfont}{\fontsize{9pt}{11pt}\selectfont}
+
+
+
+
+
+\begin{document}
+
+\subsection*{Problem Statement}
+
+% The problem is to design an intelligent path finding system for a mobile robot navigating a warehouse represented as a two-dimensional grid, where each cell has a traversal cost determined by the type of terrain (e.g., normal floor, carpet, slippery surface) and some cells are impassable obstacles. The robot must travel from a given start cell to a specified goal cell while minimizing the total cumulative cost of movement. It is allowed to move in eight possible directions (up, down, left, right), and diagonals where moving into a cell incurs the cost of the destination cell, and diagonal moves are weighted at 1.4 times the base cost to reflect the greater effort required. The task is to compute an optimal path that avoids obstacles and achieves the lowest possible cost under these movement and terrain constraints.
+
+This work addresses the problem of optimal robot navigation in a warehouse environment modeled as a two-dimensional grid, where each cell is associated with a terrain-dependent traversal cost and certain cells represent impassable obstacles. The robot is permitted to move in eight directions, with straight moves incurring the cost of the destination cell and diagonal moves weighted at 1.4 times the destination cell's cost. The objective is to determine a collision-free path from a designated start cell to a goal cell that minimizes the total cumulative traversal cost under these terrain and movement constraints.
+
+
+
+\subsection*{A* Searching}
+
+\begin{figure}[H]
+   \centering
+   \begin{tikzpicture}
+      [y=-1cm, scale=1.5, every node/.style={font=\scriptsize}]
+      \def\size{5}
+      \draw (0,0) grid (\size,\size);
+      
+      \foreach \x in {0,...,\numexpr\size-1\relax} {
+         \node at (0.5+\x,-0.15) {\x};
+         \node at (-0.15,0.5+\x) {\x};
+      }
+      
+      % Explored cells
+      \foreach \x/\y in {0/0, 1/0, 2/1, 3/2, 4/3, 4/4} {
+         \draw[fill=lightgray!30, draw=black] (\x,\y) rectangle ++(1,1);
+      }
+      
+      % Terrain cost cells
+      \foreach \r/\c/\val in {0/1/2, 1/2/3, 2/2/5} {
+         \putcell{\r}{\c}{\val}
+      }
+      
+      % Obstacle cells
+      \foreach \r/\c in {1/1, 3/3} {
+         \fill[black!75] (\r,\c) rectangle ++(1,1);
+      }
+   
+      
+      % Start node and Goal node
+      \fill[start] (0,0) rectangle ++(1,1);
+      \fill[goal] (4,4) rectangle ++(1,1);
+   
+      % Optimal path
+      \coordinate (P0) at ($(0,0)+(0.5,0.5)$);
+      \coordinate (P5) at ($(4,4)+(0.5,0.5)$);
+
+      \node at (P0) {Start};
+      \node at (P5) {Goal};
+   \end{tikzpicture}
+\end{figure}
+
+\begin{tabular}{lll|l}
+m n & Grid dimensions (rows m, columns n)
+& \hspace{5em} & \textbf{Sample Input} \\
+
+k & Number of obstacle cells && 5 5\\
+x1 y1 &&& 2 \\
+x2 y2 &&& 1 1\\
+xk yk & Coordinates of obstacles && 3 3\\
+
+c & Number of terrain cost cells && 3 \\
+x1 y1 cost1 &&& 0 1 2\\
+x2 y2 cost2 &&& 1 2 3\\
+xc yc costc & Coordinates and costs of terrain cells && 2 2 5\\
+
+startx starty & Starting cell coordinates && 0 0\\
+goalx goaly & Goal cell coordinates && 4 4\\
+\end{tabular}
+
+
+
+\subsubsection*{Manhattan Heuristic}
+\begin{figure}[H]
+    \centering
+    \small
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/manhattan-distance.png}
+        $h(n) = |(\text{Goal}_X - \text{Current}_X)| \ + \ |(\text{Goal}_Y - \text{Current}_Y)|$
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \begin{tikzpicture}
+         [y=-1cm, every node/.style={font=\scriptsize}]
+         \def\size{5}
+         \draw (0,0) grid (\size,\size);
+         
+         \foreach \x in {0,...,\numexpr\size-1\relax} {
+            \node at (0.5+\x,-0.15) {\x};
+            \node at (-0.15,0.5+\x) {\x};
+         }
+         
+         % Explored cells
+         \foreach \x/\y in {0/0, 1/0, 2/1, 3/2, 4/3, 4/4} {
+            \draw[fill=lightgray!30, draw=black] (\x,\y) rectangle ++(1,1);
+         }
+         
+         % Terrain cost cells
+         \foreach \r/\c/\val in {0/1/2, 1/2/3, 2/2/5} {
+            \putcell{\r}{\c}{\val}
+         }
+         
+         % Obstacle cells
+         \foreach \r/\c in {1/1, 3/3} {
+            \fill[black!75] (\r,\c) rectangle ++(1,1);
+         }
+      
+         
+         % Start node and Goal node
+         \fill[start] (0,0) rectangle ++(1,1);
+         \fill[goal] (4,4) rectangle ++(1,1);
+      
+         % Optimal path
+         \coordinate (P0) at ($(0,0)+(0.5,0.5)$);
+         \coordinate (P1) at ($(1,0)+(0.5,0.5)$);
+         \coordinate (P2) at ($(2,1)+(0.5,0.5)$);
+         \coordinate (P3) at ($(3,2)+(0.5,0.5)$);
+         \coordinate (P4) at ($(4,3)+(0.5,0.5)$);
+         \coordinate (P5) at ($(4,4)+(0.5,0.5)$);
+      
+         \node[below=2pt] at (P0) {Start};
+         \node[below=2pt] at (P5) {Goal};
+         \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5);
+         \foreach \i in {0,...,5} {\fill[rgbRF] (P\i) circle (2pt);}
+      \end{tikzpicture}
+    \end{subfigure}
+    \caption{A* Search using Manhattan Heuristic}
+\end{figure}
+
+\begin{tabularx}{\linewidth}{llX}
+   Path &:& (0, 0), (1, 0), (2, 1), (3, 2), (4, 3), (4, 4) \\
+   Path Cost &:& 6.2 \\
+   Explored Nodes &:& (0, 0), (1, 0), (2, 1), (3, 2), (4, 3), (4, 4) \\
+   Total Explored &:& 6 \\
+   Runtime &:& 0.027 ms \\
+\end{tabularx}
+
+
+\subsubsection*{Diagonal Heuristic}
+\begin{figure}[H]
+   \centering
+    \small
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/diagonal-distance.png}
+        $h(n) = \text{max}(|(\text{Goal}_X - \text{Current}_X)| \, , |(\text{Goal}_Y - \text{Current}_Y)|)$
+    \end{subfigure}
+    \hfill
+   \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+   \begin{tikzpicture}
+      [y=-1cm, every node/.style={font=\scriptsize}]
+      \def\size{5}
+      \draw (0,0) grid (\size,\size);
+      
+      \foreach \x in {0,...,\numexpr\size-1\relax} {
+         \node at (0.5+\x,-0.15) {\x};
+         \node at (-0.15,0.5+\x) {\x};
+      }   
+      
+      % Explored cells
+      \foreach \x/\y in {0/0, 0/1, 1/0, 2/0, 2/1, 3/2, 4/3, 4/4} {
+         \draw[fill=lightgray!30, draw=black] (\x,\y) rectangle ++(1,1);
+      }
+
+      % Terrain cost cells
+      \foreach \r/\c/\val in {0/1/2, 1/2/3, 2/2/5} {
+         \putcell{\r}{\c}{\val}
+      }
+      
+      % Obstacle cells
+      \foreach \r/\c in {1/1, 3/3} {
+         \fill[black!75] (\r,\c) rectangle ++(1,1);
+      }
+
+      % Start node and Goal node
+      \fill[start] (0,0) rectangle ++(1,1);
+      \fill[goal] (4,4) rectangle ++(1,1);
+   
+      % Optimal path
+      \coordinate (P0) at ($(0,0)+(0.5,0.5)$);
+      \coordinate (P1) at ($(1,0)+(0.5,0.5)$);
+      \coordinate (P2) at ($(2,1)+(0.5,0.5)$);
+      \coordinate (P3) at ($(3,2)+(0.5,0.5)$);
+      \coordinate (P4) at ($(4,3)+(0.5,0.5)$);
+      \coordinate (P5) at ($(4,4)+(0.5,0.5)$);
+   
+      \node[below=2pt] at (P0) {Start};
+      \node[below=2pt] at (P5) {Goal};
+      \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5);
+      \foreach \i in {0,...,5} {\fill[rgbRF] (P\i) circle (2pt);}
+   \end{tikzpicture}
+   \end{subfigure}
+\end{figure}
+
+\begin{tabularx}{\linewidth}{llX}
+   Path &:& (0, 0),\ (1, 0),\ (2, 1),\ (3, 2),\ (4, 3),\ (4, 4) \\
+   Path Cost &:& 6.2 \\
+   Explored Nodes &:&
+   (0, 0),\ (0, 1),\ (1, 0),\ (2, 0),\ (2, 1),\ (3, 2), \newline (4, 3),\ (4, 4) \\
+   Total Explored &:& 8 \\
+   Runtime &:& 0.033 ms \\
+\end{tabularx}
+
+
+\subsubsection*{Euclidean Heuristic}
+
+
+\begin{figure}[H]
+   \centering
+    \small
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/euclidean-distance.png}
+        $h(n) = \sqrt{(\text{Goal}_X - \text{Current}_X)^2 + (\text{Goal}_Y - \text{Current}_Y)^2}$
+    \end{subfigure}
+    \hfill
+   \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+   \begin{tikzpicture}
+      [y=-1cm, every node/.style={font=\scriptsize}]
+      \def\size{5}
+      \draw (0,0) grid (\size,\size);
+      
+      \foreach \x in {0,...,\numexpr\size-1\relax} {
+         \node at (0.5+\x,-0.15) {\x};
+         \node at (-0.15,0.5+\x) {\x};
+      }
+      
+      % Explored cells
+      \foreach \x/\y in {0/0, 1/0, 2/1, 3/2, 4/3, 4/4} {
+         \draw[fill=lightgray!30, draw=black] (\x,\y) rectangle ++(1,1);
+      }
+      
+      % Terrain cost cells
+      \foreach \r/\c/\val in {0/1/2, 1/2/3, 2/2/5} {
+         \putcell{\r}{\c}{\val}
+      }
+      
+      % Obstacle cells
+      \foreach \r/\c in {1/1, 3/3} {
+         \fill[black!75] (\r,\c) rectangle ++(1,1);
+      }
+   
+      
+      % Start node and Goal node
+      \fill[start] (0,0) rectangle ++(1,1);
+      \fill[goal] (4,4) rectangle ++(1,1);
+   
+      % Optimal path
+      \coordinate (P0) at ($(0,0)+(0.5,0.5)$);
+      \coordinate (P1) at ($(1,0)+(0.5,0.5)$);
+      \coordinate (P2) at ($(2,1)+(0.5,0.5)$);
+      \coordinate (P3) at ($(3,2)+(0.5,0.5)$);
+      \coordinate (P4) at ($(4,3)+(0.5,0.5)$);
+      \coordinate (P5) at ($(4,4)+(0.5,0.5)$);
+   
+      \node[below=2pt] at (P0) {Start};
+      \node[below=2pt] at (P5) {Goal};
+      \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5);
+      \foreach \i in {0,...,5} {\fill[rgbRF] (P\i) circle (2pt);}
+   \end{tikzpicture}
+   \end{subfigure}
+\end{figure}
+
+\begin{tabularx}{\linewidth}{lX}
+   Path: & (0, 0), (1, 0), (2, 1), (3, 2), (4, 3), (4, 4) \\
+   Path Cost: & 6.2 \\
+   Explored Nodes: & (0, 0), (1, 0), (2, 1), (3, 2), (4, 3), (4, 4) \\
+   Total Explored: & 6 \\
+   Runtime: & 0.056 ms \\
+\end{tabularx}
+
+
+
+\vspace{1em}
+\subsection*{Comparison Table}
+\begin{center}
+\begin{tabularx}{\linewidth}{|C|C|C|C|C|}\hline
+   \textbf{Heuristic} & \textbf{Path Cost} & \textbf{Path Length} &
+   \textbf{Total Explored Nodes} & \textbf{Runtime(s)} \\\hline
+
+   Manhattan & 6.2 & 6 & 6 & 0.027 ms
+   \\\hline
+   Diagonal & 6.2 & 6 & 8 & 0.033 ms
+   \\\hline
+   Euclidean & 6.2 & 6 & 6 & 0.056 ms
+   \\\hline
+\end{tabularx}
+\end{center}
+
+
+\vspace{1em}
+\subsection*{Conclusion}
+
+The experimental results indicate that the choice of heuristic significantly affects search efficiency in terms of the number of explored nodes. Both the Euclidean and Manhattan heuristics explored only six nodes to reach the optimal path, demonstrating higher efficiency, whereas the Diagonal heuristic required exploration of eight nodes, reflecting slightly lower efficiency. Despite all heuristics producing the same path and total cost, minimizing node expansions is critical for performance, particularly in larger or more complex grids. Runtime differences were minimal, with the Manhattan heuristic being the fastest (0.027 ms), followed by the Diagonal (0.034 ms) and Euclidean (0.063 ms), suggesting that while runtime is secondary, the reduction in explored nodes is the primary factor in evaluating heuristic effectiveness.
+\end{document}

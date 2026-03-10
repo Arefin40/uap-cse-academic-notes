@@ -1,0 +1,41 @@
+\begin{multicols}{2}
+\topic{Attribute Selection Metrics}
+\textbf{Information Gain (ID3)}
+\begin{itemize}[leftmargin=*,parsep=0.5em]
+   \item All attributes are assumed to be categorical.
+   \item Attribute with the highest information gain get selected.
+   \item Entropy: A measure of uncertainty in the dataset\\
+   $E(D) = \sum_{i=1}^{m} -p_i \log_2(pi)$\\
+   \begin{tabularx}{\linewidth}{@{}r @{}P{2em}@{} X}
+      Where \ $D$ &:& Dataset \\[-0.5em]
+      $C$ &:& The number of unique class labels in $D$ \\[-0.5em]
+      $p_i$&:& The proportion (probability) of class $i$ in $D$.
+   \end{tabularx}
+   \item Weighted Entropy$(A) = \sum_{j=1}^{v} \frac{|A_j|}{|S|} \times E(A_j)$
+   \item Gain$(D,A) = E(\text{Dataset}) -  \text{Weighted Entropy}(A)$
+\end{itemize}
+
+\textbf{Gain Ratio (C4.5)}
+\begin{itemize}[leftmargin=*,parsep=0.5em]
+   \item C4.5 (a successor of ID3) uses gain ratio to overcome the
+   problem (normalization to information gain)
+   \item $\text{SplitInfo}(D,A) = -\sum_{i=1}^{v} \frac{|A_i|}{|D|} \times \log_2 \left(\frac{|A_i|}{|D|} \right)$
+   \item $\text{GainRatio}(A) = \frac{\text{Gain}(D,A)}{\text{SplitInfo}(D,A)}$
+\end{itemize}
+
+\textbf{Gini Index (CART)}
+\begin{itemize}[leftmargin=*,parsep=0.5em]
+   \item CART creates a Binary Tree
+   \item Gini$(D) = 1 - \sum_{i=1}^{m} p_i^2$
+   \item Gini$(D,A) = $
+\end{itemize}
+
+\columnbreak
+\textbf{Problems with Attribute Selection Metrics}
+\begin{itemize}[leftmargin=*,parsep=0.5em]
+   \item \rgbR{Information gain}: measure is biased towards attributes with
+   a large number of values. (Solution: C4.5)
+   \item \rgbR{Gain Ration (C4.5)}: Tend to prefer unbalanced split in which one partition is much smaller than the other.
+   \item \rgbR{Gini Index (CART)}: Struggles with imbalanced datasets and can be sensitive to noise.
+\end{itemize}
+\end{multicols}

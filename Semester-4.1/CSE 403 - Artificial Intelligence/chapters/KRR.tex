@@ -1,0 +1,138 @@
+\chapter{Knowledge Representation and Reasoning}
+
+\subsection*{Rules of Inference}
+\vspace{1em}
+\begin{tabularx}{\textwidth}{CCCC}
+   $\begin{aligned}
+   & P \to Q \\
+   & P \\\hline
+   & \therefore Q \\
+\end{aligned}$
+&
+$\begin{aligned}
+   & P \to Q \\
+   & \neg Q \\\hline
+   & \therefore \neg P \\
+\end{aligned}$
+&
+$\begin{aligned}
+   & P \lor Q \\
+   & \neg P \\\hline
+   & \therefore Q \\
+\end{aligned}$
+&
+$\begin{aligned}
+   & P \to Q \\
+   & Q \to R \\\hline
+   & \therefore P \to R \\
+\end{aligned}$
+\\
+Modus Ponens
+&
+Modus Tollens
+&
+Disjunctive Syllogism
+&
+Hypothetical Syllogism
+\end{tabularx}
+
+
+
+\subsection*{Examples}
+\textbf{Question-1:} Represent the following knowledge statements using propositional logic. Apply rules of inference to conclude \textbf{"The laptop is working"}.
+\begin{enumerate}
+   \item Either the laptop is working or I will study at the library.
+   \item If I study at the library, then I will not attend the online seminar.
+   \item I attended the online seminar.
+\end{enumerate}
+
+\textbf{Solution:}\\[1em]
+Let propositions are,\\
+\begin{tabular}{ll}
+   $P$ &: The laptop is working. \\
+   $Q$ &: I will study at the library. \\
+   $R$ &: I will attend the online seminar. \\
+\end{tabular}
+
+Given Statements,\\
+\begin{tabular}{ll}
+   $P \lor Q$ & $\ldots (1)$\\
+   $Q \to \neg R$ & $\ldots (2)$\\
+   $R$ & $\ldots (3)$\\
+\end{tabular}
+
+
+From statement (3) and (2), by Modus Tollens, we get,\\
+$\begin{aligned}
+   & Q \to \neg R \\
+   & R \\\hline
+   & \therefore \neg Q \ldots\ldots (4) \\
+\end{aligned}$
+
+From statement (1) and (4), by Disjunctive Syllogism, we get,\\
+$\begin{aligned}
+   & P \lor Q \\
+   & \neg Q \\\hline
+   & \therefore P \\
+\end{aligned}$
+
+
+\textbf{Question-2:} Represent the following knowledge statements using propositional logic. Apply rules of inference to conclude \textbf{"Applications can be processed"}.
+\vspace{-\baselineskip}
+\begin{enumerate}
+   \item If Admission office is open, Staff are present
+   \item If Staff are present, Applications can be processed
+   \item If emergency drill is active, the building is evacuated
+   \item The emergency drill is not active
+   \item The admission office is open or the building is evacuated.
+\end{enumerate}
+
+\textbf{Solution:}\\[1em]
+Let propositions are,\\
+\begin{tabular}{ll}
+   $P$ &: Admission office is open. \\
+   $Q$ &: Staff are present. \\
+   $R$ &: Applications can be processed. \\
+   $S$ &: Emergency drill is active. \\
+   $T$ &: Building is evacuated. \\
+\end{tabular}
+
+Given Statements,\\
+\begin{tabular}{ll}
+   $P \to Q$ & $\ldots (1)$\\
+   $Q \to R$ & $\ldots (2)$\\
+   $S \to T$ & $\ldots (3)$\\
+   $\neg S$ & $\ldots (4)$\\
+   $P \lor T$ & $\ldots (5)$\\
+\end{tabular}
+
+
+From statement (4) and (3), by Modus Tollens, we get,\\
+$\begin{aligned}
+   & S \to T \\
+   & \neg S \\\hline
+   & \therefore \neg T \ldots\ldots (6) \\
+\end{aligned}$
+
+From statement (5) and (6), by Disjunctive Syllogism, we get,\\
+$\begin{aligned}
+   & P \lor T \\
+   & \neg T \\\hline
+   & \therefore P \\
+\end{aligned}$
+
+From statement (1) and (7), by Modus Ponens, we get,\\
+$\begin{aligned}
+   & P \to Q \\
+   & P \\\hline
+   & \therefore Q \\
+\end{aligned}$
+
+From statement (2) and (8), by Modus Ponens, we get,\\
+$\begin{aligned}
+   & Q \to R \\
+   & Q \\\hline
+   & \therefore R \\
+\end{aligned}$
+
+Thus, we conclude that \textbf{"Applications can be processed"}.

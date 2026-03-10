@@ -1,0 +1,66 @@
+{
+% Set custom margins for the title page only
+\newgeometry{top=1cm, bottom=1cm, left=2cm, right=1cm}
+\definecolor{orange}{HTML}{FE8A01}
+\definecolor{yellow}{HTML}{FFD500}
+\definecolor{black}{HTML}{242424}
+
+
+\def\courseCode{CSE 403}
+\def\courseTitle{Artificial Intelligence \& Expert Systems}
+\def\instructor{Dr. Nasima Begum}
+\def\designation{Professor}
+\def\department{CSE}
+\def\semester{Spring 25}
+
+
+
+
+% ===========================
+\begin{titlepage}
+
+\begin{tikzpicture}[remember picture, overlay, yscale=-1]
+\def\r{3}   \def\R{2.5}   \def\dx{0}
+
+% Large left vertical rectangle
+\fill[thick, orange] (current page.north west) -- ++(0.8,0) -- ++(0,8) to[in=0, out=90] ++(-0.8,0.8) -- cycle;
+
+% Top left circle
+\fill[right, orange] (0.4,0) circle (0.4);
+
+% Top right circle
+\fill[right, orange] (0.4,0) circle (0.4);
+
+% Middle small horizontal line
+\fill[orange] (current page.north east) circle (\r);
+
+% Decorative quarter circles
+\fill[black] (current page.south east) ++(-\dx-\r,-\dx) arc[start angle=90, end angle=180, radius=2*\R] -- ++(2*\R,0) -- cycle;
+
+\fill[black] (current page.south east) ++(-\dx-\r,-\dx-2*\R-\r) arc[start angle=90, end angle=0, radius=\r] -- ++(-\r,0) -- cycle;
+
+\fill[yellow] (current page.south east) ++(-\dx,-\dx-2*\R+\r) arc[start angle=0, end angle=-90, radius=\r] -- ++(0,-\r) arc[start angle=270, end angle=180, radius=\r] -- ++(\r,0) -- ++(0,\r) -- cycle;
+
+\fill[orange] (current page.south east) ++(-\dx-2*\r,-\dx-2*\R) arc[start angle=180, end angle=90, radius=\r] -- ++(0,-\r) -- cycle;
+
+\fill[orange] (current page.south east) ++(-\dx-\r-2*\R,-\dx-2*\R) arc[start angle=0, end angle=-90, radius=\r] -- ++(0,\r) -- cycle;
+
+% ============================
+\node[right, inner sep=0pt, font=\Large] at (1,0) {\courseCode};
+
+\node[right, inner sep=0pt, font=\fontsize{32pt}{38pt}\selectfont\bfseries, text width=12cm, align=left] at (0,5) {\courseTitle};
+
+
+\node[right, inner sep=0pt, font=\Large\bfseries] at (0,10) {\instructor};
+\node[right, inner sep=0pt, font=\Large, black!80] at (0,11) {\designation};
+\node[right, inner sep=0pt, font=\Large, black!80] at (0,11.8) {Department of \department, UAP};
+
+\node[right, inner sep=0pt, font=\large] at ([shift={(1.5,-4)}] current page.south west) {Prepared by:};
+\node[right, inner sep=0pt, font=\Large\bfseries] at ([shift={(1.5,-3.2)}] current page.south west) {Shahriar Arefin};
+\node[right, inner sep=0pt, font=\large, black!80] at ([shift={(1.5,-2.4)}] current page.south west) {22101040 \rgbGray{|} Section: A};
+\node[right, inner sep=0pt, font=\large, black!80] at ([shift={(1.5,-1.6)}] current page.south west) {\textit{Semester: \semester}};
+\end{tikzpicture}
+\end{titlepage}
+
+\restoregeometry
+}

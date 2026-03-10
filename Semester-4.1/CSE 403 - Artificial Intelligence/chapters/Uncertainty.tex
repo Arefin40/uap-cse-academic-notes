@@ -1,0 +1,30 @@
+\chapter{Uncertainty}
+
+\subsection*{Inference using Joint Distributions}
+
+For the following joint distribution, find the conditional probability of
+$P(cavity | \neg toothache)$. Indicate query variable, evidence variable and hidden variable. Where the values of joint distribution are $A = 0.324$, $B=1-A$, $C = 0.576$ and $D = 0.144$.
+
+\begin{center}
+   \begin{tabularx}{0.5\textwidth}{|C|C|C|}\hline
+      & \multicolumn{2}{|c|}{$\neg$ toothache}
+      \\\hline
+      & catch & $\neg$ catch
+      \\\hline
+      cavity & 0.324 & 0.676
+      \\\hline
+      $\neg$ cavity & 0.576 & 0.144
+      \\\hline
+   \end{tabularx}
+\end{center}
+
+\textbf{Solution:}\\[0.5em]
+
+$\begin{aligned}
+   P(cavity | \neg toothache) &= \frac{P(cavity \cap \neg toothache)}{P(\neg toothache)} = \frac{0.324+0.676}{0.324+0.676+0.576+0.144} = \frac{1}{1.72}
+\end{aligned}$
+
+
+\subsection*{Naive Bayes}
+
+

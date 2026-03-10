@@ -1,0 +1,125 @@
+\begin{landscape}
+
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\makecell{\textbf{Linear Regression}}
+& \makecell{\textbf{Logistic Regression}}
+& \makecell{\textbf{SVM}}
+\\\hline
+
+Linear Regression predicts continuous values by modeling the relationship between a dependent variable and one or more independent variables using a straight line. &
+Predicts probabilities for binary outcomes, using the logistic function (sigmoid) to squeeze the output between 0 and 1. It is used for classification rather than regression.
+&
+The core idea of SVM is to find the best possible hyperplane ($N-1$ dimensional) that separates the data points of different classes in an $N$-dimensional space.
+\\\hline
+
+% $\hat{y} = WX + b$ \quad  where, ($W$ = weight, $b$ = bias) &
+% $\sigma(z) = \frac{1}{1 + e^{-z}}$ If $\sigma(z) >$ 0.5, classifies 1 else 0 &
+% \\\hline
+
+\begin{itemize}[leftmargin=*]
+   \item Simple model
+   \item Computationally efficient
+   \item Interpretability of the Output
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Overly-Simplistic
+   \item Linearity Assumption
+   \item Severely affected by Outliers
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Best for linearly separable data
+   \item Handles high-dimensional data efficiently
+   \item Adding new data doesn't affect the model
+   \item Memory efficient
+\end{itemize}
+\\\hline
+
+\begin{itemize}[leftmargin=*]
+   \item Overly-Simplistic
+   \item Linearity Assumption
+   \item Severely affected by Outliers
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Assumes linearity between inputs and log-odds
+   \item Not effective for complex or non-linear problems
+   \item Sensitive to outliers and multicollinearity
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Does not work well for large datasets.
+   \item Sensitive to noise and overlapping of target classes.
+   \item No probabilistic explanation for the predictions.
+\end{itemize}
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\makecell{\textbf{K-Means}}
+& \makecell{\textbf{KNN}}
+& \makecell{\textbf{Decision Tree}}
+\\\hline
+
+K-means clustering is an unsupervised machine learning algorithm used to partition $N$ data points into a pre-defined number of $K$ non-overlapping clusters.
+&
+Finds the k nearest neighbors and predict the class by the majority vote of the nearest neighbors. Its a lazy learning model i.e it requires no training.
+&
+Recursively splits data based on feature values to create a tree-like model, where nodes represent decisions and leaves represent outcomes or class labels.
+\\\hline
+
+% $(C_x, C_y) = \left(\frac{\sum x_i}{\text{size}}, \frac{\sum y_i}{\text{size}}\right)$
+% \\\hline
+
+
+\begin{itemize}[leftmargin=*]
+   \item Simple and easy to understand \& implement.
+   \item Computationally fast and efficient.
+   \item Guarantees convergence.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item No training period
+   \item Easy implementation
+   \item Adding new data doesn't affect the model
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Easy to interpret and visualize.
+   \item Handles numerical and categorical data.
+   \item Captures nonlinear relationships.
+   \item Minimal data preprocessing.
+\end{itemize}
+\\\hline
+
+\begin{itemize}[leftmargin=*]
+   \item Requires pre-specifying $K$ (found by Elbow Method).
+   \item Sensitive to initial centroids and outliers.
+   \item Assumes clusters are spherical and similar in size.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Does not work well for large datasets
+   \item Slower for high dimensions
+   \item Sensitive to noise
+   \item Feature scaling is mandatory
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*]
+   \item Prone to overfitting.
+   \item Sensitive to small data changes.
+   \item Can be biased toward dominant features.
+   \item Less stable than ensemble methods.
+\end{itemize}
+
+\\\hline
+\end{tabularx}
+
+\topic{Naive Bayes}
+A probabilistic classifier based on Bayes' theorem, assuming all features are conditionally independent of each other, given the class. \\
+\textbf{Pros:} Extremely fast, Easy to implement, Performs well on text classification \\
+\textbf{Cons:} Unreliable probability estimates, Assumes features are independent , Zero Frequency Problem
+\end{landscape}

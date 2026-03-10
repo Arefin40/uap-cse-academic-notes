@@ -1,0 +1,38 @@
+\chapter{Predicate Logic}
+
+\textbf{Question:} Represent the following knowledge using First Order Predicate Logic (FOPL): David, William, and Kim are members of the CSE Sports Club. Every member of the Sports Club who is not a footballer is a cricketer. Cricketers do not like rain, and anyone who does not like rain is not a footballer. David dislikes whatever Kim likes, and likes whatever Kim dislikes. William likes rain and snow.
+
+
+\textbf{Predicates:}\\
+Member$(x)$: $x$ is a member of the CSE Sports Club.\\
+Footballer$(x)$: $x$ is a footballer.\\
+Cricketer$(x)$: $x$ is a cricketer.\\
+Likes$(x, y)$: $x$ likes $y$.
+
+\textbf{FOPL Representation:}
+\begin{enumerate}[itemsep=5pt, topsep=-0.75em]
+   \item David, William, and Kim are members of the CSE Sports Club.\\
+   Member(David) $\land$
+   Member(William) $\land$
+   Member(Kim)
+   
+   \item Every member of the Sports Club who is not a footballer is a cricketer.\\
+   $\forall x$ (Member$(x)$ $\land$ $\neg$Footballer$(x)$ $\rightarrow$ Cricketer$(x)$)
+
+   \item Cricketers do not like rain.\\
+   $\forall x$ (Cricketer$(x)$ $\rightarrow$ $\neg$Likes$(x, Rain)$)
+   
+   \item Anyone who does not like rain is not a footballer.\\
+   $\forall x$ ($\neg$Likes$(x, Rain)$ $\rightarrow$ $\neg$Footballer$(x)$)
+
+   \item David dislikes whatever Kim likes.\\
+   $\forall y$ (Likes$(Kim, y)$ $\rightarrow$ $\neg$Likes$(David, y)$)
+
+   \item David likes whatever Kim dislikes.\\
+   $\forall y$ ($\neg$Likes$(Kim, y)$ $\rightarrow$ Likes$(David, y)$)
+
+   \item William likes rain and snow.\\
+   Likes(William, Rain) $\land$
+   Likes(William, Snow)
+\end{enumerate}
+

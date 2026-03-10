@@ -1,0 +1,123 @@
+\begin{multicols}{2}
+\topic{KRR}
+\textbf{Rules of Inference}\\[0.5em]
+\begin{tabularx}{0.4\textwidth}{LL}
+   $\begin{aligned}
+   & P \to Q \\
+   & P \\\hline
+   & \therefore Q \\
+\end{aligned}$
+&
+$\begin{aligned}
+   & P \to Q \\
+   & \neg Q \\\hline
+   & \therefore \neg P \\
+\end{aligned}$\\
+Modus Ponens
+&
+Modus Tollens
+\\\\
+$\begin{aligned}
+   & P \lor Q \\
+   & \neg P \\\hline
+   & \therefore Q \\
+\end{aligned}$
+&
+$\begin{aligned}
+   & P \to Q \\
+   & Q \to R \\\hline
+   & \therefore P \to R \\
+\end{aligned}$
+\\
+Disjunctive Syllogism
+&
+Hypothetical Syllogism
+\end{tabularx}
+
+\textbf{Fuzzy Logic:}\\[0.5em]
+\begin{tabularx}{0.47\textwidth}{@{}l@{}X@{}}
+   Linguistic Variables $\to$ \ &
+   fuzzy variable e.g: word or phrase \\[-0.5em]
+   & Temprature = \{cold, warm, hot\}\\
+
+   Linguistic hedge $\to$ \ &
+   modifies the meaning of a fuzzy set \\[-0.5em]
+   & Very $a = a^2$, Extremely $a = a^3$, \newline
+   Somewhat = More or less $a = a^{1/2}$ \newline
+   Little $a = a^{1.3}$, Slightly = $a = a^{1/3}$ \\
+\end{tabularx}
+
+\textbf{Triangular Membership Function:}\\[0.5em]
+$\mu_A(x) =
+\begin{cases} 0 & \text{if } x < a \text{ \ or \ } x > b \\
+   \frac{x-a}{m-a} & \text{if } a \leq x \leq m \\[1em]
+   \frac{b-x}{b-m} & \text{if } m < x \leq b \\
+\end{cases}$
+
+\textbf{Operations on Fuzzy Sets:}\\[0.5em]
+\begin{tabular}{ll}
+   Union &: $A \cup B = \max(A, B)$ \\
+   Intersection &: $A \cap B = \min(A, B)$ \\
+   Complement &: $\neg A = 1 - A$ \\
+   Dilation &: $DIL(A) = A^{1/n}$ \\
+   Concentration &: $CON(A) = A^n$ \\
+\end{tabular}
+
+
+\topic{Genetic Algorithm}
+\begin{tabular}{ll}
+   Probability &: $\frac{fx}{\sum fx}$ \\
+   Expected Count &: $Probability \times N$ \\
+   Actual Count &: Round(Expected Count)
+\end{tabular}
+
+\topic{Game Theory}
+Alpha-beta pruning conditions: $\alpha \geq \beta$
+
+\topic{Artificial Neural Network}
+\begin{tabular}{ll}
+   Step function: & $f(x) = \begin{cases} 1 & \text{if } x \geq 0 \\ 0 & \text{if } x < 0 \end{cases}$ \\[0.5em]
+   Sigmoid function: & $f(x) = \frac{1}{1 + e^{-x}}$ \\[0.5em]
+   Tanh function: & $f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
+\end{tabular}
+
+\begin{tabular}{ll}
+   ReLU function: & $f(x) = \begin{cases} x & \text{if } x \geq 0 \\ 0 & \text{if } x < 0 \end{cases}$ \\[0.5em]
+   Leaky ReLU function: & $f(x) = \begin{cases} x & \text{if } x \geq 0 \\ \alpha x & \text{if } x < 0 \end{cases}$ \\
+\end{tabular}
+
+\textbf{BPNN:}\\[0.5em]
+\begin{tabular}{ll}
+   Output &: $y_p = \sigma\left(\sum w_i x_i - \theta\right)$ \\
+   Error &: $e = y_t - y_p$ \\
+   Error gradient (output layer) &: $\delta = y \cdot [1-y] \cdot e$ \\
+   Error gradient (hidden layer) &: $\delta_i = y_i \cdot [1-y_i] \cdot \sum \delta_j w_{ij}$ \\
+   Weight update &: $w_{ij}' = w_{ij} + \alpha \delta_j y_i$ \\
+\end{tabular}
+
+\topic{Uncertainty}
+$P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+Bayes' theorem: $P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$
+
+Conditional Probability: $P(A|B) = \frac{P(A \cap B)}{P(B)}$
+
+$X$,$Y$ independent if and only if:: $\forall x,y : P(x,y) = P(x)P(y)$
+
+$X$ and $Y$ are conditionally independent given $Z$ i.e. $X \bigCI Y | Z$ if and only if: $\forall x,y,z : P(x,y|z) = P(x|z)P(y|z)$
+
+\textbf{Variables:}\\[0.5em]
+$P(Q|e_1, e_2, \ldots, e_n)$\\[0.5em]
+Query variable $(Q)$: The variable we want to predict or infer\\
+Evidence variables $(e)$: The variables that are observed or known\\
+Hidden variables $(H)$: The variables that are neither query nor evidence just provides additional data.
+
+\textbf{Markov:}\\[0.5em]
+$\begin{aligned}
+   P(X2=\text{sun})=
+   & P(X2=\text{sun}|X1=\text{sun}) P(X1=\text{sun}) +\\
+   & P(X2=\text{sun}|X1=\text{rain}) P(X1=\text{rain}) \\
+\end{aligned}$
+
+
+\end{multicols}
