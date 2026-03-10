@@ -1,0 +1,375 @@
+\documentclass{report}
+\usepackage{Preamble, Commands, Syntax}
+\usepackage{amsmath}
+
+\begin{document}
+\tableofcontents
+
+\chapter{Bit Manipulation}
+
+\section{Binary number}
+A binary number is a number expressed in the base-2 numeral system or binary numeral system, it is a method of mathematical expression which uses only two symbols: typically ``0" (zero) and ``1" (one).
+
+We say that a certain bit is \textbf{set}, if it is one, and cleared if it is zero.
+
+\section{Bitwise Operator}
+
+\vspace{3ex}
+\textbf{\large{Bitwise AND}: }
+Returns 1 only if both the bits are 1.
+
+\begin{tabularx}{9cm}{|P{1cm}|C|C|C|C|C|C|C|C|}\hline
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   b = 14 &
+   0 & 0 & 0 & 0 & 1 & 1 & 1 & 0\\\hline
+   a \& b &
+   0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\\hline
+\end{tabularx}
+
+\vspace{3ex}
+\textbf{\large{Bitwise OR}: }
+Returns 1 if one of the bits is 1.
+
+\begin{tabularx}{9cm}{|P{1.5cm}|C|C|C|C|C|C|C|C|}\hline
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   b = 14 &
+   0 & 0 & 0 & 0 & 1 & 1 & 1 & 0\\\hline
+   a | b &
+   0 & 0 & 0 & 1 & 1 & 1 & 1 & 1\\\hline
+\end{tabularx}
+
+\vspace{3ex}
+\textbf{\large{Bitwise NOT}: }
+Returns 1 if one of the bits is 1.
+
+\begin{tabularx}{9cm}{|P{1.5cm}|C|C|C|C|C|C|C|C|}\hline
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   $\sim$ a &
+   1 & 1 & 1 & 0 & 0 & 1 & 1 & 0\\\hline
+\end{tabularx}
+
+\vspace{3ex}
+\textbf{\large{Bitwise XOR}: }
+Returns 0 if both the bits are same else 1
+
+\begin{tabularx}{9cm}{|P{1.5cm}|C|C|C|C|C|C|C|C|}\hline
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   b = 14 &
+   0 & 0 & 0 & 0 & 1 & 1 & 1 & 0\\\hline
+   a $\wedge$ b &
+   0 & 0 & 0 & 1 & 0 & 1 & 1 & 1\\\hline
+\end{tabularx}
+
+\vspace{3ex}
+\textbf{\large{Left Shift}: }
+Shifts a towards left by n digits.
+\texttt{a << b = a * $\texttt{2}^\texttt{b}$}
+
+\begin{tabularx}{9cm}{|P{1.5cm}|C|C|C|C|C|C|C|C|}\hline
+   \rowcolor{string!20}
+   \cellcolor{white}
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   \rowcolor{gray!20}
+   \cellcolor{white}
+   a \texttt{<<} 2 &
+   0 & 1 & 1 & 0 & 0 & 1 & 
+   \cellcolor{white}0 & \cellcolor{white}0\\\hline
+\end{tabularx}
+
+\vspace{3ex}
+\textbf{\large{Right Shift}: }
+Shifts a towards right by n digits.
+\texttt{a >> b = $\frac{\texttt{a}}{\texttt{2}^\texttt{b}}$}
+
+\begin{tabularx}{9cm}{|P{1.5cm}|C|C|C|C|C|C|C|C|}\hline
+   \rowcolor{string!20}
+   \cellcolor{white}
+   a = 25 &
+   0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+   \rowcolor{gray!20}
+   \cellcolor{white}
+   a \texttt{>>} 2 &
+   \cellcolor{white}0 & \cellcolor{white}0 &
+   0 & 0 & 0 & 1 & 1 & 0\\\hline
+\end{tabularx}
+
+\vspace{2ex}
+\section{Bit Masking}
+
+
+\begin{tabular}{lll}
+   x \ \& \ 1 & : &
+   Evaluates to 1 if the number is odd else evaluates to 0.
+   \\
+   x \ \& \ (x-1) & : & Clears the rightmost set bit of x.
+   \\
+   x \ \& \ $\sim$(x-1) & : &
+   Isolates the rightmost set bit of x.
+   \\
+   \\
+   1 \ \texttt{<<} \ i & : & Represent a number with only the $i$-th bit set.
+   \\
+   $\sim$(1 \ \texttt{<<} \ i) & : & Represent a number with all bits set except the $i$-th bit.
+   \\
+   \\
+   n \& (1 \texttt{<<} i) & : & Checks whether $i$-th bit  in $n$ is set or not.
+   \\
+   n \& $\sim$(1 \texttt{<<} i) & : & Clears the $i$-th bit in $n$.
+   \\
+   n | (1 \texttt{<<} i) & : & Sets the $i$-th bit  in $n$ without affecting other bits.
+   \\
+   n | $\sim$(1 \texttt{<<} i) & : & Clears all the bits except $i$-th bit in $n$.
+   \\
+   n $\wedge$ (1 \texttt{<<} i) & : & Flips the $i$-th bit in $n$ without affecting other bits.
+   \\
+   n $\wedge$ $\sim$(1 \texttt{<<} i) & : & Flips the $i$-th bit and complements all other bits in $n$.
+   \\
+\end{tabular}
+
+
+\subsection{Get, Set, Clear \codeit{i}-th bit}
+
+\textbf{Get \codeit{i}-th bit}
+\begin{code}[language=C++]
+   int get_ith_bit(int n, int i){
+      int mask = (1 << i);
+      return (n & mask) > 0 ? 1 : 0;
+   }
+\end{code}
+
+
+\pagebreak
+\textbf{Set \codeit{i}-th bit}
+\begin{code}[language=C++]
+   int set_ith_bit(int n, int i){
+      int mask = (1 << i);
+      return (n|mask);
+   }
+\end{code}
+
+
+\textbf{Clear \codeit{i}-th bit}
+\begin{code}[language=C++]
+   int clear_ith_bit(int n, int i){
+      int mask = ~(1 << i);
+      return (n & mask);
+   }
+\end{code}
+
+
+\textbf{Update \codeit{i}-th bit}
+\begin{code}[language=C++]
+   int update_ith_bit(int n, int i, int v){
+      clearIthBit(n,i);
+      int mask = (v << i);
+      return (n|mask);
+   }
+\end{code}
+
+
+\textbf{Clear last \codeit{i} bits}
+\begin{code}[language=C++]
+   int clear_last_i_bit(int n, int i){
+      int mask = (-1 << i);
+      return (n & mask);
+   }
+\end{code}
+
+
+\textbf{Clear bits in range}
+\begin{code}[language=C++]
+   int clear_bits_in_range(int n, int i, int j){
+      int a = -1 << (j+1),  b = (1 << i) - 1;
+      int mask = (a|b);
+      return (n & mask);
+   }
+\end{code}
+
+
+\textbf{Update bits in range}
+\begin{code}[language=C++]
+   int update_bits_in_range(int n, int i, int v){
+      clear_bits_in_range(n,i);
+      int mask = (v << i);
+      return (n|mask);
+   }
+\end{code}
+
+
+\textbf{Check if an integer is a power of 2}
+\begin{code}[language=C++]
+   bool isPowerOfTwo(unsigned int n){
+      return !(n & (n-1));
+   }
+\end{code}
+
+
+\textbf{Count set bits} \tab O(number of set bits)
+\begin{code}[language=C++]
+   int countSetBits(int n){
+      int count = 0;
+      while (n){
+         n = n & (n - 1);
+         count++;
+      }
+      return count;
+   }
+\end{code}
+
+
+\textbf{Find the unique number from an array of 2N + 1 numbers.}\\
+\begin{tabular}{ll}      
+   Principle &:\tab  \texttt{a $\wedge$ a = 0}
+   \tabs  \texttt{0 $\wedge$ a = a}\\
+   Approach &: Take Commulative XOR\\
+   Time complexity &: O(N)
+\end{tabular}
+
+
+\chapter{Prime Numbers \& Factorization}
+
+\section{Sieve of Eratosthenes}
+Sieve of Eratosthenes is an algorithm for finding all the prime numbers $[1:n]$ using $O(n \log \log n)$ operations.
+
+\begin{code}
+const int N = 10e6;
+vector<bool> isPrime(N + 1, true);
+
+void sieve(){
+   long long i, j;
+   isPrime[0] = isPrime[1] = false;
+
+   for (i = 2; i <= N; i++){
+      if (isPrime[i]){
+         for (j = i * i; j <= N; j += i)
+            isPrime[j] = false;
+      }
+   }
+}
+\end{code}
+
+\section{Segmented Sieve}
+
+\section{Primes in range}
+
+\chapter{String}
+\section{Sliding Window}
+\begin{center}
+   \begin{tabular}{ccc}
+      \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+         D & e & l & i & c & a & t & e\\\hline
+         \multicolumn{8}{c}{string}
+      \end{tabular}
+      & \tabs &
+      \begin{tabular}{|l|l|l|}\hline
+         c & a & t\\\hline
+         \multicolumn{3}{c}{pattern}
+      \end{tabular}
+   \end{tabular}
+\end{center}
+
+\vspace{2ex}
+\begin{tabular}{ccccc}
+   Step-1
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      \cellcolor{magenta!10}D &
+      \cellcolor{magenta!10}e &
+      \cellcolor{magenta!10}l &
+      i & c & a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-2
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D &
+      \cellcolor{magenta!10}e &
+      \cellcolor{magenta!10}l &
+      \cellcolor{magenta!10}i &
+      c & a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-3
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e &
+      \cellcolor{magenta!10}l &
+      \cellcolor{magenta!10}i &
+      \cellcolor{magenta!10}c &
+      a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-4
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e & l &
+      \cellcolor{magenta!10}i &
+      \cellcolor{magenta!10}c &
+      \cellcolor{magenta!10}a &
+      t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\vspace{2ex}
+\begin{tabular}{ccccc}
+   Step-5
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e & l & t &
+      \cellcolor{green!10}c &
+      \cellcolor{green!10}a &
+      \cellcolor{green!10}t &
+      e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\vspace{6ex}
+\begin{code}
+   int findIndex(string &str, string &pattern)
+   {
+      int index = -1;
+      int n = str.size(), m = pattern.size();
+
+      for (int i = 0; i + m <= n; i++)
+         if (str.substr(i, m) == pattern)
+            index = i;
+
+      return index;
+   }
+\end{code}
+
+\section{Rolling Hash}
+
+
+\end{document}

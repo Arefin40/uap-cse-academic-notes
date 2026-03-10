@@ -1,0 +1,227 @@
+% \RequirePackage[nomarginpar, margin=1.27cm]{geometry}
+\RequirePackage{setspace} % for controlling line spacing
+\RequirePackage{amsmath,amssymb,nicefrac,mathtools,pifont} %for math
+\RequirePackage[table, dvipsnames]{xcolor} % for colour
+\RequirePackage{tcolorbox} % for coloured box
+\RequirePackage{tikz, pgfplots, forest} %for diagram
+\RequirePackage{siunitx} %for SI unit
+\RequirePackage{graphicx,subcaption,wrapfig,tcolorbox,wrapfig} %for figure
+\RequirePackage{float} %for figure placement
+\RequirePackage{etoolbox} %for ifthenelse
+\usepackage[none]{hyphenat} %for no hyphenation
+\RequirePackage{xparse, environ} %for custom environment definition
+% \RequirePackage{tocloft} %for customizing table of contents
+\usepackage{pdflscape} % for landscape pages
+
+% Package configs
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows,positioning,calc}
+\usetikzlibrary{arrows.meta}
+\tikzstyle{every node}=[font=\small]
+\usetikzlibrary{decorations.pathreplacing}
+
+
+% #ANCHOR Colors
+\definecolor{doctextcolor}{HTML}{262626}
+\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}
+\definecolor{carminepink}{rgb}{0.92, 0.3, 0.26}
+\definecolor{violet}{rgb}{0.60, 0.45, 1}
+\definecolor{red}{HTML}{E11D48}
+% #ANCHOR Syantax Highlighting Colors
+\definecolor{keyword}{HTML}{D73A4A}
+\definecolor{number}{HTML}{015CC5}
+\definecolor{comment}{HTML}{6A737D}
+\definecolor{string}{HTML}{1D825E}
+\definecolor{function}{HTML}{743FD1}
+\definecolor{rgbV}{HTML}{743FD1}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{rgbO}{HTML}{EA580C}
+\definecolor{codeblack}{HTML}{24292F}
+\definecolor{divider}{HTML}{A1A1AA}
+\definecolor{border}{HTML}{D1D1D1}
+\definecolor{rgbG}{HTML}{a7f3d0}
+\definecolor{rgbGF}{HTML}{047857}
+\definecolor{rgbR}{HTML}{fecdd3}
+\definecolor{rgbRF}{HTML}{e11d48}
+\definecolor{rgbB}{HTML}{bae6fd}
+\definecolor{rgbBF}{HTML}{0284c7}
+\definecolor{rgbY}{HTML}{fde68a}
+\definecolor{rgbYF}{HTML}{ca8a04}
+
+\definecolor{rgbC1}{HTML}{E76E50}
+\definecolor{rgbC2}{HTML}{264753}
+\definecolor{rgbC3}{HTML}{E9C469}
+\definecolor{rgbC4}{HTML}{299D90}
+\definecolor{rgbC5}{HTML}{2463EB}
+\definecolor{rgbC6}{HTML}{1DC355}
+
+% #ANCHOR Underline
+\RequirePackage[normalem]{ulem}
+\makeatletter
+\newcommand{\ul}[2][black]{%
+\UL@protected\def\temp@uline{\bgroup\markoverwith
+    {\textcolor{#1}{\rule[-0.5ex]{2pt}{0.6pt}}}\ULon}%
+\temp@uline{#2}%
+}
+\makeatother
+
+% #ANCHOR Color Commands
+\newcommand{\red}[1]{\textcolor{keyword}{#1}}
+\newcommand{\green}[1]{\textcolor{string}{#1}}
+\newcommand{\blue}[1]{\textcolor{number}{#1}}
+\newcommand{\gray}[1]{\textcolor{lightgray}{#1}}
+\newcommand{\orange}[1]{\textcolor{orange}{#1}}
+\newcommand{\rgbV}[1]{\textcolor{rgbV}{#1}}
+\newcommand{\rgbB}[1]{\textcolor{number}{#1}}
+\newcommand{\rgbR}[1]{\textcolor{rgbRF}{#1}}
+\newcommand{\rgbO}[1]{\textcolor{orange}{#1}}
+\newcommand{\rgbG}[1]{\textcolor{string}{#1}}
+\newcommand{\rgbGray}[1]{\textcolor{comment}{#1}}
+
+% #ANCHOR Signs and Symbols
+\newcommand{\Xmark}[2][G]{%
+    \ifx#1success\relax
+        \xdef\BGcolor{rgbG}
+        \xdef\FGcolor{rgbGF}
+    \else\ifx#1G\relax
+        \xdef\BGcolor{rgbG}
+        \xdef\FGcolor{rgbGF}
+    \else\ifx#1danger\relax
+        \xdef\BGcolor{rgbR}
+        \xdef\FGcolor{rgbRF}
+    \else\ifx#1R\relax
+        \xdef\BGcolor{rgbR}
+        \xdef\FGcolor{rgbRF}
+    \else\ifx#1info\relax
+        \xdef\BGcolor{rgbB}
+        \xdef\FGcolor{rgbBF}
+    \else\ifx#1B\relax
+        \xdef\BGcolor{rgbB}
+        \xdef\FGcolor{rgbBF}
+    \else\ifx#1warning\relax
+        \xdef\BGcolor{rgbY}
+        \xdef\FGcolor{rgbYF}
+    \else\ifx#1Y\relax
+        \xdef\BGcolor{rgbY}
+        \xdef\FGcolor{rgbYF}
+    \fi\fi\fi\fi\fi\fi\fi\fi
+    \raisebox{0.5\height}{\tikz[baseline]{\filldraw[\BGcolor] (0,0) circle(6pt); \node[\FGcolor] at (0,0) {\small\textbf{#2}};}}%
+}
+
+% #ANCHOR Font Settings
+\RequirePackage{fontspec}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[skip=10pt, indent=0pt]{parskip}
+\setmainfont{Mulish}
+\setmonofont{IBM Plex Mono}
+\newfontfamily\banglafont[Script=Bengali]{Tiro Bangla}
+\newcommand{\bn}[1]{{\banglafont #1}}
+\renewcommand{\normalsize}{\fontsize{9pt}{14pt}\selectfont}
+
+% #ANCHOR Bold Cursive Font Settings 
+\newfontfamily{\cursive}{Cookie}
+
+% #ANCHOR Link Settings
+\RequirePackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+% #ANCHOR List Settings
+\RequirePackage{enumerate,enumitem}
+\setlist[enumerate]{noitemsep}
+
+
+% #ANCHOR Multiple columns
+\RequirePackage{multicol}
+\setlength{\columnsep}{0.83cm}
+
+
+% #ANCHOR Equation (Math Mode)
+\everymath{\displaystyle}
+\RequirePackage{amsmath,amssymb,nicefrac,mathtools,pifont} %for math
+
+
+% #ANCHOR Tabular commands
+\RequirePackage{multirow}
+% Table Border
+\setlength{\arrayrulewidth}{0.35 pt}
+\definecolor{border}{HTML}{A1A1AA}
+\arrayrulecolor{border}
+
+% Table Others
+\RequirePackage{array,tabularx,makecell,multirow,fmtcount,adjustbox,tabularray}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{I}{>{\centering\arraybackslash}m{0.5\textwidth}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\rspan}[2]{\multirow{#1}{*}{#2}}
+\newcommand{\thc}[1]{%
+\multicolumn{1}{|c|}{\textbf{#1}}
+}
+\newcommand{\thcx}[1]{%
+\multicolumn{1}{|C|}{\textbf{#1}}
+}
+\newcommand{\thl}[1]{%
+\multicolumn{1}{|l|}{\textbf{#1}}
+}
+\newcommand{\thr}[1]{%
+\multicolumn{1}{|r|}{\textbf{#1}}
+}
+\newcommand{\ccell}[1]{\multicolumn{1}{c}{#1}}
+% Adjusting arraystretch to modify vertical padding
+\renewcommand{\arraystretch}{1.25}
+% Adjusting tabcolsep to modify horizontal padding
+% \setlength{\tabcolsep}{10pt}
+
+% #ANCHOR Topic and Subtopic
+\newcommand{\topic}[1]{%
+  \vspace{0.5em}
+  \noindent\textbf{\large #1}\par
+  \vspace{-0.5em}
+}
+\newcommand{\subtopic}[1]{%
+  \noindent\textbf{\fontsize{10pt}{0pt}\selectfont #1}\par
+  \vspace{-0.6em}
+}
+
+
+% Question Container
+\makeatletter
+\newcommand{\IfEmptyTF}[3]{%
+  \edef\temp{#1}%
+  \ifx\temp\@empty
+    #2% true (empty)
+  \else
+    #3% false (non-empty)
+  \fi
+}
+\makeatother
+\NewDocumentEnvironment{Question}{O{} O{} +b}{%
+  \noindent
+  \IfEmptyTF{#1}{% marks empty
+    \IfEmptyTF{#2}{% CO also empty
+      % --- both empty → only body ---
+      #3%
+    }{%
+      % --- only CO ---
+      \begin{minipage}[t]{0.9\textwidth}#3\end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.1\textwidth}\raggedleft #2\end{minipage}\par
+    }%
+  }{%
+    % --- marks present (maybe CO too) ---
+    \begin{minipage}[t]{0.9\textwidth}#3\end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.1\textwidth}\raggedleft
+      [#1]%
+      \IfEmptyTF{#2}{}{\\#2}%
+    \end{minipage}\par
+  }%
+}{}

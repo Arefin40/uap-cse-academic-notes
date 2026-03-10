@@ -1,0 +1,133 @@
+\RequirePackage[nomarginpar, margin=2.54cm]{geometry}
+\RequirePackage{setspace} % for controlling line spacing
+
+
+% \RequirePackage{amsmath,txfonts,amssymb,nicefrac,mathtools,pifont} %for math
+% \RequirePackage{tikz, pgfplots} %for diagram
+\RequirePackage{multicol} %for multiple column
+% \RequirePackage{graphicx,subcaption,wrapfig,tcolorbox} %for figure
+% \RequirePackage{xparse} %for commands & environments
+% \RequirePackage{lipsum} %miscellaneous
+% \RequirePackage{colortbl,xcolor,soul} %for default table & border
+
+
+% #ANCHOR Colors
+\RequirePackage[table, dvipsnames]{xcolor}
+%default font color for the document
+% \definecolor{textcolor}{HTML}{1A1919}
+\definecolor{textcolor}{HTML}{262626}
+
+\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}
+\definecolor{carminepink}{rgb}{0.92, 0.3, 0.26}
+\definecolor{orange}{rgb}{0.9, 0.55, 0.22}
+\definecolor{violet}{rgb}{0.60, 0.45, 1}
+
+% #ANCHOR Syantax Highlighting Colors
+\definecolor{keyword}{HTML}{D73A4A}
+\definecolor{number}{HTML}{015CC5}
+\definecolor{comment}{HTML}{6A737D}
+\definecolor{string}{HTML}{1D825E}
+\definecolor{function}{HTML}{743FD1}
+\definecolor{orange}{HTML}{CF7842}
+\definecolor{codeblack}{HTML}{24292F}
+\definecolor{divider}{HTML}{A1A1AA}
+\definecolor{border}{HTML}{D1D1D1}
+
+
+% #ANCHOR Font settings
+\RequirePackage{fontspec}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[skip=10pt, indent=0pt]{parskip}
+% \setmainfont{Merriweather Light}
+\setmainfont{Times New Roman}
+% \setmainfont{Mulish}
+\setmonofont{IBM Plex Mono}
+\newfontfamily\banglafont[Script=Bengali]{Tiro Bangla}
+\newcommand{\bn}[1]{{\banglafont #1}}
+\renewcommand{\normalsize}{\fontsize{13pt}{16.5pt}\selectfont}
+
+% #ANCHOR Number Font
+% \newfontfamily\fdigitsu{Lora}
+% \XeTeXinterchartokenstate = 1
+% \newXeTeXintercharclass \digits
+% \XeTeXcharclass `\0 \digits
+% \XeTeXcharclass `\1 \digits
+% \XeTeXcharclass `\2 \digits
+% \XeTeXcharclass `\3 \digits
+% \XeTeXcharclass `\4 \digits
+% \XeTeXcharclass `\5 \digits
+% \XeTeXcharclass `\6 \digits
+% \XeTeXcharclass `\7 \digits
+% \XeTeXcharclass `\8 \digits
+% \XeTeXcharclass `\9 \digits
+% \XeTeXinterchartoks 4095 \digits = {\bgroup\fdigitsu}
+% \XeTeXinterchartoks \digits 4095 = {\egroup}
+% \XeTeXinterchartoks 0 \digits = {\bgroup\fdigitsu}
+% \XeTeXinterchartoks \digits 0 = {\egroup}
+
+% #ANCHOR Disable Hypernation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% #ANCHOR Link settings
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+% #ANCHOR List settings
+\RequirePackage{enumerate,enumitem}
+\setlist[enumerate]{noitemsep}
+
+
+% #ANCHOR Multiple columns
+\RequirePackage{multicol}
+\setlength{\columnsep}{0.83cm}
+
+
+% #ANCHOR Equation (Math Mode)
+\everymath{\displaystyle}
+\RequirePackage{amsmath,amssymb,nicefrac,mathtools,pifont} %for math
+
+
+% #ANCHOR Tabular commands
+% Table Border
+\setlength{\arrayrulewidth}{0.35 pt}
+\definecolor{border}{HTML}{A1A1AA}
+\arrayrulecolor{border}
+% Table Others
+\RequirePackage{array,tabularx,multirow,fmtcount} %for tables
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcommand{\rspan}[2]{\multirow{#1}{*}{#2}}
+\newcommand{\thc}[1]{%
+\multicolumn{1}{|c|}{\textbf{#1}}
+}
+\newcommand{\thcx}[1]{%
+\multicolumn{1}{|C|}{\textbf{#1}}
+}
+\newcommand{\thl}[1]{%
+\multicolumn{1}{|l|}{\textbf{#1}}
+}
+\newcommand{\thr}[1]{%
+\multicolumn{1}{|r|}{\textbf{#1}}
+}
+% Adjusting arraystretch to modify vertical padding
+% \renewcommand{\arraystretch}{1.25}
+% Adjusting tabcolsep to modify horizontal padding
+% \setlength{\tabcolsep}{10pt}
+
+
+% #ANCHOR Space
+\newcommand{\tabs}{\ \ \ \ \ \ }
+\newcommand{\tab}{\ \ \ }
+
+\newcommand{\dividex}{{\color{divider}\vrule width 0.35pt}}

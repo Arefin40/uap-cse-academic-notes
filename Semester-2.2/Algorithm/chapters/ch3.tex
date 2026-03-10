@@ -1,0 +1,113 @@
+\chapter{String}
+\section{Sliding Window}
+\begin{center}
+   \begin{tabular}{ccc}
+      \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+         D & e & l & i & c & a & t & e\\\hline
+         \multicolumn{8}{c}{string}
+      \end{tabular}
+      & \tabs &
+      \begin{tabular}{|l|l|l|}\hline
+         c & a & t\\\hline
+         \multicolumn{3}{c}{pattern}
+      \end{tabular}
+   \end{tabular}
+\end{center}
+
+\vspace{2ex}
+\begin{tabular}{ccccc}
+   Step-1
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      \cellcolor{magenta!10}D &
+      \cellcolor{magenta!10}e &
+      \cellcolor{magenta!10}l &
+      i & c & a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-2
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D &
+      \cellcolor{magenta!10}e &
+      \cellcolor{magenta!10}l &
+      \cellcolor{magenta!10}i &
+      c & a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-3
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e &
+      \cellcolor{magenta!10}l &
+      \cellcolor{magenta!10}i &
+      \cellcolor{magenta!10}c &
+      a & t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\begin{tabular}{ccccc}
+   Step-4
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e & l &
+      \cellcolor{magenta!10}i &
+      \cellcolor{magenta!10}c &
+      \cellcolor{magenta!10}a &
+      t & e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\vspace{2ex}
+\begin{tabular}{ccccc}
+   Step-5
+   & \tabs &
+   \begin{tabular}{|l|l|l|l|l|l|l|l|}\hline
+      D & e & l & t &
+      \cellcolor{green!10}c &
+      \cellcolor{green!10}a &
+      \cellcolor{green!10}t &
+      e\\\hline
+   \end{tabular}
+   & \tabs &
+   \begin{tabular}{|l|l|l|}\hline
+      c & a & t\\\hline
+   \end{tabular}
+\end{tabular}
+
+\vspace{6ex}
+\begin{code}
+   int findIndex(string &str, string &pattern)
+   {
+      int index = -1;
+      int n = str.size(), m = pattern.size();
+
+      for (int i = 0; i + m <= n; i++)
+         if (str.substr(i, m) == pattern)
+            index = i;
+
+      return index;
+   }
+\end{code}
+
+\section{Rolling Hash}

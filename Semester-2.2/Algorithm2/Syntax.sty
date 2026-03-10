@@ -1,0 +1,32 @@
+% #ANCHOR Dependencies
+\RequirePackage{listings}
+
+% #ANCHOR Mono Font for Code
+\newfontfamily{\FiraCode}{Fira Code}
+\newfontfamily{\IBMMono}{IBM Plex Mono}
+\newfontfamily{\OperatorMono}{Operator Mono Book}
+\newfontfamily{\SFMono}{SF Mono Regular}
+\newfontfamily{\Consolas}{Consolas}
+
+\lstdefinestyle{Fira}{basicstyle=\FiraCode}
+\lstdefinestyle{IBM}{basicstyle=\IBMMono}
+\lstdefinestyle{Operator}{basicstyle=\OperatorMono}
+\lstdefinestyle{SF}{basicstyle=\SFMono}
+\lstdefinestyle{Basic}{basicstyle=\large\Consolas}
+
+\newcommand{\codeit}[1]{
+   \texorpdfstring{\textit{\OperatorMono #1}}{#1}
+}
+\definecolor{kword}{HTML}{db2777}
+\lstdefinestyle{cpp}{
+   language=C++,
+   basicstyle=\linespread{0.9}\ttfamily,
+   keywordstyle = {\color{kword}},
+   otherkeywords = {<,>,+,-,&,|,!,=,?, :},
+   breaklines=true,
+   tabsize=3,
+   frame=lines,
+   rulecolor=\color{gray!50},
+   backgroundcolor = \color{lightgray!10}
+}
+\lstnewenvironment{code}[1][]{\lstset{style=cpp}}{}

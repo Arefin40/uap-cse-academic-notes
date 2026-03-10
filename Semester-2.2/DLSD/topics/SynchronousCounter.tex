@@ -1,0 +1,676 @@
+\Section{Synchronous Counter}
+\vspace{2em}
+
+\Question{Define Asynchronous counter?}
+The counter where all the outputs do not response together, that counter is called asynchronous counter or ripple counter.
+
+\Question{Define Synchronous counter?}
+The counter where all the outputs response together, that counter is called asynchronous counter or parallel counter.
+
+\vspace{4em}
+\HeadingCenter{3-bit Synchronous Up Counter (MOD 8)}
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.3) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.3) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{$\text{\F}$}} -- ++(0.25,0) coordinate (q\F) -- ++(0.25,0) coordinate (qbar\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (k\F) -- (j\F);
+      }
+
+      \draw
+      (clkA) ++(0,0.125) coordinate (clk)
+      (clkB) -| ++(0,-2.25)
+      (clkC) -| ++(0,-2.25)  coordinate (clkEend)
+      (clkA) -| ++(-0.8,-2.25) -- (clkEend);
+
+      \draw
+      (qA) to[short,-*] (jB)
+      (jA) -- ++(0,0.25) node[above]{1}
+
+      (qB) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,2) node[and port, anchor=in 2](and1){}
+      to[crossing] ++(0,0.9) to[short,-*] ++(0,0.1)
+      node[above]{B}
+
+      (qA) ++(0.4,0) |- (and1.in 1)
+      (and1.out) to[short,-*] ++(0,0)
+      (jC) to[short,*-]  ++(0,1.5) -| (and1.out)
+
+      (qA) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,3) node[above]{A (LSB)}
+
+      (qC) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,3) node[above]{C (MSB)};
+   
+      \NGT{clk};
+   \end{circuitikz}
+\end{figure}
+\vspace{2em}
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{6cm}{|r|C|C|C|}\hline
+      & C & B & A \\\hline
+      0 & 0 & 0 & 0 \\
+      1 & 0 & 0 & 1 \\
+      2 & 0 & 1 & 0 \\
+      3 & 0 & 1 & 1 \\
+      4 & 1 & 0 & 0 \\
+      5 & 1 & 0 & 1 \\
+      6 & 1 & 1 & 0 \\
+      7 & 1 & 1 & 1 \\\hline
+      0 & 0 & 0 & 0 \\\hline
+   \end{tabularx}
+   \end{adjustbox}
+   &\vspace{2ex}&
+   \begin{adjustbox}{valign=t}
+     \begin{tabularx}{6.5cm}{lXl}
+      \multicolumn{3}{l}{\textbf{Operation}}\\
+      \multicolumn{3}{l}{Initially $A=B=C=0$}\\[1em]
+      $A$ & : is always toggle,& $J_A = K_A = 1$ \\[1em]
+      $B$ & : if $A=0$ then,& $J_B = K_B = 0$ \\
+       & : if $A=1$ then,& $J_B = K_B = 1$ \\
+      &\multicolumn{2}{l}{$\therefore J_B = K_B = A$}\\[1em]
+      $C$ & : if $A\text{=}B\text{=}1$ then,& $J_C = K_C = 1$ \\
+       & \ \ otherwise,& $J_C = K_C = 0$ \\
+      &\multicolumn{2}{l}{$\therefore J_C = K_C = A.B$}\\
+     \end{tabularx}
+   \end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\HeadingCenter{3-bit Synchronous Down Counter (MOD 8)}
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.6cm}
+      \def\FF{A,B,C}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.15) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.15) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{$\text{\F}$}} -- ++(0.25,0) coordinate (q\F) -- ++(0.25,0) coordinate (qbar\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (k\F) to[short,*-] (j\F);
+      }
+
+      \draw
+      (clkA) ++(0,0.125) coordinate (clk)
+      (clkB) to[crossing] ++(0,-1.8) -- ++(0,-0.45) 
+      (clkC) to[crossing] ++(0,-2) -- ++(0,-0.25) 
+      coordinate (clkEend)
+      (clkA) -| ++(-0.8,-2.25) -- (clkEend);
+
+      \draw
+      (qbarA) -- (kB)
+      (jA) -- ++(0,0.25) node[above]{1}
+      (qbarB) node[and port, anchor=in 1,scale=0.45](and){}
+      (and.out) -| (kC)
+      (kB) -- ++(0,-1) -| (and.in 2)
+
+      (qA) -- ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{A (LSB)}
+
+      (qB) -- ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{B}
+
+      (qC) -- ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{C (MSB)};
+   
+      \NGT{clk};
+   \end{circuitikz}
+\end{figure}
+\vspace{4em}
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{6cm}{|r|C|C|C|}\hline
+      & C & B & A \\\hline
+      7 & 1 & 1 & 1 \\
+      6 & 1 & 1 & 0 \\
+      5 & 1 & 0 & 1 \\
+      4 & 1 & 0 & 0 \\
+      3 & 0 & 1 & 1 \\
+      2 & 0 & 1 & 0 \\
+      1 & 0 & 0 & 1 \\
+      0 & 0 & 0 & 0 \\\hline
+      7 & 1 & 1 & 1 \\\hline
+   \end{tabularx}
+   \end{adjustbox}
+   &&
+   \begin{adjustbox}{valign=t}
+     \begin{tabularx}{6.5cm}{lXl}
+      \multicolumn{3}{l}{\textbf{Operation}}\\
+      \multicolumn{3}{l}{Initially $A=B=C=1$}\\[1em]
+      $A$ & : is always toggle,& $J_A = K_A = 1$ \\[1em]
+      $B$ & : if $A=0$ then,& $J_B = K_B = 1$ \\
+       & : if $A=1$ then,& $J_B = K_B = 0$ \\
+      &\multicolumn{2}{l}{$\therefore J_B = K_B = \not{A}$}\\[1em]
+      $C$ & : if $A\text{=}B\text{=}0$ then,& $J_C = K_C = 1$ \\
+       & \ \ otherwise,& $J_C = K_C = 0$ \\
+      &\multicolumn{2}{l}{$\therefore J_C = K_C = \not{A}.\not{B}$}\\
+     \end{tabularx}
+   \end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\HeadingCenter{4-bit Synchronous Up Counter (MOD 16)}
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.3) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.3) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{Q$_\text{\F}$}} -- ++(0.25,0) coordinate (q\F) -- ++(0.25,0) coordinate (qbar\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{Q}_\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (k\F) -- (j\F);
+      }
+
+      \draw
+      (clkA) ++(0,0.125) coordinate (clk)
+      (clkB) -| ++(0,-2.25)
+      (clkC) -| ++(0,-2.25)
+      (clkD) -| ++(0,-2.25)  coordinate (clkEend)
+      (clkA) -| ++(-0.8,-2.25) -- (clkEend);
+
+      \draw
+      (qA) to[short,-*] (jB)
+      (jA) -- ++(0,0.25) node[above]{1}
+
+      (qB) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,2) node[and port, anchor=in 2](and1){}
+      to[crossing] ++(0,0.9) to[short,-*] ++(0,0.1)
+      node[above]{B}
+
+      (qC) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,2) node[and port, anchor=in 2](and2){}
+      to[crossing] ++(0,0.9) to[short,-*] ++(0,0.1)
+      node[above]{C}
+
+      (and1.out) |- (and2.in 1)
+      (qA) ++(0.4,0) |- (and1.in 1)
+      (and1.out) to[short,-*] ++(0,0)
+      (and2.out) to[short,-*] ++(0,0)
+      (jC) to[short,*-]  ++(0,1.5) -| (and1.out)
+      (jD) to[short,*-]  ++(0,1.5) -| (and2.out)
+
+      (qA) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,3) node[above]{A (LSB)}
+
+      (qD) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,3) node[above]{D (MSB)};
+   
+      \NGT{clk};
+   \end{circuitikz}
+\end{figure}
+\vspace{4em}
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{7cm}{|r|C|C|C|C|}\hline
+      & D & C & B & A \\\hline
+      0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 0 & 0 & 1 \\
+      2 & 0 & 0 & 1 & 0 \\
+      3 & 0 & 0 & 1 & 1 \\
+      4 & 0 & 1 & 0 & 0 \\
+      5 & 0 & 1 & 0 & 1 \\
+      6 & 0 & 1 & 1 & 0 \\
+      7 & 0 & 1 & 1 & 1 \\
+      8 & 1 & 0 & 0 & 0 \\
+      9 & 1 & 0 & 0 & 1 \\
+      10 & 1 & 0 & 1 & 0 \\
+      11 & 1 & 0 & 1 & 1 \\
+      12 & 1 & 1 & 0 & 0 \\
+      13 & 1 & 1 & 0 & 1 \\
+      14 & 1 & 1 & 1 & 0 \\
+      15 & 1 & 1 & 1 & 1 \\\hline
+   \end{tabularx}
+   \end{adjustbox}
+   &\vspace{2ex}&
+\begin{adjustbox}{valign=t}
+\begin{tabularx}{7cm}{lXl}
+   \multicolumn{3}{l}{\textbf{Operation}}\\
+   \multicolumn{3}{l}{Initially $A=B=C=D=0$}\\[1em]
+   $A$ & : is always toggle,& $J_A = K_A = 1$ \\[1em]
+   $B$ & : if $A=0$ then,& $J_B = K_B = 0$ \\
+      & : if $A=1$ then,& $J_B = K_B = 1$ \\
+   &\multicolumn{2}{l}{$\therefore J_B = K_B = A$}\\[1em]
+   $C$ & : if $A\text{=}B\text{=}1$ then,& $J_C = K_C = 1$ \\
+      & \ \ otherwise,& $J_C = K_C = 0$ \\
+   &\multicolumn{2}{l}{$\therefore J_C = K_C = A.B$}\\[1em]
+   $D$ & : if $A\text{=}B\text{=}C\text{=}1$ then,& $J_D = K_D = 1$ \\
+      & \ \ otherwise,& $J_D = K_D = 0$ \\
+   &\multicolumn{2}{l}{$\therefore J_D = K_D = A.B.C$}\\
+\end{tabularx}
+\end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\HeadingCenter{4-bit Synchronous Up/Down Counter (MOD 16)}
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{2.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.3) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.3) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{\F}} -- ++(0.25,0) coordinate (q\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (k\F) to[crossing] (j\F);
+      }
+
+      \draw
+      (clkA) ++(0,0.125) coordinate (clk)
+      (clkB) -| ++(0,-2.25)
+      (clkC) -| ++(0,-2.25)
+      (clkD) -| ++(0,-2.25)  coordinate (clkEend)
+      (clkA) -| ++(-0.8,-2.25) -- (clkEend);
+
+      \draw
+      (qA) -- ++(0.4,0) node[xor port, anchor=in 1, scale=0.65](xor1){}
+      (qB) -- ++(0.4,0) node[xor port, anchor=in 1, scale=0.65](xor2){}
+      (qC) -- ++(0.4,0) node[xor port, anchor=in 1, scale=0.65](xor3){}
+
+      (xor1.in 2) -| ++(-0.25,-1.85) to[crossing] ++(0,-2)
+       coordinate (xA)
+      (xor2.in 2) -| ++(-0.25,-1.85) to[crossing] ++(0,-2)
+       coordinate (xB)
+      (xor3.in 2) -| ++(-0.25,-1.85) to[crossing] ++(0,-2)
+       coordinate (xC)
+      
+      (xC) to[short,*-*] (xB) to[short,-*] (xA) -- ++(-2,0)
+      node[left]{Switch $(S)$}
+      node[above right]{{(0/1)}}
+
+      (jA) -- ++(0,0.25) node[above]{1}
+      (xor1.out) -| (jB)
+
+      (xor2.out) -- ++(0,2) node[and port, anchor=in 2](and1){}
+      (xor3.out) -- ++(0,2) node[and port, anchor=in 2](and2){}
+      
+      (and1.in 1) -- ++(-1.15,0) to[crossing] ++(-0.75,0) -| (jB)
+      (and2.in 1) -- ++(-1.15,0) to[crossing] ++(-0.75,0) -| (and1.out)
+
+      (and1.out) to[short,-*] ++(0,0)
+      (and2.out) to[short,-*] ++(0,0)
+      (jC) to[short,*-]  ++(0,1.4) -| (and1.out)
+      (jD) to[short,*-]  ++(0,1.4) -| (and2.out)
+
+      (qA) to[short,-*] ++(0,3) node[above]{A (LSB)}
+      (qB) to[short,-*] ++(0,3) node[above]{B}
+      (qC) to[short,-*] ++(0,3) node[above]{C}
+      (qD) to[short,-*] ++(0,3) node[above]{D (MSB)};
+   
+      \NGT{clk};
+   \end{circuitikz}
+\end{figure}
+\vspace{4em}
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{7cm}{|r|C|C|C|C|}\hline
+      & D & C & B & A \\\hline
+      0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 0 & 0 & 1 \\
+      2 & 0 & 0 & 1 & 0 \\
+      3 & 0 & 0 & 1 & 1 \\
+      4 & 0 & 1 & 0 & 0 \\
+      5 & 0 & 1 & 0 & 1 \\
+      6 & 0 & 1 & 1 & 0 \\
+      7 & 0 & 1 & 1 & 1 \\
+      8 & 1 & 0 & 0 & 0 \\
+      9 & 1 & 0 & 0 & 1 \\
+      10 & 1 & 0 & 1 & 0 \\
+      11 & 1 & 0 & 1 & 1 \\
+      12 & 1 & 1 & 0 & 0 \\
+      13 & 1 & 1 & 0 & 1 \\
+      14 & 1 & 1 & 1 & 0 \\
+      15 & 1 & 1 & 1 & 1 \\\hline
+   \end{tabularx}
+   \end{adjustbox}
+   &\vspace{2ex}&
+\begin{adjustbox}{valign=t}
+\begin{tabular}{ll}
+   \multicolumn{2}{l}{\textbf{Operation}}\\
+   When & $S$ = 0, then \quad [ $A\oplus 0 = A$ ] \\
+   & $\left. \begin{array}{l}
+      J_A = K_A = 1\\
+      J_B = K_B = A\\
+      J_C = K_C = A.B\\
+      J_D = K_D = A.B.C\\
+   \end{array}
+   \right\}$ It is up counter\\\\
+
+   When & $S$ = 1, then \quad [ $A\oplus 1 = \not{A}$ ] \\
+   & $\left. \begin{array}{l}
+      J_A = K_A = 1\\
+      J_B = K_B = \not{A}\\
+      J_C = K_C = \not{A}.\not{B}\\
+      J_D = K_D = \not{A}.\not{B}.\not{C}\\
+   \end{array}
+   \right\}$ It is down counter\\
+   \end{tabular}
+\end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\HeadingCenter{Propagation Delay}
+% Propagation delay in a logic gate refers to the time it takes for the output signal to respond to a change in the input signal.
+
+For any device, to give the input, and response for output, it takes some time, this time is
+called propagation Delay.
+
+\begin{center}
+   $\begin{array}{lll}
+      J.K \text{ FF } & \Rightarrow &tpd \ = \ 50ns \ = \ 50\times 10^{-9} {s}\\
+      \text{AND gate } & \Rightarrow &tpd \ = \ 20ns \ = \ 20\times 10^{-9} {s}\\
+   \end{array}$
+\end{center}
+
+
+\begin{tabular}{ll}
+   For asynchronous counter: &
+   Total \ $tpd \ = \ tpd$ for one $J.K$  FF $ \ \times \ $ Number of FF\\
+   For synchronous counter: &
+   Total \ $tpd \ = \ tpd$ for one $J.K$  FF $ \ + \ \ tpd$ for one AND gate\\
+\end{tabular}
+
+% =========================================================
+\vspace{4em}
+\Section{Shift Counter}
+\begin{center}
+   \begin{tabular}{ll}
+   (1) Ring Counter &
+   [ MOD Number $=$ Number of FF ]\\
+   (2) Johnson Counter & 
+   [ MOD Number $= 2 \ \times$ Number of FF ]\\
+   \end{tabular}
+\end{center}
+
+
+\vspace{2em}
+\HeadingCenter{MOD 4 Ring Counter}
+
+\vspace{2em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \i in {0,...,3} {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+
+         % D, Q, & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{D}} -- ++(-0.25,0) coordinate (d\i)
+
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{Q$_\text{\i}$}} -- ++(0.25,0) coordinate (q\i)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{Q}_\text{\i}}$}} -- ++(0.2,0) coordinate (qbar\i)
+
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\i)
+
+         % Extensions
+         (clk\i) -- ++(0,-2) coordinate (clkEnd\i);
+      }
+   
+      \draw
+      (clkEnd0) -- (clkEnd3)
+      (q0) -- (d1)
+      (q1) -- (d2)
+      (q2) -- (d3)
+
+      (d0) -| ++(-0.5,1.25) coordinate (ringStart)
+      (q3) -| ++(0.5,1.25) coordinate (ringEnd)
+      (ringStart) -- (ringEnd);
+
+      \NGT{clk0};
+   \end{circuitikz}
+\end{figure}
+
+% =========================================================
+
+\vspace{4em}
+\HeadingCenter{MOD 8 Johnson Counter}
+
+\vspace{2em}
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}
+   \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+   \def\FF{A,B,C,D}
+   
+   \foreach \i in {0,...,3} {
+      \draw
+      % Box
+      (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+      (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+
+      % D, Q, & clk bar
+      (\i*\W + \i*\Gap, \H*0.8)
+      node[right]{\scriptsize{D}} -- ++(-0.25,0) coordinate (d\i)
+
+      (\i*\W+\W + \i*\Gap, \H*0.8)
+      node[left]{\scriptsize{Q$_\text{\i}$}} -- ++(0.25,0) coordinate (q\i)
+      (\i*\W+\W + \i*\Gap, \H*0.2)
+      node[left]{\scriptsize{$\not{\text{Q}_\text{\i}}$}} -- ++(0.2,0) coordinate (qbar\i)
+
+      (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\i)
+
+      % Extensions
+      (clk\i) -- ++(0,-2) coordinate (clkEnd\i);
+   }
+
+   \draw
+   (clkEnd0) -- (clkEnd3)
+   (q0) -- (d1)
+   (q1) -- (d2)
+   (q2) -- (d3)
+
+   (d0) -| ++(-0.5,1.25) coordinate (ringStart)
+   (qbar3) -| ++(0.5,0) coordinate (ringEnd)
+   (ringStart) -| (ringEnd);
+
+   \NGT{clk0};
+\end{circuitikz}
+\end{figure}
+
+\pagebreak
+\HeadingCenter{Counter Summery}
+
+
+\begin{tabularx}{\textwidth}{lXr}
+\multicolumn{3}{l}{
+\begin{tabularx}{\textwidth}{Xr}
+\Question{For each of the following statements, indicates the types of counter being described:}
+& \textbf{Answers}
+\end{tabularx}}\\[-1.5em]
+
+1.& Each FF is clocked at the same time.
+& Synchronous counter / Parallel counter\\
+
+2.& Each FF divides the frequency at its clock pulse by 2.
+& Any counter\\
+
+3.& The counter sequence is \newline 111 $\to$ 110 $\to$ 101 $\to$ 100 $\to$ 011 $\to$ 010 $\to$ 001 $\to$ 000.
+& MOD 8 Down counter\\
+
+4.& The counter has 10 distinct states.
+& MOD 10 counter\\
+
+5.& The total delay is the sum of the individual FF's delay.
+& Asynchronous counter / Ripple counter\\
+
+6.& The counter can count in either direction.
+& Up/Down counter\\
+
+7.& The counter counts from 0 to 9.
+& MOD 10 Up counter\\
+
+8.& The MOD number is always twice the number of FFs.
+& Johnson counter\\
+
+9.& The total delay is the sum of one FF's delay and one AND gate's delay.
+& Synchronous counter\\
+
+10.& The MOD number is always equal to the number of FFs.
+& Ring counter\\
+\end{tabularx}
+
+
+
+\vspace{4em}
+\begin{tcolorbox}[title=Counter Formulas]
+   \begin{tabularx}{\textwidth}{lp{2cm}r}
+      \begin{tabular}{ll}
+         \textbf{MOD Number:}\\
+         Asynchronous counter / Ripple counter & $= \ 2^{N}$\\
+         Synchronous counter / Parallel counter & $= \ 2^{N}$\\
+         Ring counter & $= \ N$\\
+         Johnson counter & $= \ 2N$\\
+         Here, $N = $ Number of FF
+      \end{tabular}
+      &&
+      $\text{Output Frequency} =
+      \frac{\ \ \text{Input Frequency}\ \ }
+      {\text{MOD Number}}$
+   \end{tabularx}
+\end{tcolorbox}
+
+\vspace{2em}
+\Question{Find the values of $w,\ x,\ y,\ z$}
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \i in {0,...,3} {
+         \draw
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+
+         (\i*\W + \i*\Gap, 0) ++(0.5*\W,0.5*\H) coordinate (FFCenter\i)
+         ++(0,0.5*\H) coordinate (FFTop\i)
+
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.5*\Gap,0)
+         coordinate (bridge\i) -- ++(-0.5*\Gap,0);
+      }
+      
+      \draw
+      (bridge3) ++(\W+0.5*\Gap,0) -- ++(0.25*\Gap,0)
+      coordinate (bridge4) -- ++(0.25*\Gap,0);
+
+      \node[above] at (bridge0){160kHz};
+      \node[above] at (bridge1){$w$};
+      \node[above] at (bridge2){$x$};
+      \node[above] at (bridge3){$y$};
+      \node[above] at (bridge4){$z$};
+
+      \node[above] at (FFTop0){MOD10};
+      \node[above] at (FFTop1){MOD16};
+      \node[above] at (FFTop2){MOD25};
+      \node[above] at (FFTop3){MOD8};
+
+      \node[align=center] at (FFCenter0) {10-bit \\ Ring \\ Counter};
+      \node[align=center] at (FFCenter1) {4-bit \\ Parallel \\ Counter};
+      \node[align=center] at (FFCenter2) {MOD25 \\ Ripple \\ Counter};
+      \node[align=center] at (FFCenter3) {4-bit \\ Johnson \\ Counter};
+   \end{circuitikz}
+\end{figure}
+
+\vspace{1em}
+\begin{center}
+   $\begin{array}{c}
+      w = \frac{160 \si{kHz}}{10} = 16 \si{kHz} \quad\quad\quad\quad
+      x = \frac{16 \si{kHz}}{16} = 1000 \si{Hz} \quad\quad\quad\quad
+      y = \frac{1000 \si{Hz}}{25} = 40 \si{Hz} \quad\quad\quad\quad
+      z = \frac{40 \si{Hz}}{8} = 5 \si{Hz} \quad\quad\quad\quad
+   \end{array}$
+\end{center}

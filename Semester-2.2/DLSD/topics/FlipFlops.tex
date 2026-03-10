@@ -1,0 +1,400 @@
+\Chapter{Flip-Flop and Related Devices}
+
+\Question{What is Flip-Flop?}
+A flip-flop is a circuit with two stable states that can be used to store binary data. 
+% It serves as a memory cell, capable of retaining a single bit of data, either a '0' or a '1'.
+The stored data can be changed by applying varying inputs. This is the smallest and fundamental building blocks of the memory unit used in computer, RAM and other memory devices. This device has many inputs and exactly two outputs. One is opposite to the other.
+
+\Question{Why do we use Flip-Flop?}
+A flip flop serves as a fundamental building blocks of the memory unit memory unit that is capable of retaining a single bit of data, either a '0' or a '1'.
+
+% An $S$-$R$ (Set-Reset) flip-flop is a type of digital electronic circuit element that serves as a memory cell capable of storing one bit of binary information. It has two inputs, $S$ (Set) and $R$ (Reset), which control the state of the flip-flop.
+
+\vspace{1em}
+\Topic{S-R Flip-Flop}
+The SET-RESET (SR) flip-flop can be designed with the help of two NAND gate or NOR gate. This flip-flop is also called $S$-$R$ Latch.
+
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\linewidth}
+   \centering
+   \begin{circuitikz}
+      \draw
+      (0,0) node[left]{$R$} -- 
+      (2,0) node[nand port, anchor=in 2] (nand1){}
+      (0,2.45) node[left]{$S$} -- 
+      (2,2.45) node[nand port, anchor=in 1] (nand2){}
+   
+      (nand1.out) -- ++(1,0) node[right]{$\not{Q}$}
+      (nand2.out) -- ++(1,0) node[right]{$Q$}
+   
+      (nand1.out) -- ++(0.25,0) -- ++(0,0.75) coordinate (A)
+      (nand2.out) -- ++(0.25,0) -- ++(0,-0.75) coordinate (B)
+   
+      (nand1.in 1) -| ++(-1,0.5) to[crossing] (B)
+      (nand2.in 2) -| ++(-1,-0.5) to[short] (A);
+   \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.4\linewidth}
+   \centering
+   \begin{tabularx}{5.2cm}{|M{1cm}|M{1cm}|C|}\hline
+      $S$ & $R$ & $Q$ \\\hline
+      0 & 0 & Invalid \\\hline
+      0 & 1 & 1 \\\hline
+      1 & 0 & 0 \\\hline
+      1 & 1 & No Change \\\hline
+   \end{tabularx}
+\end{minipage}
+\end{figure}
+
+\vspace{1em}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\linewidth}
+   \centering
+   \begin{circuitikz}
+      \draw
+      (0,0) node[left]{$R$} -- 
+      (2,0) node[nor port, anchor=in 2] (nor1){}
+      (0,2.45) node[left]{$S$} -- 
+      (2,2.45) node[nor port, anchor=in 1] (nor2){}
+   
+      (nor1.out) -- ++(1,0) node[right]{$Q$}
+      (nor2.out) -- ++(1,0) node[right]{$\not{Q}$}
+   
+      (nor1.out) -- ++(0.25,0) -- ++(0,0.75) coordinate (A)
+      (nor2.out) -- ++(0.25,0) -- ++(0,-0.75) coordinate (B)
+   
+      (nor1.in 1) -| ++(-1,0.5) to[crossing] (B)
+      (nor2.in 2) -| ++(-1,-0.5) to[short] (A);
+   \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.4\linewidth}
+   \centering
+   \begin{tabularx}{5.2cm}{|M{1cm}|M{1cm}|C|}\hline
+      $S$ & $R$ & $Q$ \\\hline
+      0 & 0 & No Change \\\hline
+      0 & 1 & 0 \\\hline
+      1 & 0 & 1 \\\hline
+      1 & 1 & Invalid \\\hline
+   \end{tabularx}
+\end{minipage}
+\caption{Circuit Diagram of $S$-$R$ Flip-Flop and Truth Table}
+\end{figure}
+
+\Heading{State diagram:}
+Here
+
+\vspace{1em}
+\Heading{Operation:}
+Here
+
+\pagebreak
+\Topic{J-K Flip-Flop}
+It is an enhanced version of the $S$-$R$ (Set-Reset) flip-flop, addressing the invalid state associated with the $S$-$R$ flip-flop.
+It has two inputs $J$ and $K$, along with the clock signal.
+
+\vspace{1em}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\linewidth}
+   \centering
+   \begin{circuitikz}
+      \draw
+      (1,1.25) -- ++(-0.5,0) node[left]{$CLK$}
+      (0,2.5) node[left]{$J$} -- ++(1,0)
+      node[nand port, anchor=in 2,number inputs=3] (nand1){}
+      (0,0) node[left]{$K$} -- ++(1,0)
+      node[nand port, anchor=in 2,number inputs=3] (nand2){}
+      (nand1.in 3) -- (nand2.in 1)
+   
+      (nand1.out) -- ++(1,0) node[nand port,anchor=in 1](nor1){}
+      (nand2.out) -- ++(1,0) node[nand port,anchor=in 2](nor2){}
+   
+      (nor1.out) -- ++(1.25,0) node[right]{$Q$}
+      (nor2.out) -- ++(1.25,0) node[right]{$\not{Q}$}
+   
+      (nor1.out) -- ++(0.25,0) -- ++(0,-0.75) coordinate (A)
+      (nor2.out) -- ++(0.25,0) -- ++(0,0.75) coordinate (B)
+   
+      (nor1.in 2) -| ++(-0.5,-0.5) to[crossing] (B)
+      (nor2.in 1) -| ++(-0.5,0.5) to[short] (A)
+   
+      (nand2.in 3) -| ++(-0.5,-0.5) coordinate (K)
+      (nor1.out) ++ (0.75,0) to[short, *-] ++(0,0) |- (K)
+      
+      (nand1.in 1) -| ++(-0.5,0.5) coordinate (J)
+      (nor2.out) ++ (1,0) to[short, *-] ++(0,0) |- (J);
+   
+      \draw[dashed, keyword] (3,-1) rectangle (6,3.5);
+      \fill[lightgray, opacity=0.1] (3,-1) rectangle (6,3.5);
+   \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.48\linewidth}
+   \centering
+   \begin{tabularx}{6cm}{|M{0.65cm}|M{0.65cm}|M{1cm}|C|}\hline
+      $J$ & $K$ & $CLK$ & $Q$ \\\hline
+      0 & 0 & $\uparrow$ & No Change \\\hline
+      0 & 1 & $\uparrow$ & 0 \\\hline
+      1 & 0 & $\uparrow$ & 1\\\hline
+      1 & 1 & $\uparrow$ &Toggle \\\hline
+   \end{tabularx}
+\end{minipage}
+\caption{Circuit Diagram of $J$-$K$ Flip-Flop and Truth Table}
+\end{figure}
+
+\Heading{State diagram:}
+Here
+
+\vspace{1em}
+\Heading{Operation:}
+\begin{tabular}{ll}
+When & $J$ = 0 and $K$ = 0 \\
+& No change in the output \\
+When & $J$ = 0 and $K$ = 1 \\
+& $\left. \begin{array}{l}
+   \text{If initially}\ Q\ \text{= 0, finally}\ Q\ \text{= 0}\\
+   \text{If initially}\ Q\ \text{= 1, finally}\ Q\ \text{= 0}
+\end{array}
+\right\}$ Reset condition\\
+
+When & $J$ = 1 and $K$ = 0 \\
+& $\left. \begin{array}{l}
+   \text{If initially}\ Q\ \text{= 0, finally}\ Q\ \text{= 1}\\
+   \text{If initially}\ Q\ \text{= 1, finally}\ Q\ \text{= 1}
+\end{array}
+\right\}$ Set condition\\
+
+When & $J$ = 1 and $K$ = 1 \\
+& $\left. \begin{array}{l}
+   \text{If initially}\ Q\ \text{= 0, finally}\ Q\ \text{= 1}\\
+   \text{If initially}\ Q\ \text{= 1, finally}\ Q\ \text{= 0}
+\end{array}
+\right\}$ Toggle condition\\
+\end{tabular}
+
+
+\pagebreak
+\Topic{D Flip-Flop}
+$D$ flip-flop is a single input version of $S$-$R$ flip-flop. It has one input along with the clock signal.
+
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{minipage}{0.49\linewidth}
+      \centering
+      \begin{circuitikz}   
+         \draw
+         (0,2.5) ++(1,0)
+         node[nand port, anchor=in 1] (nand1){}
+         (0,0) ++(1,0)
+         node[nand port, anchor=in 2] (nand2){}
+         (nand1.in 2) -- (nand2.in 1)
+         
+         (nand2.in 2) -| ++(-0.5,0.5) coordinate (NOT) |- (nand1.in 1) -- ++(-1,0) node[left]{$D$}
+      
+         ($(nand1.in 2)!0.5!(nand2.in 1)$) to[crossing] ++(-1,0)
+         node[left]{$Clk$}
+      
+         (nand1.out) -- ++(1,0) node[nand port,anchor=in 1](n1){}
+         (nand2.out) -- ++(1,0) node[nand port,anchor=in 2](n2){}
+      
+         (n1.out) -- ++(1.25,0) node[right]{$Q$}
+         (n2.out) -- ++(1.25,0) node[right]{$\not{Q}$}
+      
+         (n1.out) -- ++(0.25,0) -- ++(0,-0.5) coordinate (A)
+         (n2.out) -- ++(0.25,0) -- ++(0,0.5) coordinate (B)
+      
+         (n1.in 2) -| ++(-0.5,-0.25) to[crossing] (B)
+         (n2.in 1) -| ++(-0.5,0.25) to[short] (A);
+      
+         \draw[dashed, keyword] (3,-0.5) rectangle (6,3);
+         \fill[lightgray, opacity=0.1] (3,-0.5) rectangle (6,3);
+      
+         \draw[thick,fill=white]
+         (NOT) circle (0.07)
+         (NOT) ++(0,0.1) -- ++(0.25,0.4) -- ++(-0.5,0) -- cycle;
+      \end{circuitikz}
+   \end{minipage}
+   \begin{minipage}{0.35\linewidth}
+      \centering
+      \begin{tabularx}{3.5cm}{|M{0.65cm}|C|M{0.65cm}|}\hline
+         $D$ & $CLK$ & $Q$ \\\hline
+         0 & $\uparrow$ & 0 \\\hline
+         1 & $\uparrow$ & 1\\\hline
+      \end{tabularx}
+   \end{minipage}
+   \caption{Circuit Diagram of $D$ Flip-Flop and Truth Table}
+\end{figure}
+
+\Heading{State diagram:}
+Here
+
+\vspace{1em}
+\Heading{Operation:}
+Here
+
+\pagebreak
+\Topic{T Flip-Flop}
+$T$ flip-flop is a single input version of $S$-$R$ flip-flop. It has one input along with the clock signal.
+
+\vspace{1em}
+\begin{figure}[htbp]
+   \centering
+   \begin{minipage}{0.49\linewidth}
+      \centering
+      \begin{circuitikz}   
+         \draw
+         (0,2.5) ++(1,0)
+         node[nand port, anchor=in 1] (nand1){}
+         (0,0) ++(1,0)
+         node[nand port, anchor=in 2] (nand2){}
+         (nand1.in 2) -- (nand2.in 1)
+         
+         (nand2.in 2) -| ++(-0.5,0.5) coordinate (NOT) |- (nand1.in 1) -- ++(-1,0) node[left]{$T$}
+      
+         ($(nand1.in 2)!0.5!(nand2.in 1)$) to[crossing] ++(-1,0)
+         node[left]{$Clk$}
+      
+         (nand1.out) -- ++(1,0) node[nand port,anchor=in 1](nor1){}
+         (nand2.out) -- ++(1,0) node[nand port,anchor=in 2](nor2){}
+      
+         (nor1.out) -- ++(1.25,0) node[right]{$Q$}
+         (nor2.out) -- ++(1.25,0) node[right]{$\not{Q}$}
+      
+         (nor1.out) -- ++(0.25,0) -- ++(0,-0.5) coordinate (A)
+         (nor2.out) -- ++(0.25,0) -- ++(0,0.5) coordinate (B)
+      
+         (nor1.in 2) -| ++(-0.5,-0.25) to[crossing] (B)
+         (nor2.in 1) -| ++(-0.5,0.25) to[short] (A);
+      
+         \draw[dashed, keyword] (3,-0.5) rectangle (6,3);
+         \fill[lightgray, opacity=0.1] (3,-0.5) rectangle (6,3);
+      \end{circuitikz}
+   \end{minipage}
+   \begin{minipage}{0.35\linewidth}
+      \centering
+      \begin{tabularx}{4.15cm}{|M{0.65cm}|C|M{1.25cm}|}\hline
+         $T$ & $CLK$ & $Q$ \\\hline
+         0 & $\uparrow$ & Q \\\hline
+         1 & $\uparrow$ & Toggle\\\hline
+      \end{tabularx}
+   \end{minipage}
+   \caption{Circuit Diagram of $D$ Flip-Flop and Truth Table}
+\end{figure}
+
+
+\Heading{State diagram:}
+Here
+
+\vspace{1em}
+\Heading{Operation:}
+Here
+
+\pagebreak
+\Topic{4-bit BCD Adder}
+\begin{figure}[h]
+   \begin{center}
+      \begin{circuitikz}
+         % \draw[lightgray] (0,-5) grid (5,5);
+      
+         \def\W{5} \def\H{2} \def\pinGap{0.5}
+         \draw
+         (0,0) rectangle (\W,\H) node [pos=.5,align=center] {4-bit Adder}
+         (0,\H*0.5) -- ++(-0.25,0) coordinate (cout);
+      
+         \foreach \i/\j in {0/3, 1/2, 2/1, 3/0}{
+         \draw
+            (\i*\pinGap+0.5,\H) -- ++(0,0.5) node[above]{$A_{\j}$}
+            (\W-\i*\pinGap-0.5,\H) -- ++(0,0.5) node[above]{$B_{\i}$}
+            (\W-\i*\pinGap-0.5,0) -- ++(0,-0.5) coordinate (S\i) -- ++(0,-3.5);
+         }
+      
+         \node[and port,rotate=-180, scale=0.8] at (1,-1) (and1){};
+         \node[and port,rotate=-180, scale=0.8] at (1,-2) (and2){};
+         \node[or port,rotate=-180, scale=0.8,number inputs=3] at (-1,-1.5) (or){};
+      
+         \draw
+         (or.in 3) -| (cout)
+         (or.in 2) -- ++(0.5,0) -| (and1.out) 
+         (or.in 1) -- ++(0.5,0) -| (and2.out)
+         (or.out) -- ++(-0.5,0) node[left]{$C_{out}$};
+      
+         \def\shiftY{-6}
+         \draw
+         (0,\shiftY) rectangle (\W,\H+\shiftY) node [pos=.5,align=center] {4-bit Adder}
+         (0,\H*0.5+\shiftY);
+      
+         \foreach \i/\j in {0/3, 1/2, 2/1, 3/0}{
+            \draw (\i*\pinGap+0.5,\H+\shiftY) -- ++(0,0.5)
+            coordinate (A\j);
+            \draw (\W*0.5 + \pinGap*1.5 - \pinGap*\i,\shiftY) -- ++(0,-0.5) node[below]{$S_{\i}$};
+         }
+      
+         \draw
+         (A2) to[short,-*] ++(0,0.5)
+         (A1) -- ++(0,0.5) -| (or.out) to[short,-*] (or.out)
+         (A0) to[short,-*] (A3) -- ++(-1,0) node[left]{0}
+         
+         (S3) |- (and1.in 2)
+         node[midway, fill=black, circle, inner sep=1.25pt] {}
+         (S2) |- (and1.in 1)
+         node[midway, fill=black, circle, inner sep=1.25pt] {}
+         (S3) |- (and2.in 2)
+         node[midway, fill=black, circle, inner sep=1.25pt] {}
+         (S1) |- (and2.in 1)
+         node[midway, fill=black, circle, inner sep=1.25pt] {};
+      \end{circuitikz}
+   \end{center}
+   \caption{Block Diagram of a BCD Adder}
+\end{figure}
+
+% \pagebreak
+% \Section{Previous Semesters Question}
+% \begin{enumerate}
+%    \item
+%    \begin{enumerate}[label=$(\alph*)$]
+%       \item Draw the internal circuit of the clocked $J$-$K$ flip-flop and briefly describe its operation.
+%       \item Draw the internal circuit of the clocked $D$ flip-flop and write down the truth table of the flip-flop.
+%       \item Design $D$ flip-flop from $J$-$K$ flip-flop.
+%       \item What will be the output of the clocked $D$ flip-flop if-
+%       \begin{enumerate}[label=$\roman*$.]
+%          \item $Q$ is connected to input?
+%          \item $\not{Q}$ is connected to input?
+%       \end{enumerate}
+%       Assume that initially $Q$ (output of D flip-flop) = '$0$'.
+%    \end{enumerate}
+%    \vspace{1em}
+%    \item \begin{enumerate}[label=$\roman*)$]
+%       \item What are the values of $J$ and $K$ so that the $J$-$K$ flip-flop can operate as a toggle $F$
+%       (changes states on each clock pulse)? Then apply a $60kHz$ clock signal ot its $CLK$ input and determine the frequency of the waveform at $Q$(output fo $J$-$K$ flip-flop).
+%       \item Connect $Q$ from this $FF$ to the $CLK$ input of a second $J$-$K FF$ that also has the same value of $J$ and $K$ of the first $FF$. Determine the frequency of the signal at this $FF$'s output.
+%    \end{enumerate}
+% \end{enumerate}
+
+\vspace{2em}
+\Topic{Convert $J$-$K$ Flip-Flop to $D$ Flip-Flop}
+\begin{circuitikz}   
+   \draw
+      (2,0) rectangle (4,3)
+
+      (2,2.5) node[right]{$J$}
+      -- ++(-1.5,0) coordinate (A)
+      to[short, *-] ++(-0.5,0)
+      node[left]{$D$}
+
+      (2,0.5) node[right]{$K$}
+      -- ++(-1.5,0) coordinate (B)
+      (A) -- ++ (0,-1) coordinate (NOT) -- (B)
+      
+      (2,1.5) -- ++(-0.4,0) node[left]{$Clk$}
+      (4,2.5) -- ++(0.5,0) node[right]{$Q$}
+      (4,0.5) -- ++(0.5,0) node[right]{$\not{Q}$};
+      
+      % \PGT[(1.5,1.5)]
+
+   \draw[thick,fill=white]
+      (NOT) circle (0.07)
+      (NOT) ++(0,0.1) -- ++(0.25,0.4) -- ++(-0.5,0) -- cycle;
+\end{circuitikz}

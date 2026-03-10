@@ -1,0 +1,173 @@
+\Section{Logic Gates}
+\begin{multicols}{2}
+\textbf{NOT Gate (Inverter)}\\
+NOT gate accepts a single input and outputs the opposite value.
+NOT gate is also known as an “INVERTER” as it inverts the input value.
+
+
+\begin{center}
+\vspace{2ex}
+\begin{circuitikz} \draw
+   (0,2) node[not port] (not) {}
+   (not.in) -- ++(-0.25,0) node[left] {$A$}
+   (not.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|} \hline
+   A & R \\\hline
+   0 & 1 \\\hline
+   1 & 0 \\\hline
+\end{tabularx}
+
+% \vspace{2ex}
+% \begin{circuitikz}[x=0.5cm,y=0.5cm]
+%    \draw
+%    (0,0) |- 
+%    (2,3) |- (3,3.75) to[nos,o-o] (4,3.75) -| (5,3)
+%    (2,3) |- (3,2.25) to[nos,o-o] (4,2.25) -| (5,3)
+%    (5,3) -- (7,3) to[led] (7,0) to[battery] (0,0)
+%    ;
+% \end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{AND Gate}\\
+AND Operation produces HIGH output (1) only if all the inputs to the digital circuit are HIGH (1). Otherwise output will be LOW (0).
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 0 \\\hline
+   0 & 1 & 0 \\\hline
+   1 & 0 & 0 \\\hline
+   1 & 1 & 1 \\\hline
+\end{tabularx}
+
+\begin{circuitikz} \draw
+   (0,2) node[and port] (and) {}
+   (and.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (and.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (and.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{OR Gate}\\
+OR Operation produces HIGH output (1) if at least one of the inputs is HIGH (1).
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 0 \\\hline
+   0 & 1 & 1 \\\hline
+   1 & 0 & 1 \\\hline
+   1 & 1 & 1 \\\hline
+\end{tabularx}
+
+\begin{circuitikz} \draw
+   (0,2) node[or port] (or) {}
+   (or.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (or.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (or.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{NAND Gate}\\
+NAND Operation produces LOW output (0) only if all the inputs to the digital circuit are HIGH (1). Otherwise output will be HIGH (1).
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 1 \\\hline
+   0 & 1 & 1 \\\hline
+   1 & 0 & 1 \\\hline
+   1 & 1 & 0 \\\hline
+\end{tabularx}
+
+\begin{circuitikz} \draw
+   (0,2) node[nand port] (nand) {}
+   (nand.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (nand.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (nand.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{NOR Gate}\\
+NOR Operation produces LOW output (0) if at least one of the inputs is HIGH (1).
+
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 1 \\\hline
+   0 & 1 & 0 \\\hline
+   1 & 0 & 0 \\\hline
+   1 & 1 & 0 \\\hline
+\end{tabularx}
+
+\begin{circuitikz} \draw
+   (0,2) node[nor port] (nor) {}
+   (nor.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (nor.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (nor.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{XOR Gate}\\
+XOR Operation produces LOW output (0) if both of the inputs are same and produces HIGH output (1) if the inputs are different.
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 0 \\\hline
+   0 & 1 & 1 \\\hline
+   1 & 0 & 1 \\\hline
+   1 & 1 & 0 \\\hline
+\end{tabularx}
+
+\begin{circuitikz} \draw
+   (0,2) node[xor port] (xor) {}
+   (xor.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (xor.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (xor.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+
+
+\vspace{4ex}
+\textbf{XNOR Gate}\\
+XNOR Operation produces HIGH output (1) if both of the inputs are same and produces LOW output (0) if the inputs are different.
+
+\begin{center}
+\vspace{2ex}
+\begin{tabularx}{5cm}{|C|C|C|} \hline
+   A & B & R \\\hline
+   0 & 0 & 1 \\\hline
+   0 & 1 & 0 \\\hline
+   1 & 0 & 0 \\\hline
+   1 & 1 & 1 \\\hline
+\end{tabularx}
+
+\begin{circuitikz}
+   \draw
+   (0,2) node[xnor port] (xnor) {}
+   (xnor.in 1) -- ++(-0.25,0) node[left] {$A$}
+   (xnor.in 2) -- ++(-0.25,0) node[left] {$B$}
+   (xnor.out) -- ++(0.25,0) node[right] {$R$};
+\end{circuitikz}
+\end{center}
+\end{multicols}

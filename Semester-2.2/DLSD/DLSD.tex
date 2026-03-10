@@ -1,0 +1,69 @@
+\documentclass{report}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Preamble.tex}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Syntax.tex}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Kmap.tex}
+
+% \usepackage{Preamble, Commands, Kmap}
+\RequirePackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows,positioning}
+\color{doctextcolor}
+% #ANCHOR Circuit style
+\ctikzset{
+   logic ports=ieee,
+   logic ports/scale=0.8,
+   logic ports/fill=white,
+   bipoles/crossing/size=0.5
+}
+\tikzstyle{every node}=[font=\small]
+\renewcommand{\not}[1]{\overline{#1}}
+
+\newcommand{\Question}[2][Q]{%
+   \textbf{\textcolor{keyword}{#1:} #2}\par
+   \vspace{-\baselineskip+0.75em}
+}
+\newcommand{\Solution}{%
+   \textbf{\textcolor{codeblack}{Solution:}}\par
+}
+
+\newcommand{\Chapter}[1]{%
+\begin{center}
+   \textbf{\LARGE{#1}}
+   \vspace{6ex}
+\end{center}
+}
+
+\newcommand{\Section}[1]{%
+   \begin{center}
+      \textbf{\Large{#1}}
+   \end{center}
+}
+
+\newcommand{\HeadingCenter}[1]{%
+   \begin{center}
+      \textbf{\large{#1}}
+   \end{center}
+}
+
+\newcommand{\Topic}[1]{\textbf{#1}\par}
+\newcommand{\Heading}[1]{\textbf{#1}\par}
+
+\newcommand{\NGT}[1]{%
+\draw[thick] (#1) ++ (-0.65,0) -- ++(0.15,0) |- ++(0.25,0.5) -- ++(0,-0.5) node[currarrow,pos=0.5,sloped]{} -- ++(0.15,0)
+}
+\newcommand{\PGT}[1]{%
+\draw[thick] (#1) ++(-0.1,0) -- ++(-0.15,0) |- ++(-0.25,0.5) -- ++(0,-0.5) node[currarrow,pos=0.5,sloped]{} -- ++(-0.15,0)
+}
+
+
+\begin{document}
+\input{questions/LogicGatesQ}
+\include{topics/Simplification}
+\include{topics/DigitalArithmetic}
+\include{topics/FlipFlops}
+\include{topics/ModCounter}
+\include{topics/SynchronousCounter}
+% \include{topics/Decoder}
+\end{document}

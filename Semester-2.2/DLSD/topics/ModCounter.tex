@@ -1,0 +1,195 @@
+\Section{MOD 10 Up Counter}
+\vspace{2em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.3) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.3) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{Q$_\text{\F}$}} -- ++(0.25,0) coordinate (q\F) -- ++(0.25,0) coordinate (qbar\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{Q}_\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (j\F) node[left]{\scriptsize{1}}
+         (k\F) node[left]{\scriptsize{1}}
+         (pre\F) node[above]{\scriptsize{1}};
+      }
+   
+      \draw
+      (qA) ++(-0.5,1.5) coordinate (outputBoxX)
+      (qD) ++(1.25,2.5) coordinate (outputBoxY)
+      (outputBoxX) rectangle (outputBoxY)
+      (qA) -- ++(0.4,0) |- (clkB)
+      (qB) -- ++(0.4,0) |- (clkC)
+      (qC) -- ++(0.4,0) |- (clkD)
+
+      (qA) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{A}$}
+      (qB) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{B}$}
+      (qC) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{C}$}
+      (qD) to[short,-*] ++(0.4,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{D}$}
+      (clrA) -- (clrD);
+   
+      \draw
+      (clkC) to[short,-*] ++(-0.25,0) |- ++(-1,-2.5)
+      node[nand port, anchor=in 2, rotate=180] (nand){}
+      (qD) -- ++(0.4,0) |- (nand.in 1)
+      (nand.out) -| ++(-0.25,0) to[short,-*] ++(-0,0.92);
+   
+      \NGT{clkA};
+   \end{circuitikz}
+   % \caption{MOD 10 Up Counter}
+\end{figure}
+
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{10cm}{|r|C|C|C|C|M{1.5cm}|}\hline
+      & D & C & B & A & \\\hline
+      0 & 0 & 0 & 0 & 0 & PRE=1 \\
+      1 & 0 & 0 & 0 & 1 & CLR=1 \\
+      2 & 0 & 0 & 1 & 0 & \\
+      3 & 0 & 0 & 1 & 1 & \\
+      4 & 0 & 1 & 0 & 0 & \\
+      5 & 0 & 1 & 0 & 1 & \\
+      6 & 0 & 1 & 1 & 0 & \\
+      7 & 0 & 1 & 1 & 1 & \\
+      8 & 1 & 0 & 0 & 0 & \\
+      9 & 1 & 0 & 0 & 1 & \\\hline
+      10 & 1 & 0 & 1 & 0 & PRE=1\\\cline{1-5}
+      \multicolumn{5}{c|}{Reset Condition = 1 0 1 0} & CLR=0 \\\cline{6-5}
+   \end{tabularx}
+   \end{adjustbox}
+   &\vspace{2ex}&
+   \begin{adjustbox}{valign=t}
+     \begin{tabular}{lll}
+      \textbf{Operation} \\
+      From (0 to 9) & $\Rightarrow$ & PRE=1 CLR=1 \\[-0.5em]
+      && Normal Clock Operation\\[0.5em]
+      For (10) & $\Rightarrow$ & PRE=1 CLR=0 \\[-0.5em]
+      && $A=B=C=D=0$\\[-0.5em]
+      && So it counts 0000\\[0.5em]
+      \multicolumn{3}{l}{$\therefore$ It counts from 0 to 9}\\
+      \multicolumn{3}{l}{$\therefore$ This is MOD 10 up counter}
+     \end{tabular}
+   \end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\Section{MOD 10 Down Counter}
+\vspace{2em}
+\begin{figure}[htbp]
+   \centering
+   \begin{circuitikz}
+      \def\W{2cm} \def\H{3cm} \def\Gap{1.5cm}
+      \def\FF{A,B,C,D}
+      
+      \foreach \F [count=\i from 0] in \FF {
+         \draw
+         % Box
+         (\i*\W + \i*\Gap, 0) rectangle ++(\W,\H)
+         (\i*\W + \i*\Gap, \H*0.5) ++(0,-0.2) -- ++(0.2,0.2) -- ++(-0.2,0.2)
+         
+         % Pre & Clr
+         (\i*\W + \W*0.5 + \i*\Gap, 0) node[above]{\scriptsize{CLR}} -- ++(0,-0.3) coordinate (clr\F)
+         (\i*\W + \W*0.5 + \i*\Gap, \H) node[below]{\scriptsize{PRE}} -- ++(0,0.3) coordinate (pre\F)
+         
+         % Q & Q bar
+         (\i*\W+\W + \i*\Gap, \H*0.8)
+         node[left]{\scriptsize{Q$_\text{\F}$}} -- ++(0.25,0) coordinate (q\F) -- ++(0.25,0) coordinate (qbar\F)
+         (\i*\W+\W + \i*\Gap, \H*0.2)
+         node[left]{\scriptsize{$\not{\text{Q}_\text{\F}}$}} -- ++(0.25,0) coordinate (qbar\F)
+
+         % j, k & clk bar
+         (\i*\W + \i*\Gap, \H*0.8)
+         node[right]{\scriptsize{J$_\text{\F}$}} -- ++(-0.25,0) coordinate (j\F)
+         (\i*\W + \i*\Gap, \H*0.2)
+         node[right]{\scriptsize{K$_\text{\F}$}} -- ++(-0.25,0) coordinate (k\F)
+         (\i*\W + \i*\Gap, \H*0.5) -- ++(-0.6,0) coordinate (clk\F)         
+         (j\F) node[left]{\scriptsize{1}}
+         (k\F) node[left]{\scriptsize{1}}
+         (clr\F) node[below]{\scriptsize{1}};
+      }
+   
+      \draw
+      (qA) ++(-0.5,1.5) coordinate (outputBoxX)
+      (qD) ++(1.25,2.5) coordinate (outputBoxY)
+      (outputBoxX) rectangle (outputBoxY)
+      (qA) to[short,-*] ++(0.5,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{A}$}
+      (qB) to[short,-*] ++(0.5,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{B}$}
+      (qC) to[short,-*] ++(0.5,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{C}$}
+      (qD) to[short,-*] ++(0.5,0) to[short,-*]
+      ++(0,1.5) node[above]{Q$_\text{D}$}
+
+      (qbarA) -- ++(0.4,0) |- (clkB)
+      (qbarB) -- ++(0.4,0) |- (clkC)
+      (qbarC) -- ++(0.4,0) |- (clkD)
+
+      (preA) to[crossing] (preB) to[crossing] (preC) to[crossing] (preD);
+   
+      \draw
+      (preD) -- ++(1,0) to[crossing] ++(1.5,0) -- ++(0,-1)
+      node[nand port, anchor=out, rotate=90] (nand){}
+      (qbarD) |- (nand.in 1)
+      (qbarB) to[short,-*] ++(0.4,0) -- ++(0,-1.5) -| (nand.in 2);
+   
+      \NGT{clkA};
+   \end{circuitikz}
+   % \caption{MOD 10 Up Counter}
+\end{figure}
+
+\begin{tabular}{lll}
+   \begin{adjustbox}{valign=t}
+   \begin{tabularx}{10cm}{|r|C|C|C|C|M{1.5cm}|}\hline
+      & D & C & B & A & \\\hline
+      15 & 1 & 1 & 1 & 1 & PRE=1 \\
+      14 & 1 & 1 & 1 & 0 & CLR=1 \\
+      13 & 1 & 1 & 0 & 1 & \\
+      12 & 1 & 1 & 0 & 0 & \\
+      11 & 1 & 0 & 1 & 1 & \\
+      10 & 1 & 0 & 1 & 0 & \\
+      9 & 1 & 0 & 0 & 1 & \\
+      8 & 1 & 0 & 0 & 0 & \\
+      7 & 0 & 1 & 1 & 1 & \\
+      6 & 0 & 1 & 1 & 0 & \\\hline
+      5 & 0 & 1 & 0 & 1 & PRE=0\\\cline{1-5}
+      \multicolumn{5}{c|}{Reset Condition = 0 1 0 1} & CLR=1\\\cline{6-5}
+   \end{tabularx}
+   \end{adjustbox}
+   &\vspace{2ex}&
+   \begin{adjustbox}{valign=t}
+     \begin{tabular}{lll}
+      \textbf{Operation} \\
+      From (15 to 6) & $\Rightarrow$ & PRE=1 CLR=1 \\[-0.5em]
+      && Normal Clock Operation\\[0.5em]
+      For (5) & $\Rightarrow$ & PRE=0 CLR=1 \\[-0.5em]
+      && $A=B=C=D=1$\\[-0.5em]
+      && So it counts 1111\\[0.5em]
+      \multicolumn{3}{l}{$\therefore$ It counts from 15 to 6}\\
+      \multicolumn{3}{l}{$\therefore$ This is MOD 10 down counter}
+     \end{tabular}
+   \end{adjustbox}
+\end{tabular}

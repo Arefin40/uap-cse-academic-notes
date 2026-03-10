@@ -1,0 +1,215 @@
+\documentclass{report}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Preamble.tex}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Syntax.tex}
+\input{/Users/shahriararfin/Workspace/LaTex/#Packages/Kmap.tex}
+
+
+\color{doctextcolor}
+\definecolor{graph1}{HTML}{AA59A9}
+\definecolor{graph2}{HTML}{705FCF}
+
+\usetikzlibrary {decorations.pathmorphing}
+
+
+\newcommand{\Question}[2][Q]{%
+   \textbf{\textcolor{keyword}{#1:} #2}\par
+   \vspace{-\baselineskip+0.75em}
+}
+\newcommand{\Solution}{%
+   \textbf{\textcolor{codeblack}{Solution:}}\par
+}
+
+\newcommand{\Chapter}[1]{%
+\begin{center}
+   \textbf{\LARGE{#1}}
+   \vspace{6ex}
+\end{center}
+}
+
+\newcommand{\Section}[1]{%
+   \begin{center}
+      \textbf{\Large{#1}}
+   \end{center}
+}
+
+\newcommand{\HeadingCenter}[1]{%
+   \begin{center}
+      \textbf{\large{#1}}
+   \end{center}
+}
+
+\newcommand{\Topic}[1]{\textbf{#1}\par}
+\newcommand{\Heading}[1]{\textbf{#1}\par}
+
+\begin{document}
+
+
+\begin{tabularx}{\textwidth}{C}
+   \begin{tikzpicture}
+      \fill[graph1!10] (0,3) rectangle (1.35,2);
+      \fill[graph2!10] (1.35,2) rectangle (3.6,0);
+   
+      \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+      \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q_d$};
+   
+      \draw[thick] (0.25,3.5) -- (4.75,1.5);
+      \draw[graph1] (0,3) -| (1.35,0);
+      \draw[graph2] (0,2) -| (3.6,0);
+   
+      \node[left] at (0,3) {$P_1$};
+      \node[left] at (0,2) {$P_2$};
+      \node[below] at (1.35,0) {$Q_1$};
+      \node[below] at (3.6,0) {$Q_2$};
+   \end{tikzpicture}\\
+   Elastic Demand Curve\\[5em]
+   \begin{tikzpicture}
+      \fill[graph1!10] (0,3.6) rectangle (2,1.35);
+      \fill[graph2!10] (2,1.35) rectangle (3,0);
+   
+      \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+      \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q_d$};
+
+      \draw[graph1] (0,3.6) -| (2,0);
+      \draw[graph2] (0,1.35) -| (3,0);
+      \draw[thick] (1.82,4) -- (3.38,0.5);
+   
+      \node[left] at (0,3.6) {$P_1$};
+      \node[left] at (0,1.35) {$P_2$};
+      \node[below] at (2,0) {$Q_1$};
+      \node[below] at (3,0) {$Q_2$};
+   \end{tikzpicture}\\
+   Inelastic Demand Curve\\[5em]
+   \begin{tikzpicture}
+      \fill[graph1!10] (0,3) rectangle (2,2);
+      \fill[graph2!10] (2,2) rectangle (3,0);
+   
+      \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+      \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q_d$};
+   
+      \draw[thick] (1,4) -- (4,1);
+      \draw[graph1] (0,3) -| (2,0);
+      \draw[graph2] (0,2) -| (3,0);
+   
+      \node[left] at (0,3) {$P_1$};
+      \node[left] at (0,2) {$P_2$};
+      \node[below] at (2,0) {$Q_1$};
+      \node[below] at (3,0) {$Q_2$};
+   \end{tikzpicture}\\
+   Unit Elastic Demand Curve
+\end{tabularx}
+
+
+\begin{tabularx}{\textwidth}{C}
+   \begin{tikzpicture}
+      \begin{axis}[
+         axis lines=middle,
+         axis line style={-triangle 45,thick},
+         width=7cm,
+         x=1cm, y=1cm,
+         xmin=0, xmax = 5,
+         ymin=0, ymax = 4.5,
+         xtick=\empty, ytick=\empty,
+         xlabel=$Q_s$, ylabel=$P$,
+         clip=false
+         ]
+         \addplot[graph1] coordinates {(0,3) (3.6,3) (3.6,0)};
+         \addplot[graph2] coordinates {(0,2) (1.35,2) (1.35,0)};
+         \addplot[domain=0.5:4,thick] {0.444*x + 1.40};
+
+         \addplot[thick, graph1, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] coordinates {(1.35,0.05) (3.6,0.05)};
+         \addplot[thick, graph2, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] coordinates {(0.04,2) (0.04,3)};
+      
+         \node[left] at (0,2) {$P_1$};
+         \node[left] at (0,3) {$P_2$};
+         \node[below] at (1.35,0) {$Q_1$};
+         \node[below] at (3.6,0) {$Q_2$};
+      \end{axis}
+   \end{tikzpicture}\\
+   Elastic Supply Curve\\[5em]
+
+   \begin{tikzpicture}
+      \begin{axis}[
+         axis lines=middle,
+         axis line style={-triangle 45,thick},
+         width=7cm,
+         x=1cm, y=1cm,
+         xmin=0, xmax = 5,
+         ymin=0, ymax = 4.5,
+         xtick=\empty, ytick=\empty,
+         xlabel=$Q_s$, ylabel=$P$,
+         clip=false
+         ]   
+         \addplot[graph1] coordinates {(0,3.6) (2,3.6) (2,0)};
+         \addplot[graph2] coordinates {(0,1.35) (1,1.35) (1,0)};
+         \addplot[domain=0.5:2.25,thick] {2.25*x - 0.9};
+
+         \addplot[thick, graph1, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] coordinates {(1,0.05) (2,0.05)};
+         \addplot[thick, graph2, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] coordinates {(0.04,1.35) (0.04,3.6)};
+      
+         \node[left] at (0,1.35) {$P_1$};
+         \node[left] at (0,3.6) {$P_2$};
+         \node[below] at (1,0) {$Q_1$};
+         \node[below] at (2,0) {$Q_2$};
+      \end{axis}
+   \end{tikzpicture}\\
+   Inelastic Supply Curve\\[5em]
+
+   \begin{tikzpicture}   
+      \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+      \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q_s$};
+   
+      \draw[thick] (1,1) -- (4,4);
+      \draw[graph1] (0,3) -| (3,0);
+      \draw[graph2] (0,2) -| (2,0);
+      
+      \draw[thick, graph2, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] (0.05,2) -- (0.05,3);
+      \draw[thick, graph1, decorate, decoration={zigzag,segment length=6pt,amplitude=1.5pt}] (2,0.05) -- (3,0.05);
+   
+      \node[left] at (0,2) {$P_1$};
+      \node[left] at (0,3) {$P_2$};
+      \node[below] at (2,0) {$Q_1$};
+      \node[below] at (3,0) {$Q_2$};
+   \end{tikzpicture}\\
+   Unit Elastic Supply Curve
+\end{tabularx}
+
+\pagebreak
+\begin{tabularx}{\textwidth}{C}
+\begin{tikzpicture}   
+   \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+   \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q$};
+
+   \draw[thick,graph2] (1,1) -- (4,4) node[above]{$S$};
+   \draw[thick,graph1] (0.5,4) -- (2.75,1) node[below]{$D$};
+   \draw[thick,graph1] (2.25,4) -- (4.5,1) node[below]{$D^\prime$};
+   \draw[lightgray] (0,3) -| (3,0);
+   \draw[lightgray] (0,2) -| (2,0);
+
+   \node[left] at (0,2) {$P_1$};
+   \node[left] at (0,3) {$P_2$};
+   \node[below] at (2,0) {$Q_1$};
+   \node[below] at (3,0) {$Q_2$};
+   \node[above] at (3,3) {$E^\prime$};
+   \node[above] at (2,2) {$E$};
+\end{tikzpicture}\\
+
+\begin{tikzpicture}
+   \draw[-triangle 45,thick] (0,0) -- (0,4.5) node[above]{$P$};
+   \draw[-triangle 45,thick] (0,0) -- (5,0) node[right]{$Q$};
+
+   \draw[thick, graph1] (1,4) -- (4,1) node[below]{$D$};
+   \draw[thick, graph2] (0.1,1.75) -- (3.95,4.3) node[above]{$S^\prime$};
+   \draw[thick, graph2] (0.1,0.5) -- (3.95,3.05) node[above]{$S$};
+
+   \draw[lightgray] (0,3) -| (2,0);
+   \draw[lightgray] (0,2.25) -| (2.75,0);
+
+   \node[left] at (0,3) {$P_2$};
+   \node[left] at (0,2) {$P_1$};
+   \node[below] at (2,0) {$Q_2$};
+   \node[below] at (3,0) {$Q_1$};
+   \node[above] at (2,3) {$E^\prime$};
+   \node[above] at (2.75,2.25) {$E$};
+\end{tikzpicture}\\
+\end{tabularx}
+\end{document}

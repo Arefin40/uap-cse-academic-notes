@@ -1,0 +1,116 @@
+\chapter{Dynamic Programming}
+
+\section{Longest Common Subsequence (LCS)}
+\begin{algorithm}
+   \caption{Longest Common Subsequence}
+   \SetAlgoLined
+   \SetKwFunction{LCS}{LCS}
+   \SetKwProg{Fn}{Function}{:}{}
+   \Fn{\LCS{$X, Y$}}{
+   $m \gets X.length$\;
+   $n \gets Y.length$\;
+   \For{$i \gets 0$ \KwTo $m$}{
+      \For{$j \gets 0$ \KwTo $n$}{
+         \uIf{$i = 0$ \textbf{or} $j = 0$}{
+            $dp[i][j] \gets 0$\;
+            }
+            \uElseIf{$X[i] = Y[j]$}{
+            $dp[i][j] \gets 1+dp[i - 1][j-1]$\;
+            }
+            \Else{
+            $dp[i][j] \gets \max(dp[i - 1][j], dp[i][j - j])$\;
+            }
+         Print $dp[i][w]$ followed by space\;
+      }
+   }}
+   \Return $dp[n][W]$\;
+\end{algorithm}
+
+
+\pagebreak
+\section{0/1 Knapsack}
+\begin{algorithm}
+   \caption{0/1 Knapsack}
+   \SetAlgoLined
+   \SetKwFunction{Knapsack}{Knapsack}
+   \SetKwProg{Fn}{Function}{:}{}
+   % \KwData{$W,\ v_1,v_2,v_3,...,v_n,\ w_1,w_2,w_3,...,w_n$}
+   % \KwResult{$dp[n][W]$}
+   \Fn{\Knapsack{$\text{weights}, \text{values}, n, W$}}{
+   \For{$i \gets 0$ \KwTo $n$}{
+      \For{$w \gets 0$ \KwTo $c$}{
+         \uIf{$i = 0$ \textbf{or} $w = 0$}{
+            $dp[i][w] \gets 0$\;
+            }
+            \uElseIf{$\text{weights}[i - 1] \leq w$}{
+               $dp[i][w] \gets \max(dp[i - 1][w], dp[i - 1][w - \text{weights}[i - 1]] + \text{values}[i - 1])$\;
+               }
+               \Else{
+               $dp[i][w] \gets dp[i - 1][w]$\;
+            }
+         Print $dp[i][w]$ followed by space\;
+      }
+   }}
+   \Return $dp[n][W]$\;
+\end{algorithm}
+
+
+\pagebreak
+\section{Coin Change-\texttt{I}}
+\begin{algorithm}
+   \caption{Coin Change - (Minimum Coin Required)}
+   \SetAlgoLined
+   \SetKwFunction{CoinChange}{MinCoins}
+   \SetKwProg{Fn}{Function}{:}{}
+   \Fn{\CoinChange{$\text{coins}, n, V$}}{
+   \For{$i \gets 0$ \KwTo $n$}{
+      \For{$v \gets 0$ \KwTo $V$}{
+         \uIf{$v = 0$ \textbf{or} }{
+            $dp[i][v] \gets 0$\;
+         }
+         \uElseIf{$i = 0$}{
+            $dp[i][v] \gets \infty$\;
+         }
+         \uElseIf{$\text{coins}[i - 1] \leq w$}{
+            $dp[i][v] = \min(dp[i - 1][v],\ \ 1 + dp[i][v - coins[i - 1]])$\;
+            }
+         \Else{
+            $dp[i][v] \gets dp[i - 1][v]$\;
+         }
+         Print $dp[i][v]$ followed by space\;
+      }
+   }}
+   \Return $dp[n][V]$\;
+\end{algorithm}
+
+
+
+\pagebreak
+\section{Coin Change-\texttt{II}}
+\begin{algorithm}
+   \caption{Coin Change - (Number of ways)}
+   \SetAlgoLined
+   \SetKwFunction{CoinChange}{MinCoins}
+   \SetKwProg{Fn}{Function}{:}{}
+   \Fn{\CoinChange{$\text{coins}, n, V$}}{
+   \For{$i \gets 0$ \KwTo $n$}{
+      \For{$v \gets 0$ \KwTo $V$}{
+         \uIf{$v = 0$ \textbf{or} }{
+            $dp[i][v] \gets 0$\;
+         }
+         \uElseIf{$i = 0$}{
+            $dp[i][v] \gets \infty$\;
+         }
+         \uElseIf{$\text{coins}[i - 1] \leq w$}{
+            $dp[i][v] = \min(dp[i - 1][v],\ \ 1 + dp[i][v - coins[i - 1]])$\;
+            }
+         \Else{
+            $dp[i][v] \gets dp[i - 1][v]$\;
+         }
+         Print $dp[i][v]$ followed by space\;
+      }
+   }}
+   \Return $dp[n][V]$\;
+\end{algorithm}
+% \includecode{Codes/Knapsack.cpp}
+   

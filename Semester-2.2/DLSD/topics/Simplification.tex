@@ -1,0 +1,261 @@
+\Section{Logic Simplification}
+
+\Question{Implement the given function using K-map \quad
+$F(A,B,C,D) = \sum{\{0,2,5,7,8,10,15\}}$}
+
+\begin{center}
+   \begin{tabular}{l}
+      \begin{Karnaugh}
+         % \NumberGridO;
+         \minterms{0,2,5,7,8,10,15}
+         \implicant{7}{15}
+         \implicant{5}{7}
+         \implicantcorner
+   
+         \draw[-latex](4,0.5) -- (5,0.5)
+         node[right]{$G_1 = \not{B}\not{D}$};
+         \draw[-latex](1.5,1.2) |- (5,1.1)
+         node[right]{$G_2 = \not{A}BD$};
+         \draw[-latex](2.8,2.5) |- (5,2.5)
+         node[right]{$G_3 = BCD$};
+      \end{Karnaugh}\\
+      \quad \quad \ 
+      $\therefore Y = \not{B}\not{D} + \not{A}BD + BCD$
+   \end{tabular}
+\end{center}
+
+\vspace{1.5em}
+\Question{Design a logic circuit from the given statement:}
+Suppose A,B,C are inputs and Y is the output. Output will be high when majority of the inputs are high.
+
+\begin{tabular}{lcl}
+   \begin{adjustbox}{valign=t}
+      \begin{tabularx}{7cm}{l|C|C|C|C|cl}\cline{2-5}
+         & A & B & C & Y \\\cline{2-5}
+         0 & 0 & 0 & 0 & 0 \\\cline{2-5}
+         1 & 0 & 0 & 1 & 0 \\\cline{2-5}
+         2 & 0 & 1 & 0 & 0 \\\cline{2-5}
+         3 & 0 & 1 & 1 & 1 & $\to$ & $\not{A}BC$\\\cline{2-5}
+         4 & 1 & 0 & 0 & 0 \\\cline{2-5}
+         5 & 1 & 0 & 1 & 1 & $\to$ & $A\not{B}C$ \\\cline{2-5}
+         6 & 1 & 1 & 0 & 1 & $\to$ & $AB\not{C}$ \\\cline{2-5}
+         7 & 1 & 1 & 1 & 1 & $\to$ & $ABC$ \\\cline{2-5}
+      \end{tabularx}
+   \end{adjustbox}
+   & \hspace{2cm} &
+   \begin{adjustbox}{valign=t}
+      \begin{tabular}{l}
+         $Y=\not{A}BC+A\not{B}C+AB\not{C}+ABC$\\[2em]
+         \begin{Karnaugh}[3]
+            % \NumberGridO;
+            \minterms{3,5,6,7}
+            \implicant{3}{7}
+            \implicant{5}{7}
+            \implicant{7}{6}
+      
+            \draw[-latex](2.8,0.5) -- (5,0.5)
+            node[right]{$G_1 = BC$};
+            \draw[-latex](3.8,1.5) -- (5,1.5)
+            node[right]{$G_2 = AB$};
+            \draw[-latex](1.65,1.8) |- (5,2.25)
+            node[right]{$G_3 = AC$};
+         \end{Karnaugh}\\
+         \quad \quad \quad \quad
+         $Y = AB + BC + AC$
+      \end{tabular}
+   \end{adjustbox}
+\end{tabular}
+
+
+\vspace{1.5em}
+\Question{Design a logic circuit that follows the following requirements:}
+\begin{enumerate}[itemsep=0.25em, label=(\roman*)]
+   \item Output X will be equal to A when B and C are same.
+   \item Output X will remain high when B and C are different.
+\end{enumerate}
+
+\begin{tabular}{lcl}
+   \begin{adjustbox}{valign=t}
+      \begin{tabularx}{7cm}{l|C|C|C|C|cl}\cline{2-5}
+         & A & B & C & X \\\cline{2-5}
+         0 & 0 & 0 & 0 & 0 \\\cline{2-5}
+         1 & 0 & 0 & 1 & 1 &
+         $\to$ & $\not{A}\not{B}C$ \\\cline{2-5}
+         2 & 0 & 1 & 0 & 1 &
+         $\to$ & $\not{A}B\not{C}$\\\cline{2-5}
+         3 & 0 & 1 & 1 & 0 \\\cline{2-5}
+         4 & 1 & 0 & 0 & 1 &
+         $\to$ & $A\not{B}\not{C}$ \\\cline{2-5}
+         5 & 1 & 0 & 1 & 1 &
+         $\to$ & $A\not{B}C$ \\\cline{2-5}
+         6 & 1 & 1 & 0 & 1 &
+         $\to$ & $AB\not{C}$ \\\cline{2-5}
+         7 & 1 & 1 & 1 & 1 &
+         $\to$ & $ABC$ \\\cline{2-5}
+      \end{tabularx}
+   \end{adjustbox}
+   & \hspace{2cm} &
+   \begin{adjustbox}{valign=t}
+      \begin{tabular}{l}
+         $X=\not{A}\not{B}C+\not{A}B\not{C}+A\not{B}\not{C}+A\not{B}C+AB\not{C}+ABC$\\[2em]
+         \begin{Karnaugh}[3]
+            % \NumberGridO;
+            \minterms{1,2,4,5,6,7}
+            \implicant{4}{6}
+            \implicant{1}{5}
+            \implicant{2}{6}
+      
+            \draw[-latex](3.8,0.5) -- (5,0.5)
+            node[right]{$G_2 = B\not{C}$};
+            \draw[-latex](3.8,1.5) -- (5,1.5)
+            node[right]{$G_1 = A$};
+            \draw[-latex](1.5,1.8) |- (5,2.25)
+            node[right]{$G_3 = \not{B}C$};
+         \end{Karnaugh}\\
+         \quad \quad \quad \quad
+         $\begin{aligned}
+            X &= A + B\not{C} + \not{B}C\\
+              &= A + (B \oplus C)
+         \end{aligned}$
+      \end{tabular}
+   \end{adjustbox}
+\end{tabular}
+
+\vspace{2em}
+\Question{Design a logic circuit that follows the following requirements:}
+A 4-bit i binary number is represented as D,C,B,A where D is MSB and A is LSB. Design a logic circuit that will produce a high output whenever the binary number is greater than 0010 and less than 1010 or all inputs are low or all inputs are high.
+
+
+\vspace{1em}
+\Solution
+\begin{tabular}{lcl}
+   \begin{adjustbox}{valign=t}
+      \begin{tabularx}{7cm}{l|C|C|C|C|C|cl}\cline{2-6}
+         & D & C & B & A & Y \\\cline{2-6}
+         0 & 0 & 0 & 0 & 0 & 1
+         & $\to$ & $\not{ABCD}$ \\\cline{2-6}
+         1 & 0 & 0 & 0 & 1 & 0 \\\cline{2-6}
+         \color{keyword}
+         2 & 0 & 0 & 1 & 0 & 0 \\\cline{2-6}
+         3 & 0 & 0 & 1 & 1 & 1
+         & $\to$ & $AB\not{CD}$ \\\cline{2-6}
+         4 & 0 & 1 & 0 & 0 & 1
+         & $\to$ & $\not{AB}C\not{D}$ \\\cline{2-6}
+         5 & 0 & 1 & 0 & 1 & 1
+         & $\to$ & $A\not{B}C\not{D}$ \\\cline{2-6}
+         6 & 0 & 1 & 1 & 0 & 1
+         & $\to$ & $\not{A}BC\not{D}$ \\\cline{2-6}
+         7 & 0 & 1 & 1 & 1 & 1
+         & $\to$ & $ABC\not{D}$ \\\cline{2-6}
+         8 & 1 & 0 & 0 & 0 & 1
+         & $\to$ & $\not{ABC}D$ \\\cline{2-6}
+         9 & 1 & 0 & 0 & 1 & 1
+         & $\to$ & $A\not{BC}D$ \\\cline{2-6}
+         \color{keyword}
+         10 & 1 & 0 & 1 & 0 & 0 \\\cline{2-6}
+         11 & 1 & 0 & 1 & 1 & 0 \\\cline{2-6}
+         12 & 1 & 1 & 0 & 0 & 0 \\\cline{2-6}
+         13 & 1 & 1 & 0 & 1 & 0 \\\cline{2-6}
+         14 & 1 & 1 & 1 & 0 & 0 \\\cline{2-6}
+         15 & 1 & 1 & 1 & 1 & 1
+         & $\to$ & $ABCD$ \\\cline{2-6}
+      \end{tabularx}
+   \end{adjustbox}
+   & \hspace{2cm} &
+   \begin{adjustbox}{valign=t}
+      \begin{tabular}{l}
+         \\[2em]
+         \begin{Karnaugh}[4][D][C][B][A]
+            % \NumberGridO;
+            \minterms{0,3,4,5,6,7,8,9,15}
+            \implicant{4}{6}
+            \implicant{0}{4}
+            \implicant{3}{7}
+            \implicant{7}{15}
+            \implicant{8}{9}
+      
+            \draw[-latex](0.5,0.2) |- (5,0.1)
+            node[right]{$G_3 = \not{ABD}$};
+            \draw[-latex](2.8,0.75) -- (5,0.75)
+            node[right]{$G_2 = AB\not{D}$};
+            \draw[-latex](3.8,1.5) -- (5,1.5)
+            node[right]{$G_1 = C\not{D}$};
+            \draw[-latex](2.8,2.25) -- (5,2.25)
+            node[right]{$G_4 = ABC$};
+            \draw[-latex](1.8,3.5) -- (5,3.5)
+            node[right]{$G_5 = \not{BC}D$};
+         \end{Karnaugh}\\
+         \quad \quad \quad \quad
+         $\begin{aligned}
+            X &= \not{ABD}+AB\not{D}+ \not{BC}D+ABC+C\not{D}\\
+         \end{aligned}$
+      \end{tabular}
+   \end{adjustbox}
+\end{tabular}
+
+\pagebreak
+\Question{Design a logic circuit that follows the following requirements:}
+Suppose A,B,C,D are inputs and Y is the output. Output will be high when A=B and C≠D.
+
+\vspace{1em}
+\Solution
+\begin{tabular}{lcl}
+   \begin{adjustbox}{valign=t}
+      \begin{tabularx}{7cm}{l|C|C|C|C|C|cl}\cline{2-6}
+         & A & B & C & D & Y \\\cline{2-6}
+         0 & 0 & 0 & 0 & 0 & 0 \\\cline{2-6}
+         1 & 0 & 0 & 0 & 1 & 1
+         & $\to$ & $\not{ABC}D$ \\\cline{2-6}
+         2 & 0 & 0 & 1 & 0 & 1 
+         & $\to$ & $\not{AB}C\not{D}$ \\\cline{2-6}
+         3 & 0 & 0 & 1 & 1 & 0 \\\cline{2-6}
+         \\\cline{2-6}
+         4 & 0 & 1 & 0 & 0 & 0 \\\cline{2-6}
+         5 & 0 & 1 & 0 & 1 & 0 \\\cline{2-6}
+         6 & 0 & 1 & 1 & 0 & 0 \\\cline{2-6}
+         7 & 0 & 1 & 1 & 1 & 0 \\\cline{2-6}
+         8 & 1 & 0 & 0 & 0 & 0 \\\cline{2-6}
+         9 & 1 & 0 & 0 & 1 & 0 \\\cline{2-6}
+         10 & 1 & 0 & 1 & 0 & 0 \\\cline{2-6}
+         11 & 1 & 0 & 1 & 1 & 0 \\\cline{2-6}
+         \\\cline{2-6}
+         12 & 1 & 1 & 0 & 0 & 0 \\\cline{2-6}
+         13 & 1 & 1 & 0 & 1 & 1
+         & $\to$ & $AB\not{C}D$ \\\cline{2-6}
+         14 & 1 & 1 & 1 & 0 & 1
+         & $\to$ & $ABC\not{D}$ \\\cline{2-6}
+         15 & 1 & 1 & 1 & 1 & 0 \\\cline{2-6}
+      \end{tabularx}
+   \end{adjustbox}
+   & \hspace{2cm} &
+   \begin{adjustbox}{valign=t}
+      \begin{tabular}{l}
+         $Y = \not{ABC}D + \not{AB}C\not{D} + AB\not{C}D + ABC\not{D}$\\[2em]
+         \begin{Karnaugh}
+            % \NumberGridO;
+            \minterms{1,2,13,14}
+            \implicant{1}{1}
+            \implicant{2}{2}
+            \implicant{13}{13}
+            \implicant{14}{14}
+         \end{Karnaugh}\\
+         $Y = \not{ABC}D + \not{AB}C\not{D} + AB\not{C}D + ABC\not{D}$
+      \end{tabular}
+   \end{adjustbox}
+\end{tabular}
+
+
+
+
+
+
+
+
+
+
+
+% \Question[Exr]{Design the logic circuit from the given statement:}
+% \begin{enumerate}[itemsep=0.5em]
+%    \item Suppose A,B,C are inputs and Y is the output. Output will be high when majority of the inputs are low.
+%    \item Suppose A,B,C are inputs and Y is the output. Output will be high when majority of the inputs are high or all of the inputs are high or all of the inputs are low.
+% \end{enumerate}

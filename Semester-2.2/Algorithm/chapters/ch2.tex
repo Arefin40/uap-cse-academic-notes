@@ -1,0 +1,25 @@
+\chapter{Prime Numbers \& Factorization}
+
+\section{Sieve of Eratosthenes}
+Sieve of Eratosthenes is an algorithm for finding all the prime numbers $[1:n]$ using $O(n \log \log n)$ operations.
+
+\begin{code}
+const int N = 10e6;
+vector<bool> isPrime(N + 1, true);
+
+void sieve(){
+   long long i, j;
+   isPrime[0] = isPrime[1] = false;
+
+   for (i = 2; i <= N; i++){
+      if (isPrime[i]){
+         for (j = i * i; j <= N; j += i)
+            isPrime[j] = false;
+      }
+   }
+}
+\end{code}
+
+\section{Segmented Sieve}
+
+\section{Primes in range}

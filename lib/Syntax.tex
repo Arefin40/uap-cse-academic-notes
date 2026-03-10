@@ -1,0 +1,108 @@
+% ANCHOR Dependencies
+\RequirePackage{listings}
+\RequirePackage[ruled,vlined]{algorithm2e}
+
+% ANCHOR Mono Font for Code
+\newfontfamily{\FiraCode}{Fira Code}
+\newfontfamily{\IBMMono}{IBM Plex Mono}
+\newfontfamily{\OperatorMono}{Operator Mono Book}
+\newfontfamily{\SFMono}{SF Mono Regular}
+\newfontfamily{\Consolas}{Consolas}
+\newfontfamily{\TimesRoman}{Cambria}
+
+\lstdefinestyle{Fira}{basicstyle=\FiraCode}
+\lstdefinestyle{IBM}{basicstyle=\IBMMono}
+\lstdefinestyle{Operator}{basicstyle=\OperatorMono}
+\lstdefinestyle{SF}{basicstyle=\SFMono}
+\lstdefinestyle{Basic}{basicstyle=\large\Consolas}
+
+\newcommand{\codeit}[1]{
+   \texorpdfstring{\textit{\OperatorMono #1}}{#1}
+}
+
+% ANCHOR C++ code listing style
+\definecolor{kword}{HTML}{db2777}
+\lstdefinestyle{cpp}{
+   language=C++,
+   basicstyle=\linespread{0.9}\ttfamily,
+   keywordstyle = {\color{kword}},
+   keywordstyle = \texttt,
+   otherkeywords = {<,>,+,-,&,|,!,=,?, :},
+   breaklines=true,
+   tabsize=3,
+   frame=lines,
+   rulecolor=\color{gray!50},
+   % backgroundcolor = \color{lightgray!10}
+}
+\lstnewenvironment{cpp}[1][]{\lstset{style=cpp}}{}
+
+% ANCHOR Pseudo code listing style
+\lstdefinelanguage{pseudo}{
+  morekeywords={BEGIN,END,IF,ELSE,LOOP,FOREVER,READ,DISPLAY,WAIT,TURN,ON,OFF,CLEAR,LOG,DELAY},
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[l]{===},
+}
+\lstdefinestyle{pseudo}{
+  language=pseudo,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\ttfamily,
+  commentstyle=\color{comment}\vspace{0.025em},
+  showstringspaces=false,
+  breaklines=true,
+  frame=none,
+  columns=fullflexible
+}
+\lstnewenvironment{pseudocode}[1][]{\lstset{style=pseudo}}{}
+
+
+% ANCHOR Arduino code listing style
+\lstdefinelanguage{arduino}{
+  language=C++,
+  morekeywords={
+   oled,
+  },
+  morekeywords=[2]{
+    pinMode, digitalWrite, digitalRead, analogRead, analogWrite,
+    delay, millis, attachInterrupt, detachInterrupt,
+    setup, loop, clearDisplay, setCursor, print, println, readTemperature, readHumidity, readPH
+  },
+  morekeywords=[3]{INPUT, OUTPUT, HIGH, LOW, NULL, millis, delayMicroseconds},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+\lstdefinestyle{arduinoStyle}{
+   language=arduino,
+   basicstyle=\ttfamily\small\setstretch{1.3},
+   keywordstyle=\color{keyword},
+   keywordstyle=[2]\color{function},
+   keywordstyle=[3]\color{number},
+   commentstyle=\color{comment}\itshape,
+   stringstyle=\color{string},
+   showstringspaces=false,
+   breaklines=true,
+   frame=none,
+   columns=fullflexible,
+}
+\lstnewenvironment{arduino}[1][]{\lstset{style=arduinoStyle}}{}
+
+\newcommand{\includecode}[1]{\lstinputlisting[style=cpp]{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newtcbox{\codebox}[1][gray!18]{%
+    on line, 
+    box align=base, 
+    nobeforeafter, 
+    colback=#1,  % Background color
+    colframe=white, % Set the border color to white
+    opacityframe=0, % Make the border completely transparent
+    boxrule=0pt, 
+    arc=2pt, 
+    left=2pt, 
+    right=2pt, 
+    top=3pt, 
+    bottom=3pt, 
+    boxsep=0pt
+}
+\newcommand{\bcode}[2][gray!15]{\codebox[#1]{\texttt{#2}}}
