@@ -1,0 +1,146 @@
+\chapter{Measuring Error}
+
+\section{True Error}
+
+Defined as the difference between the true value in a calculation and the approximate value found using a numerical method etc.
+
+\begin{center}
+   True Error $(E_t)$ $=$ True Value $-$ Approximate Value
+\end{center}
+
+\subsubsection{Example}
+If $f(x) = 7e^{0.5x}$ and $h=0.3$, then find the Relative True Error for the value of $f'(2)$.
+
+\textbf{Solution:}
+
+\begin{minipage}[T]{0.45\textwidth}
+   $\begin{aligned}
+      \text{True error}
+      & = \text{True Value} - \text{Approximate Value} \\
+      & = 9.5140 - 10.263 \\
+      & = -0.749
+   \end{aligned}$
+
+   \vspace{2ex}
+   $\begin{aligned}
+      \text{Relative True error}
+      & = \frac{\text{True error}}{\text{True Value}}\times 100\% \\
+      & = \frac{-0.749}{9.5140} \\
+      & = -7.8726\%
+   \end{aligned}$
+\end{minipage}\vrule\hfill
+\begin{minipage}[T]{0.25\textwidth}
+   For exact value,\\
+
+   $\begin{aligned}
+      f'(x) & = 7 \times 0.5 \times e^{0.5x} \\
+      f'(2) & = 7 \times 0.5 \times e^{0.5(2)} \\
+      & = 3.5e^{0.5(2)} \\
+      & = 9.5140
+   \end{aligned}$
+\end{minipage}
+\begin{minipage}[T]{0.25\textwidth}
+   For approximate value,\\
+
+   $\begin{aligned}
+      f'(2) & = \frac{f(2+0.3) - f(2)}{0.3} \\
+      & = \frac{f(2.3) - f(2)}{0.3} \\
+      & = \frac{7e^{0.5(2.3)} - 7e^{0.5(2)}}{0.3} \\
+      & = \frac{22.107 - 19.028}{0.3} \\
+      & = 10.2646
+   \end{aligned}$
+\end{minipage}
+
+
+\section{Approximate Error}
+Approximate error is defined as the difference between the
+present approximation and the previous approximation.
+
+\begin{center}
+   Approximate Error $(E_a)$ $=$ Present Approximation $-$ Previous Approximation
+\end{center}
+
+\subsubsection{Example}
+For $f(x) = 7e^{0.5x}$ find the relative approximation error for in calculating $f'(2)$ using $h=0.3$ and  $h=0.15$.
+
+\begin{minipage}[T]{0.45\textwidth}
+   $\begin{aligned}
+      \therefore E_a & = 9.8799 - 10.2646 = -0.3847 \\[3ex]
+      \therefore \in_a = & \left| \frac{-0.3847}{9.8799} \right| \times 100\% \\
+      & = 3.8938\%
+   \end{aligned}$
+\end{minipage}\vrule\hfill
+\begin{minipage}[T]{0.25\textwidth}
+   For $h=0.3$,\\
+
+   $\begin{aligned}
+      f'(2) & = \frac{f(2+0.3) - f(2)}{0.3} \\
+      & = \frac{f(2.3) - f(2)}{0.3} \\
+      & = \frac{7e^{0.5(2.3)} - 7e^{0.5(2)}}{0.3} \\
+      & = 10.2646
+   \end{aligned}$
+\end{minipage}
+\begin{minipage}[T]{0.25\textwidth}
+   For $h=0.15$,\\
+
+   $\begin{aligned}
+      f'(2) & = \frac{f(2+0.15) - f(2)}{0.15} \\
+      & = \frac{f(2.15) - f(2)}{0.15} \\
+      & = \frac{7e^{0.5(2.15)} - 7e^{0.5(2)}}{0.15} \\
+      & = 9.8799
+   \end{aligned}$
+\end{minipage}
+
+
+\subsubsection{How is Absolute Relative Error used as a
+stopping criterion?}
+If
+$|\in_a| \leq \in_s$ where $\in_s$ is a pre-specified tolerance, then no further iterations are necessary and the process is stopped.
+
+If at least $m$ significant digits are required to be correct in the final answer, then $|\in_a| \leq 0.5 \times 10^{2-m}\%$
+
+
+\vspace{2ex}
+\subsection{Significant Digits}
+Significant digits (also known as precision or resolution) of a number in positional notation are digits in the number that are reliable and necessary to indicate the quantity of something.
+
+Significant digits of a number are those that can be used with confidence.
+
+\vspace{2ex}
+\begin{minipage}{0.48\textwidth}
+\textbf{Rules:}
+\begin{itemize}[parsep=4pt]
+   \item All non-zero digits are significant
+   \item Trapped Zeros are always significant
+   \item Leading Zeros are never significant
+   \item Trailing Zeros are
+   \begin{itemize}
+      \item Significant if Decimal Point
+      \item Not significant if no Decimal Point
+   \end{itemize}
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+   \begin{tabularx}{\textwidth}{p{4cm}c}
+      \textbf{Number} & \textbf{Significant Digits} \\
+      0.012001 & 5 \\
+      20.000 & 5 \\
+      0.007 & 1 \\
+      2.1 $\times \text{10}^{-\text{3}}$ & 2 \\
+      201 & 3 \\
+      0.00418 & 3
+   \end{tabularx}
+\end{minipage}
+
+\vspace{2ex}
+For $f(x)=7 e^{0.5 x}$ at $x=2$ with varying step size, $h$
+
+\begin{tabular}{|c|c|c|c|}
+\hline$h$ & $f^{\prime}(2)$ & $\left|\epsilon_a\right|$ & $m$ \\
+\hline 0.3 & 10.263 & $\mathrm{~N} / \mathrm{A}$ & 0 \\
+\hline 0.15 & 9.8800 & $3.877 \%$ & 1 \\
+\hline 0.10 & 9.7558 & $1.273 \%$ & 1 \\
+\hline 0.01 & 9.5378 & $2.285 \%$ & 1 \\
+\hline 0.001 & 9.5164 & $0.2249 \%$ & 2 \\
+\hline
+\end{tabular}

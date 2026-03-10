@@ -1,0 +1,43 @@
+\setlength{\parskip}{1ex}
+
+% Document text color
+\color{doctextcolor}
+
+% Disable hyphenation
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Adjust text justification sensitivity
+\sloppy % Allow LaTeX to avoid over-stretching lines, enabling natural breaks without forcing justification
+\tolerance=1000 % Set reasonable tolerance for line breaking
+\emergencystretch=3em % Gracefully handle difficult lines
+
+
+% Set up theorem-like environments
+\usepackage{caption,amsthm} % For captions
+\theoremstyle{definition}
+
+
+
+% Set font size and style for captions
+\usepackage{caption}
+\captionsetup{
+  font=small,
+  textfont=it,
+  justification=centering
+}
+
+
+% For 2 columns layout
+\usepackage{multicol}
+\setlength{\columnsep}{1cm} % Set spacing between columns
+
+% For digrams
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{automata, arrows,positioning}
+
+% Automata styles
+\tikzstyle{vertex} = [circle, fill=gray!10]
+\tikzstyle{edge} = [->, >=stealth, thick]
+% \tikzstyle{every node}=[font=\small]

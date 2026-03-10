@@ -1,0 +1,75 @@
+\chapter{Introduction}
+
+\section{Computer Network}
+A computer network is a system that connects two or more computing devices for transmitting and sharing information. Computing devices include everything from a mobile phone to a server. These devices are connected using physical wires such as fiber optics, but they can also be wireless.
+
+\subsection{Characteristics of a Computer Network}
+\begin{enumerate}[itemsep=2ex]
+   \item \textbf{Fault Detection}
+   Fault detection ensures the reliability and integrity of data transmission by identifying and correcting errors in the network.
+
+   \begin{itemize}
+      \item \textbf{Data Link Layer:} Detects errors using CRC and retransmits damaged frames.
+      \item \textbf{Transport Layer:} Uses TCP protocol for end-to-end error detection and retransmission.
+   \end{itemize}
+   
+   \item \textbf{Scalability of Networks}
+   Scalability ensures that a network can can handle growth in users, devices, and data traffic without affecting performance.
+   \begin{itemize}
+      \item \textbf{Data Link Layer:} Uses IP addressing and dynamic routing protocols to handle larger networks.
+      \item \textbf{Transport Layer:} Handles multiple connections, congestion control (TCP/UDP).
+   \end{itemize}
+   
+   \item \textbf{Quality of Service (QoS)}
+   Quality of Service prioritizes network traffic to ensure smooth communication, reduce latency, and allocate bandwidth efficiently.
+   \begin{itemize}
+      \item \textbf{Network Layer:} Uses QoS protocols like DiffServ and MPLS for traffic prioritization.
+      \item \textbf{Transport Layer:} Implements flow control and prioritization (e.g., TCP).
+   \end{itemize}
+   
+   \item \textbf{Importance of Security}
+   Security protects data confidentiality, integrity, and availability from unauthorized access and attacks.
+   \begin{itemize}
+      \item \textbf{Application Layer:} Enforces authentication and secure communication (HTTPS, VPNs).
+      \item \textbf{Transport Layer:} Uses TCP protocol for end-to-end error detection and retransmission.
+      \item \textbf{Network Layer:} Implements IPsec for secure packet transmission.
+      \item \textbf{Session Layer:} Manages secure connections.
+   \end{itemize}
+\end{enumerate}
+
+
+\section{OSI Layers}
+
+\begin{tabularx}{\textwidth}{|l|l|p{3cm}|X|}\hline
+   & \thc{Data Unit} & \thc{Layer} & \thc{Function}\\\hline
+   
+   \rspan{4}{Host Layers} & \rspan{3}{Data}
+   & 7. Application\newline(Desktop Layer)&
+   Network Virtual Terminal, File Transfer Access and Management (FTAM), Mail Services, Directory Services
+   \\\cline{3-4}
+
+   & & 6. Presentation &
+   Data Translation, Encryption/Decryption, Compression
+   \\\cline{3-4}
+
+   & & 5. Session &
+   Session Establishment and Termination, Dialog Control, Synchronization
+   \\\cline{2-4}
+
+   & Segments & 4. Transport\newline(Heart of OSI) &
+   Segmentation and Reassembly, Error Detection and Correction, Flow Control, Port Addressing
+   \\\hline
+
+   \rspan{3}{Media Layers}
+   & Packet & 3. Network &
+   Routing, Logical Addressing
+   \\\cline{2-4}
+
+   & Frame & 2. Data Link & Framing, Physical Addressing, Error Control, Flow Control, Access Control
+   \\\cline{2-4}
+
+   & Bit & 1. Physical &
+   Bit Synchronization, Bit Rate Control, Physical Topology, Transmission Modes
+   \\\hline
+\end{tabularx}
+

@@ -1,0 +1,116 @@
+\chapter{Subnetting}
+
+\section{Subnet Masking}
+{\setlength{\tabcolsep}{1pt}
+\begin{tabular}{l@{\hspace{1em}}ccccccccc}
+   192.168.10.5/28 : &
+   11000000 . 10101000 . 00001010 &.& \rgbB{1111} && \rgbR{0000} \\
+   \cline{2-2}\cline{4-4}\cline{6-6}
+   & Network bits && SB && HB
+\end{tabular}}
+
+\begin{itemize}[parsep=0.5em, left=0pt]
+   \item \textbf{Network address:} All network bits \& subnet bits as it is, \rgbR{host bits all 0}
+   \item \textbf{Broadcast address:} All network bits \& subnet bits as it is, \rgbR{host bits all 1}
+   \item \textbf{Subnet mask:} All network bits \& subnet bits 1, \rgbR{host bits all 0}
+   \item \textbf{Number of subnet:} $2^X$; where $X$ is the number of subnet bits
+   \item \textbf{Number of host:} $2^Y-2$; where $Y$ is the number of host bits
+   \item \textbf{Block size:} 256 - Subnet mask
+\end{itemize}
+
+\vspace{1em}
+\section{Subnetting Example}
+\textbf{\textit{Question:}} 
+A software company has just bought an IP address of 190.168.0.0/22 and it
+needs to make subnets for the following network topology:
+Network-1: (120 hosts), \ Network-2: (55 hosts), \ Network-3: (400 hosts).
+
+\textbf{Solution:}\\[0.5em]
+{\setlength{\tabcolsep}{1pt}
+\begin{tabular}{lll@{\hspace{1em}}l}
+   IP address &:& 190.168.0.0/22 \ (Class B)\\
+   
+   IP range &:&
+   10111110 . 10101000 . \rgbB{000000} \rgbR{00} . \rgbR{00000000}
+   $\to$ 190.168.0.0\\
+   && 10111110 . 10101000 . \rgbB{000000} \rgbR{11} . \rgbR{11111111}
+   $\to$ 190.168.3.255 \\[0.75em]
+
+   % Number of subnets &:&
+   % $\text{2}^{\text{6}} = \text{64}$ \\[-0.25em]
+
+   % Number of valid hosts &:&
+   % $\text{2}^{\text{10}} - \text{2} = \text{1022}$
+\end{tabular}}
+ 
+\textbf{Network-3:}\\[0.5em]
+{\setlength{\tabcolsep}{1pt}
+\begin{tabular}{lll}
+   Hosts required &:& 400 \\
+   Nearest power of 2 &:& $\text{2}^\text{9} = \text{512}$
+   \quad $\to$ 32$-$9$=$23\\
+   Subnet address &:&
+   10111110 . 10101000 . \rgbB{0000000}\rgbR{0} . \rgbR{00000000}
+   \ $\leftarrow$ \ 190.168.0.0/23\\
+
+   Subnet Mask &:&
+   11111111 . 11111111 . 1111111\rgbR{0} . \rgbR{00000000} \quad
+   = 255 . 255 . 254 . {0} \\
+   
+   Network address &:&
+   10111110 . 10101000 . 0000000\rgbR{0} . \rgbR{00000000} \quad
+   = 190 . 168 . 0 . {0} \\
+   
+   Broadcast address &:&
+   10111110 . 10101000 . 0000000\rgbR{1} . \rgbR{11111111} \quad
+   = 190 . 168 . 1 . {255} \\
+\end{tabular}}
+ 
+\vspace{1em}
+\textbf{Network-1:}\\[0.5em]
+{\setlength{\tabcolsep}{1pt}
+\begin{tabular}{lll}
+   Hosts required &:& 120 \\
+   Nearest power of 2 &:& $\text{2}^\text{7} = \text{128}$
+   \quad $\to$ 32$-$7$=$25\\
+   Subnet address &:&
+   10111110 . 10101000 . \rgbB{00000000} . \rgbB{0}\rgbR{0000000} 
+   \ $\leftarrow$ \ 190.168.2.0/25 \\
+
+   Subnet Mask &:&
+   11111111 . 11111111 . 11111111 . 1\rgbR{0000000} \quad 
+   = 255 . 255 . 255 . {128} \\
+   
+   Network address &:&
+   10111110 . 10101000 . 00000010 . 0\rgbR{0000000} \quad 
+   = 190 . 168 . 2 . {0} \\
+   
+   Broadcast address &:&
+   10111110 . 10101000 . 00000010 . 0\rgbR{1111111} \quad 
+   = 190 . 168 . 2 . {127} \\
+\end{tabular}}
+ 
+\pagebreak
+\textbf{Network-2:}\\[0.5em]
+{\setlength{\tabcolsep}{1pt}
+\begin{tabular}{lll}
+   Hosts required &:& 55 \\
+   Nearest power of 2 &:& $\text{2}^\text{6} = \text{64}$
+   \quad $\to$ 32$-$6$=$26\\
+
+   Subnet address &:&
+   10111110 . 10101000 . \rgbB{00000010} . \rgbB{10}\red{000000} 
+   \ $\leftarrow$ \ 190.168.2.128/26\\
+
+   Subnet Mask &:&
+   11111111 . 11111111 . 11111111 . 11\rgbR{000000} \quad
+   = 255 . 255 . 255 . {192} \\
+   
+   Network address &:&
+   10111110 . 10101000 . 00000010 . 10\rgbR{000000} \quad
+   = 190 . 168 . 2 . {128} \\
+   
+   Broadcast address &:&
+   10111110 . 10101000 . 00000010 . 10\rgbR{111111} \quad
+   = 190 . 168 . 2 . {191} \\
+\end{tabular}}

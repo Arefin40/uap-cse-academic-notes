@@ -1,0 +1,288 @@
+\chapter{IoT Projects}
+
+\section{Some IoT Projects Examples}
+
+\begin{multicols}{2}
+\textbf{Smart Poultry and Fish Farming System}
+\begin{enumerate}
+   \item NodeMCU (ESP8266)
+   \item LCD Display
+   \item DHT11/DHT22
+   \item Relay Module
+   \item SMPS
+   \item Ultrasonic Sensor
+   \item Moisture Sensor
+   \item pH Sensor
+   \item TDS Sensor
+   \item Turbidity Sensor
+   \item MQ-135 Gas Sensor
+   \item Water Pump
+   \item Light Dependent Resistor (LDR)
+   \item Servo Motor
+\end{enumerate}
+
+% \begin{table}[H]
+% % \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{ll}
+%    \textbf{Component} & \textbf{Usage in the project} \\
+
+%    {NodeMCU - ESP8266} & : Microcontroller for processing sensor data and controlling actuators. \\
+
+%    {LCD Display} & : To display sensor readings/data. \\
+
+%    {DHT11/DHT22} & : To monitor temperature and humidity. \\
+
+%    {Relay Module} & : To control on/off switching. \\
+
+%    {SMPS} & : To convert AC 220V to DC 5V for power supply. \\
+
+%    {Ultrasonic Sensor} & : To monitor food level. \\
+
+%    {Moisture Sensor} & : To monitor the moisture of the water level. \\
+
+%    {pH Sensor} & : To monitor water pH (ideal pH: 6.5-8.5) to maintain fish health. \\
+
+%    {TDS Sensor} & : To monitor water quality by measuring some factors. \\
+
+%    {Turbidity Sensor} & : To monitor water clarity in fish farming, as high turbidity indicates dirty water. \\
+
+%    {MQ-135 Gas Sensor} & : To detect harmful gases like ammonia and CO2 to prevent diseases. \\
+
+%    {Water Pump} & : To supply water automatically when required. \\
+
+%    {Light Dependent Resistor (LDR)} & : To monitor light intensity and maintaining a proper lighting. \\
+
+%    {Servo Motor} & : To control automatic feeder for precise feeding schedules. \\
+
+%    {Cooling Fan / Exhaust Fan} & : To control temperature or humidity automatically if required. \\
+
+%    {Mobile/Desktop App} & : To enable real-time remote monitoring and controlling. \\
+
+% \end{tabular}
+% \end{table} 
+
+\textbf{Obstacle Avoider Robot}
+\begin{enumerate}
+   \item Arduino UNO / ESP8266
+   \item Motor Driver
+   \item Servo Motor
+   \item Ultrasonic sensor
+   \item Gear Motor
+   \item 18650 Battery
+\end{enumerate}
+
+\textbf{Line Follower Robot}
+\begin{enumerate}
+   \item Arduino UNO / ESP8266
+   \item Gear Motor
+   \item Motor Driver
+   \item IR sensor
+   \item 18650 Battery
+\end{enumerate}
+
+\columnbreak
+\textbf{Smart Plant Monitoring System}
+\begin{enumerate}
+   \item Arduino UNO / ESP8266
+   \item PIR Motion sensor
+   \item DHT11 Temperature sensor
+   \item Soil Moisture sensor
+   \item Relay module
+   \item 18650 Battery
+\end{enumerate}
+
+\textbf{Metal Detector Robot}
+\begin{enumerate}
+   \item Arduino UNO / ESP8266
+   \item Gear Motor
+   \item Motor Driver
+   \item Metal Detector
+   \item LCD display
+   \item Joystick Module
+   \item 18650 Battery
+\end{enumerate}
+
+\textbf{Voice Controlled Car}
+\begin{enumerate}
+   \item Arduino UNO / ESP8266
+   \item Gear Motor
+   \item Servo Motor
+   \item Motor Driver
+   \item Ultrasonic sensor
+   \item Bluetooth sensor
+   \item 18650 Battery
+\end{enumerate}
+\end{multicols}
+
+\pagebreak
+\subsection{Smart Agriculture}
+
+\textbf{\textit{Components}:}\\[0.5em]
+\begin{tabular}{lll}
+   1. ESP8266
+   &:& Micro-controller for IoT connectivity. \\
+   2. PIR Motion sensor
+   &:& To detect motion in the farm. \\
+   3. DHT11 Temperature sensor
+   &:& To monitor temperature and humidity. \\
+   4. Soil Moisture sensor
+   &:& To measure soil moisture levels. \\
+   5. Relay module
+   &:& To control devices like pumps or lights. \\
+   6. 18650 Battery
+   &:& Power supply for the system. \\
+   7. LDR (Light Dependent Resistor)
+   &:& To monitor light intensity for plant growth. \\
+   8. Water Pump
+   &:& To irrigate plants based on soil moisture levels. \\
+   9. pH Sensor
+   &:& To monitor soil pH for optimal plant growth. \\
+   10. OLED Display
+   &:& To display sensor readings and system status locally. \\
+\end{tabular}
+
+\vspace{2em}
+\textbf{\textit{Pseudo Code}:}
+\begin{pseudocode}   
+BEGIN
+   INITIALIZE the sensors and actuators
+
+   LOOP FOREVER:
+      === Sensor Readings ===
+      READ temperature, humidity from DHT11
+      READ soilMoistureValue from Soil Moisture Sensor
+      READ pHValue from pH Sensor
+      READ lightLevel from LDR
+      READ motionDetected from PIR Sensor (HIGH/LOW)
+
+      === Irrigation Logic ===
+      IF soilMoistureValue < THRESHOLD:
+         TURN ON Relay (activate water pump)
+         WAIT for irrigationTime seconds
+         TURN OFF Relay
+      ELSE:
+         KEEP water pump OFF
+
+      === Motion Detection Logic ===
+      IF motionDetected is HIGH:
+         LOG or DISPLAY "Motion detected"
+         Send alert to user
+
+      === Display Logic ===
+      CLEAR OLED screen
+      DISPLAY(temperature,humidity,soil_moisture,pH)
+
+      DELAY 1000
+   END LOOP
+END
+\end{pseudocode}
+
+\pagebreak
+\textbf{\textit{Iteration}:}
+\begin{arduino}
+void loop() {
+   // Sensor Readings
+   float temperature = dht.readTemperature();
+   float humidity = dht.readHumidity();
+   int soilMoistureValue = analogRead(soilMoisturePin);
+   float pHValue = readPH();
+   int lightLevel = analogRead(ldrPin);
+   bool motionDetected = digitalRead(pirPin) == HIGH ? true : false;
+   
+   // Irrigation Logic
+   if (soilMoistureValue < moistureThreshold) {
+      digitalWrite(WATER_PUMP_RELAY, HIGH);
+      delay(irrigationTime * 1000);
+      digitalWrite(WATER_PUMP_RELAY, LOW);
+   } else {
+      digitalWrite(WATER_PUMP_RELAY, LOW);
+   }
+   
+   // Motion Detection Logic
+   if (motionDetected) {
+      Serial.println("Motion detected!");
+   }
+   
+   // Display Logic
+   oled.clearDisplay();
+   oled.setCursor(0, 0);
+   oled.print("Temp: "); oled.println(temperature);
+   oled.print("Humidity: "); oled.println(humidity);
+   oled.print("Soil: "); oled.println(soilMoistureValue);
+   oled.print("pH: "); oled.println(pHValue);
+   oled.print("Light: "); oled.println(lightLevel);
+   oled.print("Motion: "); oled.println(motionDetected ? "Yes" : "No");
+   oled.display();
+   
+   delay(1000);
+}
+\end{arduino}
+
+\pagebreak
+\subsection{2WD and 4WD Robot}
+\begin{minipage}[t]{0.6\textwidth}
+\textbf{\textit{Pseudo Code}:}
+\begin{pseudocode}
+LOOP FOREVER:
+   READ leftSensor and rightSensor
+
+   IF leftSensor IS WHITE AND rightSensor IS WHITE THEN
+      MOVE forward
+   ELSE IF leftSensor IS BLACK AND rightSensor IS WHITE THEN
+      TURN right
+   ELSE IF leftSensor IS WHITE AND rightSensor IS BLACK THEN
+      TURN left
+   ELSE
+      STOP motors
+END LOOP
+\end{pseudocode}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.3\textwidth}
+   Black lines reflect less IR.\\
+   So, IR sensors return LOW when over black and HIGH when over white.
+   
+   \vspace{2em}
+   HIGH + LOW = Forward\\
+   LOW + HIGH = Backward\\
+\end{minipage}
+
+
+\textbf{\textit{Iteration}:}
+\begin{arduino}
+void loop() {
+   int RS = digitalRead(IR_RIGHT_PIN);
+   int LS = digitalRead(IR_LEFT_PIN);
+
+   // Both sensors see white => Move forward
+   if (LS == 1 && RS == 1) {
+      setMotors(HIGH, HIGH);
+   }
+
+   // Right sensor sees black, turn left
+   if (LS == 1 && RS == 0) {
+      setMotors(LOW, HIGH);
+   }
+
+   // Left sensor sees black, turn right
+   if (LS == 0 && RS == 1) {
+      setMotors(HIGH, LOW);
+   }
+
+   // Both sensors see black, stop
+   if (LS == 0 && RS == 0) {
+      stopMotors();
+   }
+}
+
+// Combined control function
+const setMotors(bool isLeftForward, bool isRightForward) {
+   digitalWrite(in1, isLeftForward); digitalWrite(in2, !isLeftForward);
+   digitalWrite(in3, isRightForward); digitalWrite(in4, !isRightForward);
+   analogWrite(enA, MAX_SPEED); analogWrite(enB, MAX_SPEED);
+}
+
+const stopMotors() {
+   analogWrite(enA, 0);
+   analogWrite(enB, 0);
+}
+\end{arduino}

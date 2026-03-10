@@ -1,0 +1,30 @@
+\documentclass[oneside]{book}
+\usepackage[nomarginpar, margin=1.27cm]{geometry}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Preamble.tex}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Syntax.tex}
+
+% Inlude preamble
+% \input{preamble/Preamble}
+\setlength{\emergencystretch}{3em}
+
+\begin{document}
+% Create the title page
+\include{chapters/Titlepage}
+
+\frontmatter
+\pagenumbering{Roman}
+% Table of contents
+\tableofcontents
+% Main content
+\mainmatter
+
+% Chapters
+% \include{chapters/Software Engineering}
+% \include{chapters/Software Process Model}
+% \include{chapters/System Engineering}
+% \include{chapters/Ethics}
+\include{chapters/Security}
+% \include{chapters/Verification and Validation}
+\include{chapters/Mnemonic}
+
+\end{document}

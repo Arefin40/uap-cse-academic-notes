@@ -1,0 +1,182 @@
+\chapter{Computer Performance}
+
+\section{Terminology}
+\begin{itemize}[parsep=0.5em]
+   \item $\text{Performance}_X = \frac{1}{\text{Execution time}_X}$
+   \item Cycle time (seconds per cycle)
+   \item CPU time / Execution time (seconds per program)
+   \item CPU clock cycles (cycles per program)
+   \item Instruction count (instructions per program)
+   \item Clock rate (cycles per second)
+   \item CPI (cycles per instruction)
+   \item MIPS (millions of instructions per second)
+\end{itemize}
+
+
+\begin{itemize}
+   \item \textbf{\textit{Response time}}
+   : The time from when a request (or task) is submitted to when the system starts responding is the response time. Lower the response time indicates faster service.
+
+   \item \textbf{\textit{Throughput}}
+   : the total amount of work done in a given time.
+\end{itemize}
+
+\vspace{2em}
+$\begin{aligned}
+   & \text{Clock Cycles (No of Pulse required)} = \text{CPU Time} \times \text{Clock Rate} \\[0.5em]
+   & \text{CPI} = \frac{\text{Clock Cycles}}{\text{Instruction Count}} = \frac{\text{CPU Time} \times \text{Clock Rate}}{\text{Instruction Count}} \\[0.5em]
+   & \text{Execution time} = \text{Clock cycles} \times \text{Clock cycle time} \\[0.5em]
+   & \text{Execution time} = \text{Instruction count} \times \text{CPI} \times \text{Clock cycle time}
+\end{aligned}$
+
+
+
+
+\pagebreak
+\section{Numerical Problems}
+\vspace{1em}
+\textbf{\textit{\#Question-1}:}\\
+A designer building a new machine B, which must run a specific program in 6 seconds. The current machine, A, completes the same program in 10 seconds, using a 2.5 GHz clock rate. The designer plans to increase the clock rate to improve performance. However, this design change will cause Machine B to require 1.2 times as many clock cycles as Machine A for the same program. Based on this information, calculate the clock rate that Machine B must have.
+
+\textbf{\textit{Solution}:}
+\begin{multicols}{2}
+   \noindent
+   \raggedcolumns
+   Now,\\
+   For Machine A,\\
+   $\begin{aligned}
+      \text{Clock Cycles } &= \text{CPU Time } \times \text{Clock Rate} \\
+      &= \text{10} \times \text{2.5} \times \text{10}^{\text{9}} 
+      = \text{2.5} \times \text{10}^{\text{10}} \text{ cycles}
+   \end{aligned}$
+
+   For Machine B,\\
+   $\begin{aligned}
+      \text{Clock Cycles } &= 1.2 \times \text{Machine A clock cycles} \\
+      &= \text{1.2} \times \text{2.5} \times \text{10}^{\text{10}} 
+      = \text{3} \times \text{10}^{\text{10}} \text{ cycles}
+   \end{aligned}$
+
+   $\begin{aligned}
+      \therefore \text{CPU Time} &= \frac{\text{Clock Cycles}}{\text{Clock Rate}} \\[0.5em]
+     \Rightarrow \text{Clock Rate} &= \frac{\text{Clock Cycles}}{\text{CPU Time}} \\
+       &= \frac{\text{3} \times \text{10}^{\text{10}}}{\text{6}} \\
+       &= \text{5} \times \text{10}^{\text{9}} \text{Hz}
+       = \text{5} \text{GHz} \\
+   \end{aligned}$
+   \columnbreak
+   Given,
+
+   For Machine A,\\
+   Execution time = 10 seconds\\
+   Clock rate = 2.5 GHz = 2.5 $\times$ $\text{10}^{\text{9}}$ Hz
+
+   For Machine B,\\
+   Execution time = 6 seconds\\
+   Clock cycles = 1.2 $\times$ Machine A clock cycles
+\end{multicols}
+
+
+
+\textbf{\textit{\#Question-2}:}\\
+Suppose Machine $X$ needs 5 seconds to run a program and $Y$ needs 3 seconds to run the same program and Clock rate is 3 GHz. Machine $Y$ to require 2.5 times as many clock cycles as Machine X for the same program. What will be the clock rate?
+
+\textbf{\textit{Solution}:}
+\begin{multicols}{2}
+   \noindent
+   \raggedcolumns
+   Now,
+
+   For Machine X,\\[0.5em]
+   $\begin{aligned}
+      \text{Clock cycles} &= \text{CPU time} \times \text{Clock rate}\\
+      &= \text{5} \times \text{3} \times \text{10}^{\text{9}}
+      = \text{15} \times \text{10}^{\text{9}} \text{ cycles}
+   \end{aligned}$
+
+   For Machine Y,\\[0.5em]
+   $\begin{aligned}
+      \text{Clock cycles} &= \text{2.5} \times \text{Machine A clock cycles}\\
+      &= \text{2.5} \times \text{15} \times \text{10}^{\text{9}}
+      = \text{3.75} \times \text{10}^{\text{10}} \text{ cycles}
+   \end{aligned}$
+
+   $\begin{aligned}
+     \therefore \text{CPU Time} &= \frac{\text{Clock Cycles}}{\text{Clock Rate}} \\[0.5em]
+     \Rightarrow \text{Clock Rate} &= \frac{\text{Clock Cycles}}{\text{CPU Time}} \\
+       &= \frac{\text{3.75} \times \text{10}^{\text{10}}}{\text{3}} \\
+       &= \text{1.25} \times \text{10}^{\text{10}} \text{Hz}
+       = \text{12.5} \text{GHz} \\
+   \end{aligned}$
+
+
+   \columnbreak
+   Given,
+
+   Machine X,\\
+   Execution time = 5 seconds\\
+   Clock rate = 3 GHz = 3 $\times$ $\text{10}^{\text{9}}$ Hz
+
+   Machine Y,\\
+   Execution time = 3 seconds\\
+\end{multicols}
+
+
+\pagebreak
+\textbf{\textit{\#Question-3}:}\\
+A compiler designer is trying to decide between two code sequences for a particular machine. Based on the hardware implementation, there are three different classes of instructions: Class A, Class B, and Class C, and they require 1, 2 and 3 cycles (respectively). The first code sequence has 5 instructions: 2 of A, 1 of B, and 2 of C The second sequence has 6 instructions: 4 of A, 1 of B, and 1 of C. Which sequence will be faster? How much? What is the CPI for each sequence?
+
+\textbf{\textit{Solution}:}
+\begin{multicols}{2}
+   \noindent
+   \raggedcolumns
+   Now,\\[0.5em]
+   For sequence-1,\\[0.5em]
+   $\begin{aligned}
+      \text{CPI} &= \frac{\text{Totol CPU Cycles}}{\text{Instruction Count}} \\[0.5em]
+      &= \frac{(2 \times 1) + (1 \times 2) + (2 \times 3)}{5}\\
+      &= \frac{10}{5} = 2 \text{ cycles per instruction}
+   \end{aligned}$
+
+   For sequence-2,\\[0.5em]
+   $\begin{aligned}
+      \text{CPI} &= \frac{\text{Totol CPU Cycles}}{\text{Instruction Count}} \\[0.5em]
+      &= \frac{(4 \times 1) + (1 \times 2) + (1 \times 3)}{6}\\
+      &= \frac{9}{6} = 1.5 \text{ cycles per instruction}
+   \end{aligned}$
+   
+
+   Now,\\
+   Let, Clock cycle time $=$ 1$ns$ \\[0.5em]
+   $\begin{aligned}
+      \therefore \text{ET}_{1} &= \text{Total cycles} \times \text{Clock cycle time}
+      = \text{10} \times \text{1}
+      \quad \ldots \quad (1) \\
+      % 
+      \therefore \text{ET}_{2} &= \text{Total cycles} \times \text{Clock cycle time}
+      = \text{9} \times \text{1}
+      \quad \ldots \quad (2)
+   \end{aligned}$
+   
+   $(2) \div (1) \ \Rightarrow
+   \begin{aligned}
+   \frac{\text{ET}_{2}}{\text{ET}_{1}}
+      = \frac{9}{10}  = 0.9 \\
+   \end{aligned}$
+   
+   \vspace{0.5em}
+   $\therefore \text{Sequence 2 is 0.9 times faster than sequence 1.}$
+
+   \columnbreak
+   Given,\\[0.5em]
+   Cycles required for,\\
+   Class A = 1\\
+   Class B = 2\\
+   Class C = 3
+
+   For sequence-1,\\
+   Instructions: 2 of A, 1 of B, and 2 of C = 5 cycles
+
+   For sequence-2,\\
+   Instructions: 4 of A, 1 of B, and 1 of C = 6 cycles
+\end{multicols}

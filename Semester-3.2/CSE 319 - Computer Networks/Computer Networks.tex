@@ -1,0 +1,45 @@
+\documentclass[oneside]{book}
+\usepackage[nomarginpar, margin=1.27cm]{geometry}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Preamble.tex}
+\input{/Users/shahriar/Workspace/LaTex/#Packages/Syntax.tex}
+
+\title{Theory of Computation Handbook}
+\author{Shahriar Arefin}
+\date{Spring 24}
+
+% Include preamble
+\input{Preamble}
+
+\setlength{\emergencystretch}{3em}
+
+\begin{document}
+% Create the title page
+\include{chapters/Titlepage}
+
+\frontmatter
+\pagenumbering{Roman}
+% Table of contents
+\tableofcontents
+
+
+% Main content
+\mainmatter % Switch to Arabic numbering for main chapters
+
+
+% Chapters
+% \include{chapters/Introduction}
+% \include{chapters/OpenSystemsInterconnection}
+% \include{chapters/Switching}
+\include{chapters/Subnetting}
+\include{chapters/Application Layer}
+% \include{chapters/Presentation Layer}
+\include{chapters/Transport Layer}
+\include{chapters/Network Layer}
+\include{chapters/Error Control}
+\include{chapters/Cellular Network}
+% \include{chapters/Wireless Network}
+\include{chapters/Cyber Security}
+
+% \pagebreak
+% \include{chapters/Quick Recap}
+\end{document}

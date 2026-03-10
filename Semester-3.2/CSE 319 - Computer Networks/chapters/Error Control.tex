@@ -1,0 +1,58 @@
+\chapter{Error Control}
+
+\section{Checksum}
+% Checksum is a simple error-detection method where data is divided into fixed-size segments, added using binary addition with wrap-around, and the 1’s complement of the sum is sent as the checksum. The receiver verifies integrity by checking if the total (including checksum) equals all 1s.
+
+Checksum is an error-detection technique used to ensure data integrity during transmission. It helps detect errors by appending a checksum value derived from the data. The receiver verifies integrity by checking if the total (including checksum) equals all 1s.
+
+\vspace{1em}
+\textbf{Advantages:}
+\begin{itemize}[parsep=0.25em]
+   \item Simple to compute and implement in hardware/software.
+   \item Efficient for detecting common transmission errors.
+   \item Low computational overhead, and widely used in protocols (TCP/IP, UDP)
+\end{itemize}
+
+\section{Practice Problems}
+\textbf{\textit{Question:}}
+Consider, the data unit to be transferred is 10010011 10010011 10011000 01001101. Checksum is an efficient error detection method to detect whether there is an error. Suppose, 8 bit checksum is used in this case. Now use this method on the data unit given above and answer the following:
+Briefly explain the above-mentioned method and why it is a good choice.
+Calculate the checksum and the exact data that will be transmitted.
+
+\textbf{Solution:}
+
+\begin{minipage}[t]{0.45\textwidth}
+In sender side,\\[0.5em]
+\begin{tabular}{rl@{}l}
+      & 100100&11\\[-0.5em]
+      & 100100&11\\[-0.5em]
+      & 100110&00\\[-0.5em]
+  $+$ & 010011&01\\\hline
+   10 & 000010&11\\[-0.5em]
+      &       &10\\\hline
+      & 000011&01
+\end{tabular}
+
+\vspace{1em}
+$\therefore$ Checksum is: 11110010 \ \ (1's compliment)\\[0.5em]
+$\therefore$ The data will be transmitted as,\\
+10010011 10010011 10011000 01001101 \rgbB{11110010}
+\end{minipage}%
+\hfill\vrule\hfill%
+\begin{minipage}[t]{0.45\textwidth}
+In receiver side,\\[0.5em]
+\begin{tabular}{rl@{}l}
+      & 100100&11\\[-0.5em]
+      & 100100&11\\[-0.5em]
+      & 100110&00\\[-0.5em]
+      & 010011&01\\[-0.5em]
+  $+$ & 111100&10\\\hline
+   10 & 111111&01\\[-0.5em]
+      &       &10\\\hline
+      & 111111&11
+\end{tabular}
+
+\vspace{1em}
+$\therefore$ Since the sum is 11111111, which is all 1s,\\
+the data is correct.
+\end{minipage}

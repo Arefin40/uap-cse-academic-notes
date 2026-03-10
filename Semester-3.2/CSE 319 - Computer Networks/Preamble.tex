@@ -1,0 +1,84 @@
+\setlength{\parskip}{1ex}
+
+% Document text color
+\color{doctextcolor}
+
+% Disable hyphenation
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Adjust text justification sensitivity
+\sloppy % Allow LaTeX to avoid over-stretching lines, enabling natural breaks without forcing justification
+\tolerance=1000 % Set reasonable tolerance for line breaking
+\emergencystretch=3em % Gracefully handle difficult lines
+
+
+% Set up theorem-like environments
+\usepackage{caption,amsthm} % For captions
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+
+
+% Set font size and style for captions
+\usepackage{caption}
+\captionsetup{
+  font=footnotesize,
+  textfont=it,
+  justification=centering
+}
+
+
+% For 2 columns layout
+\usepackage{longdivision}
+\usepackage{multicol}
+\setlength{\columnsep}{1cm} % Set spacing between columns
+
+% For digrams
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{automata, arrows,positioning}
+
+% Automata styles
+\tikzstyle{vertex} = [circle, fill=gray!10]
+\tikzstyle{edge} = [->, >=stealth, thick]
+
+% \tikzstyle{every node}=[font=\small]
+
+% Customizations
+\usepackage{fancyhdr}
+\fancyhf{}  % Clear all headers and footers
+\renewcommand{\chaptermark}[1]{}
+\renewcommand{\sectionmark}[1]{}
+\renewcommand{\headrulewidth}{0pt}  % Remove header line
+\pagestyle{fancy}  % Apply fancy page style
+\fancyfoot[C]{\thepage}  % Page number on the right side
+
+\usepackage{titlesec}
+\titleformat{\chapter}
+  [display] % Layout option (display mode for centering)
+  {\normalfont\LARGE\bfseries} % Format of the chapter title
+  {\large\vspace{-4\baselineskip}Chapter \thechapter} % Chapter number
+  {1em} % Space between number and title
+  {\vspace{-1em}} % Format of the title
+
+
+\titleformat{\section}
+  {\large\bfseries} % Format: size, bold, color
+  {\thesection} % Section number format
+  {1em} % Space between number and title
+  {}
+
+\titleformat{\subsection}
+{\fontsize{10}{16}\selectfont\bfseries}
+{} % Subsection number format
+{0em} % Space between number and title
+{}
+
+\titlespacing*{\subsection}
+  {0pt}    % Left indentation (set to 0 for no indent)
+  {2ex}    % Space before the subsection (set to 0 to remove space)
+  {1ex}    % Space after the subsection (adjust as needed)
+
+
+\newcommand{\topic}[1]{\textbf{#1}\par}

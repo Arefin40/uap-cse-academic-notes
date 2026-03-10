@@ -1,0 +1,274 @@
+\RequirePackage{ifthen}
+
+% Fill colors
+\def\edgeColor{blue}
+\def\cornerColor{red}
+\def\colorlist{{"cyan", "green", "violet", "magenta", "purple", "teal"}}
+% Counter for tracking color index
+\newcounter{implicantColor}
+\setcounter{implicantColor}{0}
+
+\NewDocumentCommand{\NumberGridF}{}{%
+   \node[right] at (0,0.8){\scriptsize{\textcolor{gray}{0}}};
+   \node[right] at (1,0.8){\scriptsize{\textcolor{gray}{1}}};
+   \node[right] at (3,0.8){\scriptsize{\textcolor{gray}{3}}};
+   \node[right] at (2,0.8){\scriptsize{\textcolor{gray}{2}}};
+
+   \node[right] at (0,1.8){\scriptsize{\textcolor{gray}{4}}};
+   \node[right] at (1,1.8){\scriptsize{\textcolor{gray}{5}}};
+   \node[right] at (3,1.8){\scriptsize{\textcolor{gray}{7}}};
+   \node[right] at (2,1.8){\scriptsize{\textcolor{gray}{6}}};
+
+   \node[right] at (0,3.8){\scriptsize{\textcolor{gray}{12}}};
+   \node[right] at (1,3.8){\scriptsize{\textcolor{gray}{13}}};
+   \node[right] at (3,3.8){\scriptsize{\textcolor{gray}{15}}};
+   \node[right] at (2,3.8){\scriptsize{\textcolor{gray}{14}}};
+
+   \node[right] at (0,2.8){\scriptsize{\textcolor{gray}{8}}};
+   \node[right] at (1,2.8){\scriptsize{\textcolor{gray}{9}}};
+   \node[right] at (3,2.8){\scriptsize{\textcolor{gray}{11}}};
+   \node[right] at (2,2.8){\scriptsize{\textcolor{gray}{10}}}
+}
+
+\NewDocumentCommand{\NumberGridO}{}{%
+   \node[left] at (1,0.8){\scriptsize{\textcolor{gray}{0}}};
+   \node[left] at (2,0.8){\scriptsize{\textcolor{gray}{1}}};
+   \node[left] at (4,0.8){\scriptsize{\textcolor{gray}{2}}};
+   \node[left] at (3,0.8){\scriptsize{\textcolor{gray}{3}}};
+
+   \node[left] at (1,1.8){\scriptsize{\textcolor{gray}{4}}};
+   \node[left] at (2,1.8){\scriptsize{\textcolor{gray}{5}}};
+   \node[left] at (4,1.8){\scriptsize{\textcolor{gray}{6}}};
+   \node[left] at (3,1.8){\scriptsize{\textcolor{gray}{7}}};
+
+   \node[left] at (1,2.8){\scriptsize{\textcolor{gray}{12}}};
+   \node[left] at (2,2.8){\scriptsize{\textcolor{gray}{13}}};
+   \node[left] at (4,2.8){\scriptsize{\textcolor{gray}{14}}};
+   \node[left] at (3,2.8){\scriptsize{\textcolor{gray}{15}}};
+
+   \node[left] at (1,3.8){\scriptsize{\textcolor{gray}{8}}};
+   \node[left] at (2,3.8){\scriptsize{\textcolor{gray}{9}}};
+   \node[left] at (4,3.8){\scriptsize{\textcolor{gray}{10}}};
+   \node[left] at (3,3.8){\scriptsize{\textcolor{gray}{11}}}
+}
+
+\NewDocumentEnvironment{Karnaugh}{O{4} O{A} O{B} O{C} O{D}}{%
+\begin{tikzpicture}[y=-1cm]
+   \setcounter{implicantColor}{0}
+   % Defining the number of rows and columns
+   \ifnum #1=2 \def\xsize{2} \else \def\xsize{4} \fi
+   \ifnum #1<4 \def\ysize{2} \else \def\ysize{4} \fi
+
+   % Draw grid surface
+   \draw[darkgray] (0,0) grid (\xsize,\ysize);
+   
+   % Define Coordinates
+   \foreach \r/\c/\i in {
+      0/0/0, 0/1/1, 0/2/3, 0/3/2,
+      1/0/4, 1/1/5, 1/2/7, 1/3/6,
+      2/0/12, 2/1/13, 2/2/15, 2/3/14,
+      3/0/8, 3/1/9, 3/2/11, 3/3/10,
+   }
+   \coordinate (C\i) at (\c,\r);
+   % Corner line
+   \draw[gray] (0,0) -- (-0.8,-0.8);
+
+   % X ticks
+   \ifnum #1>2 \def\xlabels{00,01,11,10} \else \def\xlabels{0,1} \fi
+   \foreach \value [count=\index] in \xlabels {
+      \node[above] at (\index-0.5,0) {\footnotesize \value};
+   }
+
+   % Y ticks
+   \ifnum #1>3 \def\ylabels{00,01,11,10} \else \def\ylabels{0,1} \fi
+   \foreach \value [count=\index] in \ylabels {
+      \node[left] at (0, \index-0.5){\footnotesize \value};
+   }
+
+   % X Labels
+   \ifnum #1=2
+      \node[right] at (-0.55,-0.65){{\footnotesize $\mathrm{#3}$}};
+      \def\xlogiclabels{$\mathrm{\overline{#3}}$, $\mathrm{#3}$}
+   \else\ifnum #1=3
+      \node[right] at (-0.55,-0.65){{\footnotesize $\mathrm{#3#4}$}};
+      \def\xlogiclabels{
+         $\mathrm{\overline{#3}\overline{#4}}$, $\mathrm{\overline{#3}#4}$,
+         $\mathrm{#3#4}$, $\mathrm{#3\overline{#4}}$}
+   \else
+      \node[right] at (-0.55,-0.65){{\footnotesize $\mathrm{#4#5}$}};
+      \def\xlogiclabels{
+         $\mathrm{\overline{#4}\overline{#5}}$, $\mathrm{\overline{#4}#5}$,
+         $\mathrm{#4#5}$, $\mathrm{#4\overline{#5}}$}
+   \fi\fi
+   
+
+   \foreach \value [count=\index] in \xlogiclabels {
+      \node[above] at (\index-0.5,-0.45){\scriptsize \value};
+   }
+
+   % Y Labels
+   \ifnum #1>3
+   \node[left] at (-0.5,-0.35){{\footnotesize ${\mathrm{#2#3}}$}};
+   \def\ylogiclabels{%
+      $\mathrm{\overline{#2}\overline{#3}}$, $\mathrm{\overline{#2}#3}$,
+      $\mathrm{#2#3}$, $\mathrm{#2\overline{#3}}$}
+   \else
+   \node[left] at (-0.5,-0.35){{\footnotesize $\mathrm{#2}$}};
+   \def\ylogiclabels{$\mathrm{\overline{#2}}$, $\mathrm{#2}$}
+   \fi
+
+   \foreach \value [count=\index] in \ylogiclabels {
+      \node[left] at (-0.5, \index-0.5){\footnotesize \value};
+   } 
+}{\end{tikzpicture}}
+
+\NewDocumentCommand{\minterms}{m}{%
+   \foreach \x in {#1} {
+      \node at ($(C\x) + (0.5,0.5)$) {$1$};
+   }
+}
+
+% \NewDocumentCommand{\implicant}{m m}{
+%    \pgfmathparse{\colorlist[\theimplicantColor]}
+%    % Calculate startRow and endRow
+%    \pgfmathtruncatemacro{\startRow}{((#1-1)/\xsize)}
+%    \pgfmathtruncatemacro{\endRow}{((#2-1)/\xsize)+1}
+
+%    % Calculate startCol
+%    \pgfmathtruncatemacro{\tempstartCol}{mod(#1, \xsize)}
+%    \ifnum\tempstartCol=0
+%       \pgfmathtruncatemacro{\startCol}{\xsize-1}
+%    \else
+%       \pgfmathtruncatemacro{\startCol}{\tempstartCol-1}
+%    \fi
+   
+%    % Calculate endCol
+%    \pgfmathtruncatemacro{\tempendCol}{mod(#2, \xsize)}
+%    \ifnum\tempendCol=0
+%       \pgfmathtruncatemacro{\endCol}{\xsize}
+%    \else
+%       \pgfmathtruncatemacro{\endCol}{\tempendCol}
+%    \fi
+
+%    % Draw rectangle
+%    \def\inset{0.2}
+%    \fill[\pgfmathresult, rounded corners=3pt, opacity=0.2] (\startCol+\inset, \startRow+\inset) rectangle (\endCol-\inset,\endRow-\inset);
+%    \draw[thin, rounded corners=3pt, opacity=0.75] (\startCol+\inset, \startRow+\inset) rectangle (\endCol-\inset,\endRow-\inset);
+  
+%    \stepcounter{implicantColor}
+%    % \ifnum\theimplicantColor=\numexpr\colorlistlength-1\relax
+%    %    \setcounter{implicantColor}{0}
+%    % \fi
+% }
+
+\NewDocumentCommand{\implicant}{m m}{
+   \pgfmathparse{\colorlist[\theimplicantColor]}
+
+   \def\inset{0.2}
+   \draw[thin, rounded corners=3pt, opacity=0.75]
+   ($(C#1) + (\inset,\inset)$) rectangle
+   ($(C#2) + (1-\inset,1-\inset)$);
+   \fill[\pgfmathresult, rounded corners=3pt, opacity=0.2] 
+   ($(C#1) + (\inset,\inset)$) rectangle
+   ($(C#2) + (1-\inset,1-\inset)$);
+
+   \stepcounter{implicantColor}
+}
+
+\NewDocumentCommand{\implicantcorner}{}{
+   \def\inset{0.2}
+   
+   % top-left corner
+   \fill[\cornerColor, opacity=0.2]
+   (-0.1,-0.1) -- (1-\inset,-0.1) coordinate (ATR)
+   {[rounded corners=3pt] -- (1-\inset,1-\inset) coordinate (ABR)} -- 
+   (-0.1,1-\inset) coordinate (ABL) -- cycle {};
+
+   \draw[thin, rounded corners=3pt, opacity=0.75] (ATR) -- (ABR) -- (ABL);
+
+   % top-right corner
+   \fill[\cornerColor, opacity=0.2]
+   (\xsize+0.1,-0.1) -- (\xsize-1+\inset, -0.1) coordinate (BTL)
+   {[rounded corners=3pt] -- (\xsize-1+\inset, 1-\inset) coordinate (BBL)} --
+   (\xsize+0.1, 1-\inset) coordinate (BBR) -- cycle {};
+   
+   \draw[thin, rounded corners=3pt, opacity=0.75] (BTL) -- (BBL) -- (BBR);
+   
+   % bottom-right corner
+   \fill[\cornerColor, opacity=0.2]
+   (\xsize+0.1,\ysize+0.1) -- (\xsize-1+\inset, \ysize+0.1) coordinate (CBL)
+   {[rounded corners=3pt] -- (\xsize-1+\inset,\ysize-1+\inset) coordinate (CTL)} --
+   (\xsize+0.1, \ysize-1+\inset) coordinate (CTR) -- cycle {};
+   
+   \draw[thin, rounded corners=3pt, opacity=0.75] (CBL) -- (CTL) -- (CTR);
+   
+   % bottom-left corner
+   \fill[\cornerColor, opacity=0.2]
+   (-0.1, \ysize+0.1) -- (-0.1,\ysize-1+\inset) coordinate (DTL)
+   {[rounded corners=3pt] -- (1-\inset,\ysize-1+\inset) coordinate (DTR)} --
+   (1-\inset,\ysize+0.1) coordinate (DBR) -- cycle {};
+
+   \draw[thin, rounded corners=3pt, opacity=0.75] (DTL) -- (DTR) -- (DBR);
+}
+
+
+\NewDocumentCommand{\implicantedge}{O{H} m m}{
+   \ifnum#2<#3 \def\min{#2} \def\max{#3} \else \def\min{#3} \def\max{#2} \fi
+
+   % Calculate y coordinate
+   \pgfmathtruncatemacro{\yA}{(#2-1)/\xsize}
+   % Calculate x coordinate
+   \pgfmathtruncatemacro{\tempxAloc}{mod(#2, \xsize)}
+   \ifnum\tempxAloc=0
+      \pgfmathtruncatemacro{\xA}{\xsize-1}
+   \else
+      \pgfmathtruncatemacro{\xA}{\tempxAloc-1}
+   \fi
+
+   % Calculate y coordinate
+   \pgfmathtruncatemacro{\yB}{((#3-1)/\xsize)+1}
+   % Calculate x coordinate
+   \pgfmathtruncatemacro{\tempxBloc}{mod(#3, \xsize)}
+   \ifnum\tempxBloc=0
+      \pgfmathtruncatemacro{\xB}{\xsize}
+   \else
+      \pgfmathtruncatemacro{\xB}{\tempxBloc}
+   \fi
+   
+   \ifnum\xA=0
+      \ifx#1H \def\axis{0} \else \def\axis{1} \fi
+   \else
+      \def\axis{1}
+   \fi
+
+   \def\inset{0.2}
+   \ifnum\axis=0
+      \fill[\edgeColor, opacity=0.2]
+      (-0.1,\yA+\inset) coordinate (A1)
+      {[rounded corners=3pt] -- (1-\inset,\yA+\inset) coordinate (A2) --
+      (1-\inset,\yB-\inset) coordinate (A3)} -- 
+      (-0.1,\yB-\inset) coordinate (A4) -- cycle {};
+      \draw[thin, rounded corners=3pt, opacity=0.75] (A1) -- (A2) -- (A3) -- (A4);
+      
+      \fill[\edgeColor, opacity=0.2]
+      (\xB+0.1,\yA+\inset) coordinate (B1)
+      {[rounded corners=3pt] -- (\xB-1+\inset,\yA+\inset) coordinate (B2) --
+      (\xB-1+\inset,\yB-\inset) coordinate (B3)} -- 
+      (\xB+0.1,\yB-\inset) coordinate (B4) -- cycle {};
+      \draw[thin, rounded corners=3pt, opacity=0.75] (B1) -- (B2) -- (B3) -- (B4);
+   \else
+      \fill[\edgeColor, opacity=0.2]
+      (\xA+\inset,-0.1) coordinate (N1)
+      {[rounded corners=3pt] -- (\xA+\inset,\yA+1-\inset) coordinate (N2) --
+      (\xB-\inset,\yA+1-\inset) coordinate (N3)} -- 
+      (\xB-\inset,-0.1) coordinate (N4) -- cycle {};
+      \draw[thin, rounded corners=3pt, opacity=0.75] (N1) -- (N2) -- (N3) -- (N4);
+
+      \fill[\edgeColor, opacity=0.2]
+      (\xA+\inset,\ysize+0.1) coordinate (M1)
+      {[rounded corners=3pt] -- (\xA+\inset,\ysize-1+\inset) coordinate (M2) --
+      (\xB-\inset,\ysize-1+\inset) coordinate (M3)} -- 
+      (\xB-\inset,\ysize+0.1) coordinate (M4) -- cycle {};
+      \draw[thin, rounded corners=3pt, opacity=0.75] (M1) -- (M2) -- (M3) -- (M4);
+   \fi
+}

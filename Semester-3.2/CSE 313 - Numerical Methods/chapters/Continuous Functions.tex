@@ -1,0 +1,52 @@
+\subsection*{Continuous Functions}
+
+$\therefore$ {Forward Difference Approximation} \quad
+$f'(x) = \frac{f(x+h)-f(x)}{h} = \frac{f(x_{i+1})-f(x_{i})}{\Delta x}$
+
+$\therefore$ {Backward Difference Approximation} \quad
+$f'(x) = \frac{f(x)-f(x-h)}{h} = \frac{f(x_i)-f(x_{i-1})}{\Delta x}$
+
+$\therefore$ {Central Difference Approximation} \quad
+$f'(x) = \frac{f(x+h)-f(x-h)}{2h} = \frac{f(x_{i+1})-f(x_{i-1})}{2\Delta x}$
+
+$\therefore$ {Absolute relative true error},
+$|\in_t| = \left|\frac{\text{True value} - \text{Approximate value}}{\text{True value}}\right| \times 100$
+
+\subsection*{Bisection Method}
+
+\subsubsection*{STEP-1}
+Assume $x_l$ and $x_u$.
+Choose $x_l$  and $x_u$ as two guesses for the root such that
+$f(x_l)f(x_u) < 0$, or in other words, $f(x)$ changes sign
+between $x_l$ and $x_u$.
+
+\subsubsection*{STEP-2}
+Estimate the root, xm of the equation $f(x) = 0$ as the mid
+point between $x_l$ and $x_u$ as $x_m = \frac{x_l+x_u}{2}$.
+
+\subsubsection*{STEP-3}
+\begin{enumerate}[parsep=1ex]
+   \item If $f(x_l)f(x_m) < 0$, then the root lies between $x_l$ and
+   $x_m$; then $x_l = x_l$ and $x_u = x_m$.
+
+   \item If $f(x_l)f(x_m) > 0$, then the root lies between $x_l$ and
+   $x_m$; then $x_l = x_m$ and $x_u = x_u$.
+
+   \item If $f(x_l)f(x_m) = 0$, then the root is $x_m$; Stop the
+   algorithm if this is true.
+\end{enumerate}
+
+\subsubsection*{STEP-4}
+Find the new estimate of the root, \, $x_m = \frac{x_l+x_u}{2}$
+
+Find the absolute relative approximate error, \, $|\in_t| = \left|\frac{x_m^{\text{new}} - x_m^{\text{old}}}{x_m^{\text{new}}}\right| \times 100$
+
+\subsubsection*{STEP-5}
+Compare the absolute relative approximate error with the pre-specified error tolerance-
+$|\in_a| \leq 0.5 \times 10^{2-m}\%$
+
+\begin{itemize}[parsep=1ex]
+   \item If $m=\text{1}$, then $|\in_{}| \leq \text{5}\%$
+   \item If $m=\text{2}$, then $|\in_{}| \leq \text{0.5}\%$
+   \item If $m=\text{3}$, then $|\in_{}| \leq \text{0.05}\%$
+\end{itemize}
